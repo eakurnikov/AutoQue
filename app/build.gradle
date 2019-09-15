@@ -7,7 +7,6 @@ apply from: '../dependencies.gradle'
 apply from: '../dokka.gradle'
 
 android {
-
     defaultConfig {
         applicationId "com.eakurnikov.autoque"
         versionCode 1
@@ -21,7 +20,6 @@ android {
     }
 
     buildTypes {
-
         release {
             minifyEnabled true
             testCoverageEnabled false
@@ -38,6 +36,10 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation project(':common')
+    implementation project(':feature_autofill_api')
+    implementation project(':feature_autofill_impl')
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"

@@ -1,0 +1,21 @@
+<resources>
+    <string name="faf_autofill_service_label">AutoQue Autofill Service</string>
+    <string name="faf_autofill_service_selected">AutoQue Autofill Service selected</string>
+
+    <string name="faf_fill_canceled">Autofill canceled</string>
+    <string name="faf_fill_failure">Autofill failed</string>
+
+    <string name="faf_dataset_auth_title">Autofill with AutoQue</string>
+
+    <string name="faf_save_data_success">Credentials were saved to AutoQue</string>
+    <string name="faf_save_data_failure">Credentials save failure</string>
+
+    <string name="faf_fill_authentication_failure">Can not autofill: authentication failure</string>
+    <string name="faf_save_authentication_failure">Credentials can not be saved: authentication failure</string>
+    <string name="faf_authentication_failure">Authentication failure</string>
+
+    <string name="faf_save_description_title">Your credentials could be saved to a new account for future autofill</string>
+
+    <string name="faf_no_exact_datasets_title">No suitable credentials found, but you can try these</string>
+    <string name="faf_no_datasets_title">Credentials not found. Login in this app and we will save your credentials for future use.</string>
+</resources>

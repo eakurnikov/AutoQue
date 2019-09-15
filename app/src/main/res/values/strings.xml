@@ -1,3 +1,17 @@
 <resources>
+
     <string name="app_name">AutoQue</string>
+    <string name="authentication">Autofill Authentication</string>
+
+    <string name="authenticate">Authenticate?</string>
+    <string name="authenticate_yes">Yes</string>
+    <string name="authenticate_no">No</string>
+
+    <string name="autofill_service_injected">Autofill Service injected</string>
+    <string name="autofill_service_not_injected">Autofill Service not injected</string>
+
+    <string name="autofill_service_selected">AutoQue Autofill Service selected</string>
+    <string name="autofill_service_not_selected">AutoQue Autofill Service not selected</string>
+    <string name="autofill_service_selection_canceled">AutoQue Autofill Service selection canceled</string>
+
 </resources>

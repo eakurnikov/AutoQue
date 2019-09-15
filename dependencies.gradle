@@ -1,5 +1,5 @@
 ext.versions = [
-        minSdk               : "21",
+        minSdk               : "26",
         targetSdk            : "28",
         compileSdk           : "28",
         buildTools           : "28.0.3",
@@ -21,7 +21,7 @@ ext.versions = [
         rxjava               : "2.2.3",
         rxkotlin             : "2.3.0",
         rxandroid            : "2.1.1",
-        dagger               : "2.19",
+        dagger               : "2.20",
         room                 : '2.1.0',
         navigation           : "1.0.0",
         cicerone             : "5.0.0",

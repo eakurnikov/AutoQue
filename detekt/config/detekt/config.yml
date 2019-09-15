@@ -413,9 +413,6 @@ style:
   ForbiddenComment:
     active: true
     values: 'FIXME:,STOPSHIP:'
-  ForbiddenImport:
-    active: true
-    imports: 'com.kaspersky.components.logger.KLog,com.kaspersky.core_utils.logs.XLog'
   ForbiddenVoid:
     active: false
   FunctionOnlyReturningConstant:

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <TextView android:id="@+id/faf_dataset_header_text"
+              android:layout_width="256dp"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
+              android:gravity="center_vertical"
+              android:minHeight="?android:attr/listPreferredItemHeightSmall"
+              android:paddingStart="16dp"
+              android:paddingLeft="16dp"
+              android:paddingTop="8dp"
+              android:paddingEnd="16dp"
+              android:paddingRight="16dp"
+              android:paddingBottom="8dp"
+              android:textAppearance="?android:attr/textAppearanceListItemSmall"
+              android:textColor="@color/faf_colorPrimaryDark"
+              android:textSize="15sp"
+              tools:text="No suitable credentials found, but try these"/>
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingStart="2dp"
+               android:paddingLeft="2dp"
+               android:paddingEnd="2dp"
+               android:paddingRight="2dp"
+               android:src="@drawable/faf_dataset_header_background"/>
+
+</LinearLayout>

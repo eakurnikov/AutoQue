@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#aaf3f3f3"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:gravity="center"
+              android:importantForAutofill="noExcludeDescendants"
+              android:orientation="vertical">
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:background="#fff3f3f3"
+                  android:orientation="vertical"
+                  android:padding="50dp">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:layout_marginBottom="8dp"
+                  android:padding="10dp"
+                  android:text="@string/authenticate"
+                  android:textColor="@color/colorPrimary"
+                  android:textSize="22sp"
+                  android:textStyle="bold"/>
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+            <Button android:id="@+id/no_auth_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/authenticate_no"
+                    android:textColor="#fff3f3f3"
+                    android:textStyle="bold"/>
+
+            <Button android:id="@+id/yes_auth_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/authenticate_yes"
+                    android:textColor="#fff3f3f3"
+                    android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
