@@ -1,7 +1,7 @@
 package com.eakurnikov.autoque.autofill.api.dependencies.data.dao
 
-import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.LoginEntity
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.AccountEntity
+import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.LoginEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 
