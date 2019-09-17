@@ -1,2 +1,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.eakurnikov.autoque.autofill.impl"/>
+          package="com.eakurnikov.autoque.autofill.impl">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application>
+
+        <service android:name="com.eakurnikov.autoque.autofill.impl.domain.AutoQueAutofillService"
+                 android:enabled="false"
+                 android:label="@string/faf_autofill_service_label"
+                 android:permission="android.permission.BIND_AUTOFILL_SERVICE">
+
+            <meta-data android:name="android.autofill"
+                       android:resource="@xml/faf_compatibility_packages"/>
+
+            <intent-filter>
+                <action android:name="android.service.autofill.AutofillService"/>
+            </intent-filter>
+
+        </service>
+
+    </application>
+
+</manifest>

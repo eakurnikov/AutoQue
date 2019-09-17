@@ -33,7 +33,7 @@ class AutofillViewProducer @Inject constructor(
             if (icon != null) {
                 setImageViewBitmap(R.id.faf_dataset_icon, icon)
             } else {
-                setImageViewResource(R.id.faf_dataset_icon, R.drawable.faf_ic_unlocked_dataset)
+                setImageViewResource(R.id.faf_dataset_icon, R.drawable.faf_ic_lock)
             }
         }
 

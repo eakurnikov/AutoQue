@@ -1,6 +1,7 @@
 package com.eakurnikov.autoque.domain.app
 
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
+import com.eakurnikov.autoque.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import javax.inject.Inject
@@ -17,6 +18,6 @@ class AutoQueApp : DaggerApplication() {
         return DaggerAppComponent
             .builder()
             .create(this)
-            .also { it.inject(this@AutoQueApp) }
+            .apply { inject(this@AutoQueApp) }
     }
 }

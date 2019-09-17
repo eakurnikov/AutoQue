@@ -10,11 +10,12 @@
               android:paddingTop="12dp"
               android:paddingEnd="16dp"
               android:paddingRight="16dp"
+              android:background="@color/faf_colorPrimary"
               android:paddingBottom="12dp">
 
     <ImageView android:id="@+id/faf_dataset_auth_icon"
-               android:layout_width="32dp"
-               android:layout_height="32dp"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
                android:layout_marginEnd="12dp"
                android:layout_marginRight="12dp"
                android:src="@drawable/faf_ic_launcher_foreground"/>
@@ -22,7 +23,7 @@
     <TextView android:id="@+id/faf_dataset_auth_text"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textColor="#000000"
+              android:textColor="#eeeeee"
               android:textSize="15sp"
               android:textStyle="bold"
               tools:text="Autofill with Passwords"/>

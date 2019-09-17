@@ -3,6 +3,7 @@ package com.eakurnikov.autoque.di.modules.autofill
 import android.content.Context
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
 import com.eakurnikov.autoque.autofill.impl.di.components.AutofillFeatureComponent
+import com.eakurnikov.autoque.autofill.impl.di.components.DaggerAutofillFeatureDependenciesComponent
 import com.eakurnikov.autoque.di.components.AutofillDependenciesProviderComponent
 import com.eakurnikov.common.annotations.AppContext
 import com.eakurnikov.common.di.annotations.AppScope

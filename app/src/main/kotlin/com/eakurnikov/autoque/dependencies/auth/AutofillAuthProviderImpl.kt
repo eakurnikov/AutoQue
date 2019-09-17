@@ -23,8 +23,11 @@ class AutofillAuthProviderImpl @Inject constructor(
 ) : AutofillAuthProvider<AuthActivity> {
 
     private var pendingIntentId = 0
+
     override val autofillAuthenticatorClass: Class<AuthActivity> = AuthActivity::class.java
-    override val isAuthRequired: Boolean = isSessionExpired
+
+    override val isAuthRequired: Boolean
+        get() = isSessionExpired
 
     override fun getAuthIntentSenderForFill(clientState: Bundle): IntentSender {
         return Intent(context, autofillAuthenticatorClass)
