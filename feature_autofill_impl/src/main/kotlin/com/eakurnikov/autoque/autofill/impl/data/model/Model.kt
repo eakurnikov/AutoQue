@@ -10,29 +10,29 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ViewInfo(
-        val autofillId: AutofillId,
-        val autofillType: Int,
-        val autofillHint: String,
-        val autofillValue: String?,
-        val saveType: Int,
-        val isFocused: Boolean
+    val autofillId: AutofillId,
+    val autofillType: Int,
+    val autofillHint: String,
+    val autofillValue: String?,
+    val saveType: Int,
+    val isFocused: Boolean
 ) : Parcelable
 
 @Parcelize
 data class AuthFormInfo(
-        val login: ViewInfo?,
-        val password: ViewInfo?
+    val login: ViewInfo?,
+    val password: ViewInfo?
 ) : Parcelable
 
 @Parcelize
 data class ScreenInfo(
-        val authFormInfo: AuthFormInfo,
-        val webDomain: String
+    val authFormInfo: AuthFormInfo,
+    val webDomain: String
 ) : Parcelable
 
 @Parcelize
 data class RequestInfo(
-        val requestIds: List<Int>,
-        val clientPackageName: String,
-        val screenInfo: ScreenInfo
+    val requestIds: List<Int>,
+    val clientPackageName: String,
+    val screenInfo: ScreenInfo
 ) : Parcelable

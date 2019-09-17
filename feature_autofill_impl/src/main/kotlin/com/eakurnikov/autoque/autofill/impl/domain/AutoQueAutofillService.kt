@@ -3,7 +3,11 @@ package com.eakurnikov.autoque.autofill.impl.domain
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.CancellationSignal
-import android.service.autofill.*
+import android.service.autofill.AutofillService
+import android.service.autofill.FillCallback
+import android.service.autofill.FillRequest
+import android.service.autofill.SaveCallback
+import android.service.autofill.SaveRequest
 import com.eakurnikov.autoque.autofill.impl.di.components.AutofillServiceComponent
 import com.eakurnikov.autoque.autofill.impl.domain.request.fill.FillRequestHandler
 import com.eakurnikov.autoque.autofill.impl.domain.request.save.SaveRequestHandler

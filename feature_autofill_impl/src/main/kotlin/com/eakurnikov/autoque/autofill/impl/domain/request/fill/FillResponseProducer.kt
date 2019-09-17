@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.service.autofill.FillResponse
 import com.eakurnikov.autoque.autofill.impl.data.Resource
 import com.eakurnikov.autoque.autofill.impl.data.repositories.AutofillRepository
+import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import com.eakurnikov.autoque.autofill.impl.util.FillDataResource
 import com.eakurnikov.autoque.autofill.impl.util.FillResponseResource
-import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject

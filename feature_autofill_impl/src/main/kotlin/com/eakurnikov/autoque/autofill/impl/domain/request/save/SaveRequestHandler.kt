@@ -12,10 +12,10 @@ import com.eakurnikov.autoque.autofill.impl.R
 import com.eakurnikov.autoque.autofill.impl.data.Resource
 import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.domain.request.RequestInfoBuilder
-import com.eakurnikov.autoque.autofill.impl.util.SaveResource
 import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import com.eakurnikov.autoque.autofill.impl.extensions.isValid
 import com.eakurnikov.autoque.autofill.impl.extensions.putRequestInfo
+import com.eakurnikov.autoque.autofill.impl.util.SaveResource
 import com.eakurnikov.common.annotations.AppContext
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject

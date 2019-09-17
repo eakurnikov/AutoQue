@@ -7,7 +7,7 @@ import io.reactivex.SingleTransformer
  * Created by eakurnikov on 2019-09-15
  */
 class ListSingleTransformer<UpstreamItem, DownstreamItem>(
-        private val converter: (UpstreamItem) -> DownstreamItem
+    private val converter: (UpstreamItem) -> DownstreamItem
 ) : SingleTransformer<List<UpstreamItem>, List<DownstreamItem>> {
 
     override fun apply(upstream: Single<List<UpstreamItem>>): Single<List<DownstreamItem>> {

@@ -1,9 +1,9 @@
 package com.eakurnikov.autoque.di.components
 
-import com.eakurnikov.autoque.domain.app.AutoQueApp
-import com.eakurnikov.autoque.di.modules.activity.ActivityBuilderModule
 import com.eakurnikov.autoque.di.modules.AppModule
+import com.eakurnikov.autoque.di.modules.activity.ActivityBuilderModule
 import com.eakurnikov.autoque.di.modules.autofill.AutofillFeatureApiModule
+import com.eakurnikov.autoque.domain.app.AutoQueApp
 import com.eakurnikov.common.di.annotations.AppScope
 import dagger.Component
 import dagger.android.AndroidInjector

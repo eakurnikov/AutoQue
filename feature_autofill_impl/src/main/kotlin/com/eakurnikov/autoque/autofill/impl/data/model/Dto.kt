@@ -3,10 +3,10 @@ package com.eakurnikov.autoque.autofill.impl.data.model
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.AccountEntity
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.LoginEntity
 
-//data class LoginWithAccountIdDto(
+// data class LoginWithAccountIdDto(
 //        val accountEntityId: EntityId,
 //        val loginDto: LoginDto
-//)
+// )
 
 /**
  * Created by eakurnikov on 2019-09-15

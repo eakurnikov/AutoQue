@@ -3,11 +3,12 @@ package com.eakurnikov.autoque.autofill.impl.data.repositories
 import com.eakurnikov.autoque.autofill.api.dependencies.data.dao.AutofillDao
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.AccountEntity
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.LoginEntity
-import com.eakurnikov.autoque.autofill.impl.data.model.FillDataEntity
 import com.eakurnikov.autoque.autofill.impl.data.Resource
+import com.eakurnikov.autoque.autofill.impl.data.model.FillDataEntity
 import com.eakurnikov.autoque.autofill.impl.extensions.sort
 import com.eakurnikov.autoque.autofill.impl.extensions.truncate
-import com.eakurnikov.autoque.autofill.impl.util.*
+import com.eakurnikov.autoque.autofill.impl.util.FillDataResource
+import com.eakurnikov.autoque.autofill.impl.util.SaveResource
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

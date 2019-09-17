@@ -13,7 +13,10 @@ import com.eakurnikov.autoque.autofill.impl.R
 import com.eakurnikov.autoque.autofill.impl.data.model.FillDataEntity
 import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.data.model.ScreenInfo
-import com.eakurnikov.autoque.autofill.impl.extensions.*
+import com.eakurnikov.autoque.autofill.impl.extensions.autofillIdsAsArray
+import com.eakurnikov.autoque.autofill.impl.extensions.compositeSaveType
+import com.eakurnikov.autoque.autofill.impl.extensions.containsEntityWithPackageName
+import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import com.eakurnikov.common.annotations.AppContext
 import javax.inject.Inject
 

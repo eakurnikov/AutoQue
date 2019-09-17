@@ -8,6 +8,8 @@ import android.os.Handler
  */
 object AutoQueAuthentication {
 
+    const val duration: Long = 15_000
+
     var isSessionExpired: Boolean = true
         private set
 

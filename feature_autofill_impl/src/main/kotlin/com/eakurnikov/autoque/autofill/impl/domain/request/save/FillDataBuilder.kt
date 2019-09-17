@@ -3,7 +3,10 @@ package com.eakurnikov.autoque.autofill.impl.domain.request.save
 import android.os.Bundle
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.AccountEntity
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.LoginEntity
-import com.eakurnikov.autoque.autofill.impl.data.model.*
+import com.eakurnikov.autoque.autofill.impl.data.model.AccountEntityImpl
+import com.eakurnikov.autoque.autofill.impl.data.model.FillDataEntity
+import com.eakurnikov.autoque.autofill.impl.data.model.LoginEntityImpl
+import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.domain.clientapp.AppInfoProvider
 import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import javax.inject.Inject

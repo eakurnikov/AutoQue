@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
 import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector
-import com.eakurnikov.autoque.R
 import dagger.android.AndroidInjection
 import dagger.android.DaggerActivity
-import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * Created by eakurnikov on 2019-09-15
