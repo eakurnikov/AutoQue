@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply from: '../options.gradle'
 apply from: '../dependencies.gradle'
 apply from: '../dokka.gradle'
+apply from: '../options.gradle'
 
 android {
     defaultConfig {
