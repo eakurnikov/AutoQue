@@ -37,8 +37,12 @@ class AutofillAuthProviderImpl @Inject constructor(
 
     override fun getAuthIntentSenderForSave(clientState: Bundle): IntentSender {
         return Intent(context, autofillAuthenticatorClass)
+            .addFlags(
+                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            )
             .setAutofillAuthPayload(AutofillAuthType.SAVE, clientState)
-            .apply { addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS) }
             .wrapWithSender(context)
     }
 
