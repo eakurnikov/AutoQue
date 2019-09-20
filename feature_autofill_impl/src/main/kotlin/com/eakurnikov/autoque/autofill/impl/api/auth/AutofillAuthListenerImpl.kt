@@ -12,8 +12,10 @@ import com.eakurnikov.autoque.autofill.api.dependencies.auth.AutofillAuthType
 import com.eakurnikov.autoque.autofill.api.dependencies.auth.AutofillAuthenticator
 import com.eakurnikov.autoque.autofill.impl.R
 import com.eakurnikov.autoque.autofill.impl.data.Resource
+import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.domain.request.fill.FillResponseProducer
 import com.eakurnikov.autoque.autofill.impl.domain.request.save.FillDataSaver
+import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import com.eakurnikov.autoque.autofill.impl.util.FillResponseResource
 import com.eakurnikov.autoque.autofill.impl.util.SaveResource
 import dagger.android.DaggerActivity
@@ -46,8 +48,15 @@ class AutofillAuthListenerImpl @Inject constructor(
     }
 
     private fun onAuthForFill(authenticator: AutofillAuthenticator, clientState: Bundle) {
+        val requestInfo: RequestInfo? = clientState.getRequestInfo()
+
+        if (requestInfo == null) {
+            onAuthFailure(authenticator, AutofillAuthType.FILL)
+            return
+        }
+
         fillDisposable = fillResponseProducer
-            .produceUnlockedFillResponse(clientState)
+            .produceUnlockedFillResponse(requestInfo, clientState)
             .subscribe(
                 { fillResponseResource: FillResponseResource ->
                     when (fillResponseResource) {
@@ -67,8 +76,15 @@ class AutofillAuthListenerImpl @Inject constructor(
     }
 
     private fun onAuthForSave(authenticator: AutofillAuthenticator, clientState: Bundle) {
+        val requestInfo: RequestInfo? = clientState.getRequestInfo()
+
+        if (requestInfo == null) {
+            onAuthFailure(authenticator, AutofillAuthType.SAVE)
+            return
+        }
+
         saveDisposable = fillDataSaver
-            .saveFillData(clientState)
+            .saveFillData(requestInfo)
             .subscribe(
                 { saveResource: SaveResource ->
                     when (saveResource) {

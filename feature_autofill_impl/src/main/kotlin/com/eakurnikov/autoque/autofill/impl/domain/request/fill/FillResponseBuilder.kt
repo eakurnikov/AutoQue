@@ -16,7 +16,6 @@ import com.eakurnikov.autoque.autofill.impl.data.model.ScreenInfo
 import com.eakurnikov.autoque.autofill.impl.extensions.autofillIdsAsArray
 import com.eakurnikov.autoque.autofill.impl.extensions.compositeSaveType
 import com.eakurnikov.autoque.autofill.impl.extensions.containsEntityWithPackageName
-import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import com.eakurnikov.common.annotations.AppContext
 import javax.inject.Inject
 
@@ -30,8 +29,11 @@ class FillResponseBuilder @Inject constructor(
     private val autofillViewProducer: AutofillViewProducer,
     private val datasetBuilder: DatasetBuilder
 ) {
-    fun buildLocked(authIntentSender: IntentSender, clientState: Bundle): FillResponse {
-        val requestInfo: RequestInfo = clientState.getRequestInfo()!!
+    fun buildLocked(
+        authIntentSender: IntentSender,
+        requestInfo: RequestInfo,
+        clientState: Bundle
+    ): FillResponse {
 
         val autofillIds: Array<AutofillId> = requestInfo.screenInfo.authFormInfo.autofillIdsAsArray
 
@@ -43,8 +45,11 @@ class FillResponseBuilder @Inject constructor(
             .build()
     }
 
-    fun buildUnlocked(fillDataEntities: List<FillDataEntity>, clientState: Bundle): FillResponse {
-        val requestInfo: RequestInfo = clientState.getRequestInfo()!!
+    fun buildUnlocked(
+        fillDataEntities: List<FillDataEntity>,
+        requestInfo: RequestInfo,
+        clientState: Bundle
+    ): FillResponse {
 
         val autofillIds: Array<AutofillId> = requestInfo.screenInfo.authFormInfo.autofillIdsAsArray
 

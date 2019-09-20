@@ -1,7 +1,7 @@
 package com.eakurnikov.autoque.autofill.impl.domain.request.save
 
-import android.os.Bundle
 import com.eakurnikov.autoque.autofill.impl.data.model.FillDataEntity
+import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.data.repositories.AutofillRepository
 import com.eakurnikov.autoque.autofill.impl.util.SaveResource
 import io.reactivex.disposables.Disposable
@@ -21,8 +21,8 @@ class FillDataSaver @Inject constructor(
     private val saveFillDataSubject: PublishSubject<SaveResource> = PublishSubject.create()
     private var disposable: Disposable? = null
 
-    fun saveFillData(clientState: Bundle): PublishSubject<SaveResource> {
-        val fillDataEntity: FillDataEntity = fillDataBuilder.build(clientState)
+    fun saveFillData(requestInfo: RequestInfo): PublishSubject<SaveResource> {
+        val fillDataEntity: FillDataEntity = fillDataBuilder.build(requestInfo)
 
         disposable = autofillRepo
             .saveDatasets(fillDataEntity)

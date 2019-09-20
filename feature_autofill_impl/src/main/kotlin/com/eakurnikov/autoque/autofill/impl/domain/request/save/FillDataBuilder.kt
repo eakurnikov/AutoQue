@@ -1,6 +1,5 @@
 package com.eakurnikov.autoque.autofill.impl.domain.request.save
 
-import android.os.Bundle
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.AccountEntity
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.LoginEntity
 import com.eakurnikov.autoque.autofill.impl.data.model.AccountEntityImpl
@@ -8,7 +7,6 @@ import com.eakurnikov.autoque.autofill.impl.data.model.FillDataEntity
 import com.eakurnikov.autoque.autofill.impl.data.model.LoginEntityImpl
 import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.domain.clientapp.AppInfoProvider
-import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import javax.inject.Inject
 
 /**
@@ -19,9 +17,7 @@ import javax.inject.Inject
 class FillDataBuilder @Inject constructor(
     private val appInfoProvider: AppInfoProvider
 ) {
-    fun build(clientState: Bundle): FillDataEntity {
-        val requestInfo: RequestInfo = clientState.getRequestInfo()!!
-
+    fun build(requestInfo: RequestInfo): FillDataEntity {
         with(requestInfo) {
             val clientAppName: String =
                 appInfoProvider.provideAppName(clientPackageName) ?: "My account"

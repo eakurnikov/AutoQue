@@ -4,6 +4,7 @@ import android.content.IntentSender
 import android.os.Bundle
 import android.service.autofill.FillResponse
 import com.eakurnikov.autoque.autofill.impl.data.Resource
+import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.data.repositories.AutofillRepository
 import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
 import com.eakurnikov.autoque.autofill.impl.util.FillDataResource
@@ -25,10 +26,17 @@ class FillResponseProducer @Inject constructor(
     private val unlockedFillResponseResourceSubject: PublishSubject<FillResponseResource> = PublishSubject.create()
     private var disposable: Disposable? = null
 
-    fun produceLockedFillResponse(authIntentSender: IntentSender, clientState: Bundle): FillResponse =
-        fillResponseBuilder.buildLocked(authIntentSender, clientState)
+    fun produceLockedFillResponse(
+        authIntentSender: IntentSender,
+        requestInfo: RequestInfo,
+        clientState: Bundle
+    ): FillResponse = fillResponseBuilder.buildLocked(authIntentSender, requestInfo, clientState)
 
-    fun produceUnlockedFillResponse(clientState: Bundle): PublishSubject<FillResponseResource> {
+    fun produceUnlockedFillResponse(
+        requestInfo: RequestInfo,
+        clientState: Bundle
+    ): PublishSubject<FillResponseResource> {
+
         disposable = autofillRepo
             .getDatasets(clientState.getRequestInfo()!!.clientPackageName)
             .subscribe(
@@ -36,10 +44,7 @@ class FillResponseProducer @Inject constructor(
                     when (fillDataResource) {
                         is Resource.Success -> {
                             val unlockedFillResponse: FillResponse =
-                                fillResponseBuilder.buildUnlocked(
-                                    fillDataResource.data,
-                                    clientState
-                                )
+                                fillResponseBuilder.buildUnlocked(fillDataResource.data, requestInfo, clientState)
 
                             unlockedFillResponseResourceSubject.onNext(
                                 Resource.Success(unlockedFillResponse)

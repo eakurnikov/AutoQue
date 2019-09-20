@@ -13,6 +13,8 @@ import com.eakurnikov.autoque.autofill.impl.R
 import com.eakurnikov.autoque.autofill.impl.data.Resource
 import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.domain.request.RequestInfoBuilder
+import com.eakurnikov.autoque.autofill.impl.extensions.getRequestInfo
+import com.eakurnikov.autoque.autofill.impl.extensions.plus
 import com.eakurnikov.autoque.autofill.impl.extensions.putRequestInfo
 import com.eakurnikov.autoque.autofill.impl.util.FillResponseResource
 import com.eakurnikov.common.annotations.AppContext
@@ -47,39 +49,40 @@ class FillRequestHandler @Inject constructor(
             ).show()
         }
 
-        val requestInfo: RequestInfo? = requestInfoBuilder.build(fillRequest)
+        var requestInfo: RequestInfo? = requestInfoBuilder.build(fillRequest)
 
         if (requestInfo == null) {
             fillCallback.onFailure(null)
             return
         }
 
-        val clientState: Bundle =
-            (fillRequest.clientState ?: Bundle()).apply { putRequestInfo(requestInfo) }
+        val clientState: Bundle = (fillRequest.clientState ?: Bundle())
+        requestInfo += clientState.getRequestInfo()
+        clientState.putRequestInfo(requestInfo)
 
-        sendFillResponse(clientState, fillCallback)
+        sendFillResponse(requestInfo, clientState, fillCallback)
     }
 
-    private fun sendFillResponse(clientState: Bundle, fillCallback: FillCallback) {
+    private fun sendFillResponse(requestInfo: RequestInfo, clientState: Bundle, fillCallback: FillCallback) {
         if (autofillAuthProvider.isAuthRequired) {
-            sendLockedFillResponse(clientState, fillCallback)
+            sendLockedFillResponse(requestInfo, clientState, fillCallback)
         } else {
-            sendUnlockedFillResponse(clientState, fillCallback)
+            sendUnlockedFillResponse(requestInfo, clientState, fillCallback)
         }
     }
 
-    private fun sendLockedFillResponse(clientState: Bundle, fillCallback: FillCallback) {
+    private fun sendLockedFillResponse(requestInfo: RequestInfo, clientState: Bundle, fillCallback: FillCallback) {
         val authIntentSender: IntentSender = autofillAuthProvider.getAuthIntentSenderForFill(clientState)
 
         val lockedFillResponse: FillResponse =
-            fillResponseProducer.produceLockedFillResponse(authIntentSender, clientState)
+            fillResponseProducer.produceLockedFillResponse(authIntentSender, requestInfo, clientState)
 
         fillCallback.onSuccess(lockedFillResponse)
     }
 
-    private fun sendUnlockedFillResponse(clientState: Bundle, fillCallback: FillCallback) {
+    private fun sendUnlockedFillResponse(requestInfo: RequestInfo, clientState: Bundle, fillCallback: FillCallback) {
         disposable = fillResponseProducer
-            .produceUnlockedFillResponse(clientState)
+            .produceUnlockedFillResponse(requestInfo, clientState)
             .subscribe(
                 { fillResponseResource: FillResponseResource ->
                     when (fillResponseResource) {

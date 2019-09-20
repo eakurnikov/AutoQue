@@ -50,14 +50,18 @@ class SaveRequestHandler @Inject constructor(
             return
         }
 
-        saveFillData(clientState.apply { putRequestInfo(saveRequestInfo) }, saveCallback)
+        saveFillData(
+            saveRequestInfo,
+            clientState.apply { putRequestInfo(saveRequestInfo) },
+            saveCallback
+        )
     }
 
-    private fun saveFillData(clientState: Bundle, saveCallback: SaveCallback) {
+    private fun saveFillData(requestInfo: RequestInfo, clientState: Bundle, saveCallback: SaveCallback) {
         if (autofillAuthProvider.isAuthRequired) {
             authenticateAndSaveFillData(clientState, saveCallback)
         } else {
-            authenticatedSaveFillData(clientState, saveCallback)
+            authenticatedSaveFillData(requestInfo, saveCallback)
         }
     }
 
@@ -71,9 +75,9 @@ class SaveRequestHandler @Inject constructor(
         }
     }
 
-    private fun authenticatedSaveFillData(clientState: Bundle, saveCallback: SaveCallback) {
+    private fun authenticatedSaveFillData(requestInfo: RequestInfo, saveCallback: SaveCallback) {
         disposable = fillDataSaver
-            .saveFillData(clientState)
+            .saveFillData(requestInfo)
             .subscribe(
                 { saveResource: SaveResource ->
                     when (saveResource) {
