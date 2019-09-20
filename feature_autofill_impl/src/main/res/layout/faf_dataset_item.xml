@@ -50,8 +50,9 @@
                   android:paddingEnd="16dp"
                   android:paddingRight="16dp"
                   android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                  android:textColor="@color/faf_colorPrimaryDark"
+                  android:textColor="@color/faf_textColorDark"
                   android:textSize="12sp"
+                  android:textStyle="bold"
                   tools:text="MyAwesomeApp"/>
 
     </LinearLayout>

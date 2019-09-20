@@ -3,11 +3,11 @@
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#bbbbbb"/>
+            <solid android:color="@color/colorPrimary"/>
         </shape>
     </item>
 
-    <item android:drawable="@drawable/faf_ic_launcher_foreground"
+    <item android:drawable="@drawable/ic_main"
           android:bottom="24dp"
           android:left="24dp"
           android:right="24dp"

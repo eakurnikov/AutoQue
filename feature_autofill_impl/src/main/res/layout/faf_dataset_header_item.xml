@@ -4,10 +4,11 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:gravity="center"
+              android:background="@color/faf_colorPrimary"
               android:orientation="vertical">
 
     <TextView android:id="@+id/faf_dataset_header_text"
-              android:layout_width="256dp"
+              android:layout_width="270dp"
               android:layout_height="wrap_content"
               android:layout_gravity="center_vertical"
               android:gravity="center_vertical"
@@ -19,7 +20,8 @@
               android:paddingRight="16dp"
               android:paddingBottom="8dp"
               android:textAppearance="?android:attr/textAppearanceListItemSmall"
-              android:textColor="@color/faf_colorPrimaryDark"
+              android:textColor="@color/faf_textColorLight"
+              android:textStyle="bold"
               android:textSize="15sp"
               tools:text="No suitable credentials found, but try these"/>
 

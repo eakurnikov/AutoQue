@@ -8,7 +8,6 @@
               android:layout_marginTop="8dp"
               android:layout_marginEnd="8dp"
               android:layout_marginRight="8dp"
-              android:background="#bbbbbb"
               android:orientation="horizontal">
 
     <TextView android:id="@+id/faf_save_description_text"
@@ -18,7 +17,7 @@
               android:minHeight="?android:attr/listPreferredItemHeightSmall"
               android:padding="16dp"
               android:textAppearance="?android:attr/textAppearanceListItemSmall"
-              android:textColor="@color/faf_colorPrimaryDark"
+              android:textColor="@color/faf_textColorDark"
               android:textSize="16sp"
               android:textStyle="bold"
               tools:text="Your credentials could be saved to a new account for future autofill"/>
