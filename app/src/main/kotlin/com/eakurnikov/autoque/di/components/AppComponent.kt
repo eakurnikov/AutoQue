@@ -1,8 +1,7 @@
 package com.eakurnikov.autoque.di.components
 
-import com.eakurnikov.autoque.di.modules.AppModule
-import com.eakurnikov.autoque.di.modules.activity.ActivityBuilderModule
-import com.eakurnikov.autoque.di.modules.autofill.AutofillFeatureApiModule
+import com.eakurnikov.autoque.di.modules.common.*
+import com.eakurnikov.autoque.di.modules.feature.autofill.AutofillFeatureApiModule
 import com.eakurnikov.autoque.domain.app.AutoQueApp
 import com.eakurnikov.common.di.annotations.AppScope
 import dagger.Component
@@ -15,8 +14,12 @@ import dagger.android.AndroidInjector
 @Component(
     modules = [
         AppModule::class,
-        AutofillFeatureApiModule::class,
-        ActivityBuilderModule::class
+        DatabaseModule::class,
+        NetworkModule::class,
+        RepositoryModule::class,
+        ViewModelModule::class,
+        ActivityBuilderModule::class,
+        AutofillFeatureApiModule::class
     ]
 )
 interface AppComponent : AndroidInjector<AutoQueApp> {

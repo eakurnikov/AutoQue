@@ -10,7 +10,7 @@ com.eakurnikov.autoque.dependencies.packagename
 com.eakurnikov.autoque.di.components
 com.eakurnikov.autoque.di.modules
 com.eakurnikov.autoque.di.modules.activity
-com.eakurnikov.autoque.di.modules.autofill
+com.eakurnikov.autoque.di.modules.feature.autofill
 com.eakurnikov.autoque.domain
 com.eakurnikov.autoque.domain.app
 com.eakurnikov.autoque.util

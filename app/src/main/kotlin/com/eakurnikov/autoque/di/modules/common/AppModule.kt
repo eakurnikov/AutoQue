@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.di.modules
+package com.eakurnikov.autoque.di.modules.common
 
 import android.content.Context
 import com.eakurnikov.autoque.domain.app.AutoQueApp

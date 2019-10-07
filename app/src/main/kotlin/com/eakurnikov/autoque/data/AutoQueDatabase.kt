@@ -2,7 +2,8 @@ package com.eakurnikov.autoque.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.eakurnikov.autoque.data.dao.AutofillRoomDao
+import com.eakurnikov.autoque.data.dao.autofill.AutofillRoomDao
+import com.eakurnikov.autoque.data.dao.main.MainDao
 import com.eakurnikov.autoque.data.entity.AccountRoomEntity
 import com.eakurnikov.autoque.data.entity.LoginRoomEntity
 
@@ -17,7 +18,9 @@ import com.eakurnikov.autoque.data.entity.LoginRoomEntity
     version = 1,
     exportSchema = false
 )
-abstract class AutofillDatabase : RoomDatabase() {
+abstract class AutoQueDatabase : RoomDatabase() {
 
     abstract fun autofillDao(): AutofillRoomDao
+
+    abstract fun mainDao(): MainDao
 }
