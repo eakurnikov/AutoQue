@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 /**
  * Created by eakurnikov on 2019-09-15
  */
-
 fun Context.setComponentEnabled(componentClass: Class<*>, enable: Boolean) {
     packageManager.setComponentEnabledSetting(
         ComponentName(this, componentClass),

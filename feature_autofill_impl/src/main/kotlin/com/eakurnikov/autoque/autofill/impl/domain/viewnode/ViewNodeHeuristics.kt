@@ -11,7 +11,8 @@ import javax.inject.Inject
  * Obtains view node's autofill hint, save type and web domain. Infers autofill hint using some
  * heuristics if needed.
  */
-class ViewNodeHeuristics @Inject constructor() {
+class ViewNodeHeuristics
+@Inject constructor() {
 
     fun obtainAutofillType(viewNode: AssistStructure.ViewNode): Int? {
         return viewNode.autofillType.let { if (it == View.AUTOFILL_TYPE_TEXT) it else null }

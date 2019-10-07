@@ -15,7 +15,8 @@ import javax.inject.Inject
  * Builds a [Dataset] using [AutofillViewProducer] and [AppInfoProvider]. Works only with login and
  * password values.
  */
-class DatasetBuilder @Inject constructor(
+class DatasetBuilder
+@Inject constructor(
     private val autofillViewProducer: AutofillViewProducer,
     private val appInfoProvider: AppInfoProvider
 ) {

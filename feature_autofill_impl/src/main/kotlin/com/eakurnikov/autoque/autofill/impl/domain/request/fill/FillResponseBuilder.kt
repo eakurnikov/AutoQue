@@ -24,7 +24,8 @@ import javax.inject.Inject
  *
  * Builds a [FillResponse] using [AutofillViewProducer] and [DatasetBuilder].
  */
-class FillResponseBuilder @Inject constructor(
+class FillResponseBuilder
+@Inject constructor(
     @AppContext private val context: Context,
     private val autofillViewProducer: AutofillViewProducer,
     private val datasetBuilder: DatasetBuilder

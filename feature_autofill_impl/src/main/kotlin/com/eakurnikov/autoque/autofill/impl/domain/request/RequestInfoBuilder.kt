@@ -21,7 +21,8 @@ import javax.inject.Inject
  * [AutoQueAutofillService]. Now marks as verified requests only from single-screen forms with login and
  * password fields.
  */
-class RequestInfoBuilder @Inject constructor(
+class RequestInfoBuilder
+@Inject constructor(
     private val packageVerifier: PackageVerifier,
     private val screenInfoBuilder: ScreenInfoBuilder
 ) {

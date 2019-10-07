@@ -13,7 +13,8 @@ import javax.inject.Inject
  *
  * Provides client app data, such as it's icon and name, used for filling and saving data.
  */
-class AppInfoProvider @Inject constructor(
+class AppInfoProvider
+@Inject constructor(
     @AppContext private val context: Context
 ) {
     fun provideAppIconAsDrawable(packageName: String): Drawable? {

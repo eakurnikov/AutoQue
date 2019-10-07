@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.di.modules.autofill
+package com.eakurnikov.autoque.di.modules.feature.autofill
 
 import com.eakurnikov.autoque.autofill.api.dependencies.dal.DigitalAssetLinksVerifier
 import com.eakurnikov.autoque.dependencies.dal.DigitalAssetLinksVerifierImpl

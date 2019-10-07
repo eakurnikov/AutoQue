@@ -13,7 +13,8 @@ import javax.inject.Inject
  *
  * Builds [ScreenInfo].
  */
-class ScreenInfoBuilder @Inject constructor(
+class ScreenInfoBuilder
+@Inject constructor(
     private val viewInfoBuilder: ViewInfoBuilder
 ) {
     private var login: ViewInfo? = null

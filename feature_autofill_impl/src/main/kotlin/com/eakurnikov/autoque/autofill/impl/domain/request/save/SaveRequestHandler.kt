@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.service.autofill.SaveCallback
 import android.service.autofill.SaveRequest
 import android.widget.Toast
-import com.eakurnikov.autoque.autofill.api.dependencies.auth.AutofillAuthProvider
+import com.eakurnikov.autoque.autofill.api.dependencies.auth.AuthProvider
 import com.eakurnikov.autoque.autofill.impl.R
 import com.eakurnikov.autoque.autofill.impl.data.Resource
 import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
@@ -26,9 +26,10 @@ import javax.inject.Inject
  * Replies on an autofill service's [SaveRequest] with an authentication intent got from
  * [AutofillAuthenticationProvider] or saving filled user data via [FillDataSaver].
  */
-class SaveRequestHandler @Inject constructor(
+class SaveRequestHandler
+@Inject constructor(
     @AppContext private val context: Context,
-    private val autofillAuthProvider: AutofillAuthProvider<*>,
+    private val authProvider: AuthProvider<*>,
     private val requestInfoBuilder: RequestInfoBuilder,
     private val fillDataSaver: FillDataSaver
 ) {
@@ -58,7 +59,7 @@ class SaveRequestHandler @Inject constructor(
     }
 
     private fun saveFillData(requestInfo: RequestInfo, clientState: Bundle, saveCallback: SaveCallback) {
-        if (autofillAuthProvider.isAuthRequired) {
+        if (authProvider.isAuthRequired) {
             authenticateAndSaveFillData(clientState, saveCallback)
         } else {
             authenticatedSaveFillData(requestInfo, saveCallback)
@@ -66,7 +67,7 @@ class SaveRequestHandler @Inject constructor(
     }
 
     private fun authenticateAndSaveFillData(clientState: Bundle, saveCallback: SaveCallback) {
-        val authIntentSender: IntentSender = autofillAuthProvider.getAuthIntentSenderForSave(clientState)
+        val authIntentSender: IntentSender = authProvider.getAuthIntentSenderForSave(clientState)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             saveCallback.onSuccess(authIntentSender)

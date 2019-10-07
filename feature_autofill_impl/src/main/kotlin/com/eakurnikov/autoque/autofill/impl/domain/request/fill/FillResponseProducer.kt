@@ -19,7 +19,8 @@ import javax.inject.Inject
  * Produces locked and unlocked [FillResponse]s built via [FillResponseBuilder] using fetched data
  * from [AutofillRepository] and notifies subscribers via [unlockedFillResponseResourceSubject].
  */
-class FillResponseProducer @Inject constructor(
+class FillResponseProducer
+@Inject constructor(
     private val autofillRepo: AutofillRepository,
     private val fillResponseBuilder: FillResponseBuilder
 ) {

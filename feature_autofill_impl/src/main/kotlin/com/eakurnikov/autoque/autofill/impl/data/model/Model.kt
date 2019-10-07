@@ -7,7 +7,6 @@ import kotlinx.android.parcel.Parcelize
 /**
  * Created by eakurnikov on 2019-09-15
  */
-
 @Parcelize
 data class ViewInfo(
     val autofillId: AutofillId,

@@ -14,7 +14,8 @@ import javax.inject.Inject
  * Saves filled user data via [AutofillRepository] and notifies subscribers via
  * [saveFillDataSubject]. Used in [SaveRequestHandler] and in auth activity.
  */
-class FillDataSaver @Inject constructor(
+class FillDataSaver
+@Inject constructor(
     private val autofillRepo: AutofillRepository,
     private val fillDataBuilder: FillDataBuilder
 ) {

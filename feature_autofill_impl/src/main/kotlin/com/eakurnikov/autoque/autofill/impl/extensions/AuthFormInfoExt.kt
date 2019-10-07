@@ -6,7 +6,6 @@ import com.eakurnikov.autoque.autofill.impl.data.model.AuthFormInfo
 /**
  * Created by eakurnikov on 2019-09-15
  */
-
 val AuthFormInfo.autofillIdsAsArray: Array<AutofillId>
     get() = when {
         login == null -> arrayOf(password!!.autofillId)

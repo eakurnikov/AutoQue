@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.data.dao
+package com.eakurnikov.autoque.data.dao.autofill
 
 import com.eakurnikov.autoque.autofill.api.dependencies.data.dao.AutofillDao
 import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.AccountEntity
@@ -12,7 +12,8 @@ import io.reactivex.Single
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class AutofillDaoAdapter(
+class AutofillDaoAdapter
+constructor(
     private val dao: AutofillRoomDao
 ) : AutofillDao {
 

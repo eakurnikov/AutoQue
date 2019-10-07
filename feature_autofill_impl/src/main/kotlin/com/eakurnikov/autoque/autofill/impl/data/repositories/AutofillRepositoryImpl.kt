@@ -21,7 +21,8 @@ import javax.inject.Inject
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class AutofillRepositoryImpl @Inject constructor(
+class AutofillRepositoryImpl
+@Inject constructor(
     private val autofillDao: AutofillDao
 ) : AutofillRepository {
 

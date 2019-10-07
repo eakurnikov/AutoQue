@@ -12,7 +12,8 @@ import javax.inject.Inject
  *
  * Produces [RemoteViews].
  */
-class AutofillViewProducer @Inject constructor(
+class AutofillViewProducer
+@Inject constructor(
     @AppContext private val context: Context
 ) {
     fun datasetAuthItemView() =

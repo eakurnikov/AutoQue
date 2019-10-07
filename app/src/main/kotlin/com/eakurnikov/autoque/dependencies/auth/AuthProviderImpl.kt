@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
-import com.eakurnikov.autoque.autofill.api.dependencies.auth.AutofillAuthProvider
+import com.eakurnikov.autoque.autofill.api.dependencies.auth.AuthProvider
 import com.eakurnikov.autoque.autofill.api.dependencies.auth.AutofillAuthType
 import com.eakurnikov.autoque.autofill.api.dependencies.auth.setAutofillAuthPayload
 import com.eakurnikov.autoque.domain.AutoQueAuthentication.isSessionExpired
@@ -18,9 +18,10 @@ import javax.inject.Inject
  * Created by eakurnikov on 2019-09-15
  */
 @AppScope
-class AutofillAuthProviderImpl @Inject constructor(
+class AuthProviderImpl
+@Inject constructor(
     @AppContext private val context: Context
-) : AutofillAuthProvider<AuthActivity> {
+) : AuthProvider<AuthActivity> {
 
     private var pendingIntentId = 0
 

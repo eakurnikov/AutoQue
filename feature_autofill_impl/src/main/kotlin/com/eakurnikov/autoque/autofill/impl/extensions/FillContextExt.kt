@@ -9,7 +9,6 @@ import java.util.LinkedList
 /**
  * Created by eakurnikov on 2019-09-15
  */
-
 fun FillContext.findViewNodes(autofillIds: Array<AutofillId>): Array<AssistStructure.ViewNode?> {
     val viewNodesToProcess: LinkedList<AssistStructure.ViewNode> = LinkedList()
 

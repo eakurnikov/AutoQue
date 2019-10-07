@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.di.modules.autofill
+package com.eakurnikov.autoque.di.modules.feature.autofill
 
 import com.eakurnikov.autoque.autofill.api.dependencies.packagename.PackageVerifier
 import com.eakurnikov.autoque.dependencies.packagename.PackageVerifierImpl

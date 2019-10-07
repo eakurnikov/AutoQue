@@ -11,7 +11,6 @@ import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.LoginEntity
 /**
  * Created by eakurnikov on 2019-09-15
  */
-
 data class FillDataEntity(
     val accountEntity: AccountEntity,
     val loginEntity: LoginEntity

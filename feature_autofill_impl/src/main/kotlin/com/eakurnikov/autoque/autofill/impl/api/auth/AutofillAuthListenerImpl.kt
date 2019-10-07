@@ -25,7 +25,8 @@ import javax.inject.Inject
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class AutofillAuthListenerImpl @Inject constructor(
+class AutofillAuthListenerImpl
+@Inject constructor(
     private val fillResponseProducer: FillResponseProducer,
     private val fillDataSaver: FillDataSaver
 ) : AutofillAuthListener {

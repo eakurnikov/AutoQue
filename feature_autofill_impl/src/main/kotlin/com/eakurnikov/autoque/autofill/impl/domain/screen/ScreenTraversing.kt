@@ -7,7 +7,8 @@ import android.app.assist.AssistStructure
  *
  * Traverses through each view node of assist structure and applies an action.
  */
-private class ScreenTraversing(
+private class ScreenTraversing
+constructor(
     private val assistStructures: List<AssistStructure>,
     private inline val onEachViewNode: (AssistStructure.ViewNode) -> Unit
 ) {

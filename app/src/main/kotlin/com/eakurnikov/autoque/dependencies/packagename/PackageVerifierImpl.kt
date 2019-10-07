@@ -11,7 +11,8 @@ import javax.inject.Inject
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class PackageVerifierImpl @Inject constructor(
+class PackageVerifierImpl
+@Inject constructor(
     @AppContext private val context: Context
 ) : PackageVerifier {
 

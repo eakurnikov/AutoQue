@@ -14,7 +14,8 @@ import javax.inject.Inject
  *
  * Builds and [FillDataDto] from [SaveRequestInfo] for saving.
  */
-class FillDataBuilder @Inject constructor(
+class FillDataBuilder
+@Inject constructor(
     private val appInfoProvider: AppInfoProvider
 ) {
     fun build(requestInfo: RequestInfo): FillDataEntity {

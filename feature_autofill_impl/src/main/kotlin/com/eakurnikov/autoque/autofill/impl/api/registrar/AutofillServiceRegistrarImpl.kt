@@ -12,7 +12,8 @@ import javax.inject.Inject
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class AutofillServiceRegistrarImpl @Inject constructor(
+class AutofillServiceRegistrarImpl
+@Inject constructor(
     @AppContext private val context: Context
 ) : AutofillServiceRegistrar {
 

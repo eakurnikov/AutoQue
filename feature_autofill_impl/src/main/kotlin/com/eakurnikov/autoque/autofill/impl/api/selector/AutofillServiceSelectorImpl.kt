@@ -15,7 +15,8 @@ import javax.inject.Inject
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class AutofillServiceSelectorImpl @Inject constructor(
+class AutofillServiceSelectorImpl
+@Inject constructor(
     @AppContext private val context: Context
 ) : AutofillServiceSelector {
 

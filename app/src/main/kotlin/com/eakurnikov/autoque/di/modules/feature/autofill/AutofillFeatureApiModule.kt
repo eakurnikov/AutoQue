@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.di.modules.autofill
+package com.eakurnikov.autoque.di.modules.feature.autofill
 
 import android.content.Context
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi

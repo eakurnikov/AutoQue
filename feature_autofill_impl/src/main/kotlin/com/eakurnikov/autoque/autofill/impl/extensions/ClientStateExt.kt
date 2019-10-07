@@ -7,7 +7,6 @@ import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
 /**
  * Created by eakurnikov on 2019-09-15
  */
-
 private const val LOGIN_KEY = "LOGIN"
 private const val PASSWORD_KEY = "PASSWORD"
 private const val LOGIN_AND_PASSWORD_KEY = "LOGIN_AND_PASSWORD"

@@ -6,7 +6,8 @@ import javax.inject.Inject
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class DigitalAssetLinksVerifierImpl @Inject constructor() : DigitalAssetLinksVerifier {
+class DigitalAssetLinksVerifierImpl
+@Inject constructor() : DigitalAssetLinksVerifier {
 
     /**
      * A temporary stub.

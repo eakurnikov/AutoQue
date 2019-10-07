@@ -6,7 +6,7 @@ import android.os.Bundle
 /**
  * Created by eakurnikov on 2019-09-14
  */
-interface AutofillAuthProvider<T : AutofillAuthenticator> {
+interface AuthProvider<T : AutofillAuthenticator> {
 
     val autofillAuthenticatorClass: Class<T>
     val isAuthRequired: Boolean

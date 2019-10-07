@@ -6,7 +6,8 @@ import io.reactivex.SingleTransformer
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class ListSingleTransformer<UpstreamItem, DownstreamItem>(
+class ListSingleTransformer<UpstreamItem, DownstreamItem>
+constructor(
     private val converter: (UpstreamItem) -> DownstreamItem
 ) : SingleTransformer<List<UpstreamItem>, List<DownstreamItem>> {
 

@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.data.dao
+package com.eakurnikov.autoque.data.dao.autofill
 
 import androidx.room.Dao
 import androidx.room.Insert

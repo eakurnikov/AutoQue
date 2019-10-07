@@ -8,7 +8,6 @@ import com.eakurnikov.autoque.autofill.impl.data.model.ViewInfo
 /**
  * Created by eakurnikov on 2019-09-15
  */
-
 operator fun RequestInfo?.plus(addendum: RequestInfo?): RequestInfo? {
     this ?: addendum ?: return null
 

@@ -8,7 +8,8 @@ import javax.inject.Inject
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class ViewInfoBuilder @Inject constructor(
+class ViewInfoBuilder
+@Inject constructor(
     private val viewNodeHeuristics: ViewNodeHeuristics
 ) {
     fun build(viewNode: AssistStructure.ViewNode): ViewInfo? {

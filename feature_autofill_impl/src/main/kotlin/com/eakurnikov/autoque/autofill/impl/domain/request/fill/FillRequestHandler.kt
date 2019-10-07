@@ -8,7 +8,7 @@ import android.service.autofill.FillCallback
 import android.service.autofill.FillRequest
 import android.service.autofill.FillResponse
 import android.widget.Toast
-import com.eakurnikov.autoque.autofill.api.dependencies.auth.AutofillAuthProvider
+import com.eakurnikov.autoque.autofill.api.dependencies.auth.AuthProvider
 import com.eakurnikov.autoque.autofill.impl.R
 import com.eakurnikov.autoque.autofill.impl.data.Resource
 import com.eakurnikov.autoque.autofill.impl.data.model.RequestInfo
@@ -28,9 +28,10 @@ import javax.inject.Inject
  * intent got from [AutofillAuthenticationProvider] or unlocked [FillResponse] produced by
  * [FillResponseProducer].
  */
-class FillRequestHandler @Inject constructor(
+class FillRequestHandler
+@Inject constructor(
     @AppContext private val context: Context,
-    private val autofillAuthProvider: AutofillAuthProvider<*>,
+    private val authProvider: AuthProvider<*>,
     private val requestInfoBuilder: RequestInfoBuilder,
     private val fillResponseProducer: FillResponseProducer
 ) {
@@ -64,7 +65,7 @@ class FillRequestHandler @Inject constructor(
     }
 
     private fun sendFillResponse(requestInfo: RequestInfo, clientState: Bundle, fillCallback: FillCallback) {
-        if (autofillAuthProvider.isAuthRequired) {
+        if (authProvider.isAuthRequired) {
             sendLockedFillResponse(requestInfo, clientState, fillCallback)
         } else {
             sendUnlockedFillResponse(requestInfo, clientState, fillCallback)
@@ -72,7 +73,7 @@ class FillRequestHandler @Inject constructor(
     }
 
     private fun sendLockedFillResponse(requestInfo: RequestInfo, clientState: Bundle, fillCallback: FillCallback) {
-        val authIntentSender: IntentSender = autofillAuthProvider.getAuthIntentSenderForFill(clientState)
+        val authIntentSender: IntentSender = authProvider.getAuthIntentSenderForFill(clientState)
 
         val lockedFillResponse: FillResponse =
             fillResponseProducer.produceLockedFillResponse(authIntentSender, requestInfo, clientState)

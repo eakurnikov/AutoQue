@@ -5,7 +5,6 @@ import com.eakurnikov.autoque.autofill.impl.data.model.FillDataEntity
 /**
  * Created by eakurnikov on 2019-09-15
  */
-
 fun List<FillDataEntity>.sort(targetPackageName: String): List<FillDataEntity> {
     if (isEmpty()) return this
 
