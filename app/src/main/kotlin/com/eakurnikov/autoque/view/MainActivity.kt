@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.impl.data.Resource
 import com.eakurnikov.autoque.data.entity.AccountRoomEntity
-import com.eakurnikov.autoque.data.entity.LoginRoomEntity
 import com.eakurnikov.autoque.view.base.BaseActivity
 import com.eakurnikov.autoque.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
