@@ -1,7 +1,7 @@
 package com.eakurnikov.autoque.viewmodel
 
 import com.eakurnikov.autoque.autofill.impl.data.Resource
-import com.eakurnikov.autoque.data.entity.AccountRoomEntity
+import com.eakurnikov.autoque.data.entity.LoginRoomEntity
 import com.eakurnikov.autoque.data.repository.MainRepo
 import com.eakurnikov.autoque.viewmodel.base.BaseViewModel
 import io.reactivex.subjects.BehaviorSubject
@@ -15,7 +15,7 @@ class MainViewModel
     private val mainRepo: MainRepo
 ) : BaseViewModel() {
 
-    var accountsSubject: BehaviorSubject<Resource<List<AccountRoomEntity>>> = BehaviorSubject.createDefault(
+    var accountsSubject: BehaviorSubject<Resource<List<LoginRoomEntity>>> = BehaviorSubject.createDefault(
         Resource.Loading(listOf())
     )
 
@@ -24,7 +24,7 @@ class MainViewModel
             mainRepo
                 .getAccounts()
                 .subscribe(
-                    { resource: Resource<List<AccountRoomEntity>> ->
+                    { resource: Resource<List<LoginRoomEntity>> ->
                         accountsSubject.onNext(resource)
                     },
                     { error: Throwable ->
