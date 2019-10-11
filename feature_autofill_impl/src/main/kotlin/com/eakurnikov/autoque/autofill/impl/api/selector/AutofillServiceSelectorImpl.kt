@@ -6,10 +6,10 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.view.autofill.AutofillManager
-import android.widget.Toast
 import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector
-import com.eakurnikov.autoque.autofill.impl.R
+import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector.SelectionStatus
 import com.eakurnikov.common.annotations.AppContext
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
 /**
@@ -22,8 +22,22 @@ class AutofillServiceSelectorImpl
 
     private val requestCode = 0
 
+    private val autofillManager: AutofillManager
+        get() = context.getSystemService(AutofillManager::class.java)
+
+    override val selectionStatusSubject: BehaviorSubject<SelectionStatus> = BehaviorSubject.createDefault(
+        SelectionStatus(isSelected, null)
+    )
+
     override val isSelected: Boolean
-        get() = context.getSystemService(AutofillManager::class.java).hasEnabledAutofillServices()
+        get() = autofillManager.hasEnabledAutofillServices()
+
+    override fun unselect() {
+        autofillManager.disableAutofillServices()
+        selectionStatusSubject.onNext(
+            SelectionStatus(false, null)
+        )
+    }
 
     override fun promptSelection(activity: Activity) {
         activity.startActivityForResult(
@@ -34,28 +48,13 @@ class AutofillServiceSelectorImpl
         )
     }
 
-    override fun onSelection(
-        activity: Activity,
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?,
-        action: AutofillServiceSelector.OnSelectionResultAction?
-    ) {
-        if (this.requestCode != requestCode) return
+    override fun onSelection(requestCode: Int, resultCode: Int, data: Intent?): BehaviorSubject<SelectionStatus>? {
+        if (this.requestCode != requestCode) return null
 
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                Toast.makeText(
-                    activity,
-                    activity.getString(R.string.faf_autofill_service_selected),
-                    Toast.LENGTH_LONG
-                ).show()
-
-                action?.onSelected()
-            }
-            Activity.RESULT_CANCELED -> {
-                action?.onNotSelected()
-            }
+        return selectionStatusSubject.also {
+            it.onNext(
+                SelectionStatus(resultCode == Activity.RESULT_OK, data)
+            )
         }
     }
 }

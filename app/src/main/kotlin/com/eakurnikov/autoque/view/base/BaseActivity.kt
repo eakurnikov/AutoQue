@@ -17,27 +17,13 @@ abstract class BaseActivity<ViewModel : BaseViewModel> : DaggerAppCompatActivity
 
     protected abstract var viewModel: ViewModel
 
-    private val disposables: CompositeDisposable = CompositeDisposable()
-
     override fun onStart() {
         super.onStart()
         viewModel.onStart()
-        subscribe()
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.onStop()
-        dispose()
-    }
-
-    protected open fun subscribe() = Unit
-
-    protected open fun subscribe(disposable: Disposable) {
-        disposables.add(disposable)
-    }
-
-    protected open fun dispose() {
-        disposables.dispose()
     }
 }

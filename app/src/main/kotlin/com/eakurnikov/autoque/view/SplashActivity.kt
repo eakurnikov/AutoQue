@@ -9,6 +9,8 @@ import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
 import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector
 import dagger.android.AndroidInjection
 import dagger.android.DaggerActivity
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -20,6 +22,8 @@ class SplashActivity : DaggerActivity() {
 
     @Inject
     lateinit var autofillApi: AutofillFeatureApi
+
+    private var autofillServiceSelectorDisposable: Disposable? = null
 
     private val promptAutofillServiceSelection: () -> Unit = {
         if (::autofillApi.isInitialized) {
@@ -37,14 +41,15 @@ class SplashActivity : DaggerActivity() {
         }
     }
 
-    private val onAutofillServiceSelectionAction =
-        object : AutofillServiceSelector.OnSelectionResultAction {
-            override fun onSelected() {
+    private val onAutofillServiceSelection = object : DisposableObserver<AutofillServiceSelector.SelectionStatus>() {
+        override fun onComplete() {
+        }
+
+        override fun onNext(status: AutofillServiceSelector.SelectionStatus) {
+            if (status.isSelected) {
                 autofill_registration_status.text = getString(R.string.autofill_service_selected)
                 Handler(mainLooper).postDelayed({ finish() }, TimeUnit.SECONDS.toMillis(2))
-            }
-
-            override fun onNotSelected() {
+            } else {
                 Toast.makeText(
                     this@SplashActivity,
                     R.string.autofill_service_selection_canceled,
@@ -53,7 +58,12 @@ class SplashActivity : DaggerActivity() {
 
                 finish()
             }
+            disposeAutofillServiceSelector()
         }
+
+        override fun onError(error: Throwable) {
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,14 +84,16 @@ class SplashActivity : DaggerActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        autofillApi.autofillServiceSelector.onSelection(
-            this@SplashActivity,
-            requestCode,
-            resultCode,
-            data,
-            onAutofillServiceSelectionAction
-        )
+        autofillServiceSelectorDisposable = autofillApi
+            .autofillServiceSelector
+            .onSelection(requestCode, resultCode, data)
+            ?.subscribeWith(onAutofillServiceSelection)
 
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun disposeAutofillServiceSelector() {
+        autofillServiceSelectorDisposable?.dispose()
+        autofillServiceSelectorDisposable = null
     }
 }

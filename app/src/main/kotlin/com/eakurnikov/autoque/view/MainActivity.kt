@@ -9,16 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
+import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector
 import com.eakurnikov.autoque.autofill.impl.data.Resource
 import com.eakurnikov.autoque.data.entity.LoginRoomEntity
 import com.eakurnikov.autoque.view.base.BaseActivity
 import com.eakurnikov.autoque.viewmodel.MainViewModel
 import dagger.android.AndroidInjection
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -32,6 +36,9 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     private val adapter: AccountsAdapter = AccountsAdapter()
 
+    private var viewModelDisposable: Disposable? = null
+    private var autofillServiceSelectorDisposable: Disposable? = null
+
     private val promptAutofillServiceSelection: () -> Unit = {
         if (::autofillApi.isInitialized) {
             with(autofillApi) {
@@ -43,6 +50,76 @@ class MainActivity : BaseActivity<MainViewModel>() {
                     autofillServiceSelector.promptSelection(this@MainActivity)
                 }
             }
+        }
+    }
+
+    private val onAccounts = object : DisposableObserver<Resource<List<LoginRoomEntity>>>() {
+        override fun onComplete() {
+        }
+
+        override fun onNext(resource: Resource<List<LoginRoomEntity>>) {
+            when (resource) {
+                is Resource.Success -> {
+                    label_loading.visibility = View.GONE
+                    label_error.visibility = View.GONE
+
+                    when (resource.data.size) {
+                        0 -> {
+                            label_empty.visibility = View.VISIBLE
+                            list_accounts.visibility = View.GONE
+                        }
+                        else -> {
+                            label_empty.visibility = View.GONE
+                            list_accounts.visibility = View.VISIBLE
+
+                            adapter.apply {
+                                data = resource.data
+                                notifyDataSetChanged()
+                            }
+                        }
+                    }
+                }
+                is Resource.Loading -> {
+                    label_loading.visibility = View.VISIBLE
+                    label_error.visibility = View.GONE
+                    label_empty.visibility = View.GONE
+                    list_accounts.visibility = View.GONE
+                }
+                is Resource.Error -> {
+                    label_loading.visibility = View.GONE
+                    label_error.visibility = View.VISIBLE
+                    label_empty.visibility = View.GONE
+                    list_accounts.visibility = View.GONE
+
+                    label_loading.text = resource.message
+                }
+            }
+        }
+
+        override fun onError(error: Throwable) {
+            label_loading.visibility = View.GONE
+            label_error.visibility = View.VISIBLE
+            label_empty.visibility = View.GONE
+            list_accounts.visibility = View.GONE
+
+            label_loading.text = error.message ?: getString(R.string.error)
+        }
+    }
+
+    private val onAutofillServiceSelection = object : DisposableObserver<AutofillServiceSelector.SelectionStatus>() {
+        override fun onComplete() {
+        }
+
+        override fun onNext(status: AutofillServiceSelector.SelectionStatus) {
+            Toast.makeText(
+                this@MainActivity,
+                "AutoQue Autofill Service ${if (status.isSelected) "selected" else "selection canceled"}",
+                Toast.LENGTH_LONG
+            ).show()
+            disposeAutofillServiceSelector()
+        }
+
+        override fun onError(error: Throwable) {
         }
     }
 
@@ -62,61 +139,23 @@ class MainActivity : BaseActivity<MainViewModel>() {
         Handler(mainLooper).postDelayed(promptAutofillServiceSelection, TimeUnit.SECONDS.toMillis(2))
     }
 
-    override fun subscribe() {
-        subscribe(
-            viewModel.accountsSubject.subscribe(
-                { resource: Resource<List<LoginRoomEntity>> ->
-                    when (resource) {
-                        is Resource.Success -> {
-                            label_loading.visibility = View.GONE
-                            label_error.visibility = View.GONE
+    override fun onStart() {
+        super.onStart()
+        viewModelDisposable = viewModel.accountsSubject.subscribeWith(onAccounts)
+    }
 
-                            when (resource.data.size) {
-                                0 -> {
-                                    label_empty.visibility = View.VISIBLE
-                                    list_accounts.visibility = View.GONE
-                                }
-                                else -> {
-                                    label_empty.visibility = View.GONE
-                                    list_accounts.visibility = View.VISIBLE
-
-                                    adapter.apply {
-                                        data = resource.data
-                                        notifyDataSetChanged()
-                                    }
-                                }
-                            }
-                        }
-                        is Resource.Loading -> {
-                            label_loading.visibility = View.VISIBLE
-                            label_error.visibility = View.GONE
-                            label_empty.visibility = View.GONE
-                            list_accounts.visibility = View.GONE
-                        }
-                        is Resource.Error -> {
-                            label_loading.visibility = View.GONE
-                            label_error.visibility = View.VISIBLE
-                            label_empty.visibility = View.GONE
-                            list_accounts.visibility = View.GONE
-
-                            label_loading.text = resource.message
-                        }
-                    }
-                },
-                { error: Throwable ->
-                    label_loading.visibility = View.GONE
-                    label_error.visibility = View.VISIBLE
-                    label_empty.visibility = View.GONE
-                    list_accounts.visibility = View.GONE
-
-                    label_loading.text = error.message ?: getString(R.string.error)
-                }
-            )
-        )
+    override fun onStop() {
+        super.onStop()
+        viewModelDisposable?.dispose()
+        viewModelDisposable = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        autofillApi.autofillServiceSelector.onSelection(this@MainActivity, requestCode, resultCode, data, null)
+        autofillServiceSelectorDisposable = autofillApi
+            .autofillServiceSelector
+            .onSelection(requestCode, resultCode, data)
+            ?.subscribeWith(onAutofillServiceSelection)
+
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -126,6 +165,11 @@ class MainActivity : BaseActivity<MainViewModel>() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = this@MainActivity.adapter
         }
+    }
+
+    private fun disposeAutofillServiceSelector() {
+        autofillServiceSelectorDisposable?.dispose()
+        autofillServiceSelectorDisposable = null
     }
 
     private class AccountViewHolder
