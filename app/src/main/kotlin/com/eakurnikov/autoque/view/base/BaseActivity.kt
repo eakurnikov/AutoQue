@@ -3,8 +3,6 @@ package com.eakurnikov.autoque.view.base
 import androidx.lifecycle.ViewModelProvider
 import com.eakurnikov.autoque.viewmodel.base.BaseViewModel
 import dagger.android.support.DaggerAppCompatActivity
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**

@@ -50,11 +50,6 @@ class AutofillServiceSelectorImpl
 
     override fun onSelection(requestCode: Int, resultCode: Int, data: Intent?): BehaviorSubject<SelectionStatus>? {
         if (this.requestCode != requestCode) return null
-
-        return selectionStatusSubject.also {
-            it.onNext(
-                SelectionStatus(resultCode == Activity.RESULT_OK, data)
-            )
-        }
+        return selectionStatusSubject.also { it.onNext(SelectionStatus(resultCode == Activity.RESULT_OK, data)) }
     }
 }

@@ -23,9 +23,9 @@ import com.eakurnikov.autoque.viewmodel.MainViewModel
 import dagger.android.AndroidInjection
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainViewModel>() {
 
