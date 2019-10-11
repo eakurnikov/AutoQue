@@ -4,20 +4,16 @@
 
 | Name | Summary |
 |---|---|
-| [com.eakurnikov.autoque.data](com.eakurnikov.autoque.data/index.md) |  |
-| [com.eakurnikov.autoque.data.dao](com.eakurnikov.autoque.data.dao/index.md) |  |
-| [com.eakurnikov.autoque.data.entity](com.eakurnikov.autoque.data.entity/index.md) |  |
-| [com.eakurnikov.autoque.dependencies.auth](com.eakurnikov.autoque.dependencies.auth/index.md) |  |
-| [com.eakurnikov.autoque.dependencies.dal](com.eakurnikov.autoque.dependencies.dal/index.md) |  |
-| [com.eakurnikov.autoque.dependencies.packagename](com.eakurnikov.autoque.dependencies.packagename/index.md) |  |
-| [com.eakurnikov.autoque.di.components](com.eakurnikov.autoque.di.components/index.md) |  |
-| [com.eakurnikov.autoque.di.modules](com.eakurnikov.autoque.di.modules/index.md) |  |
-| [com.eakurnikov.autoque.di.modules.activity](com.eakurnikov.autoque.di.modules.activity/index.md) |  |
-| [com.eakurnikov.autoque.di.modules.autofill](com.eakurnikov.autoque.di.modules.autofill/index.md) |  |
-| [com.eakurnikov.autoque.domain](com.eakurnikov.autoque.domain/index.md) |  |
-| [com.eakurnikov.autoque.domain.app](com.eakurnikov.autoque.domain.app/index.md) |  |
-| [com.eakurnikov.autoque.util](com.eakurnikov.autoque.util/index.md) |  |
-| [com.eakurnikov.autoque.view](com.eakurnikov.autoque.view/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.api](com.eakurnikov.autoque.autofill.api.api/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.api.auth](com.eakurnikov.autoque.autofill.api.api.auth/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.api.registrar](com.eakurnikov.autoque.autofill.api.api.registrar/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.api.selector](com.eakurnikov.autoque.autofill.api.api.selector/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.dependencies](com.eakurnikov.autoque.autofill.api.dependencies/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.dependencies.auth](com.eakurnikov.autoque.autofill.api.dependencies.auth/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.dependencies.dal](com.eakurnikov.autoque.autofill.api.dependencies.dal/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.dependencies.data.dao](com.eakurnikov.autoque.autofill.api.dependencies.data.dao/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.dependencies.data.entity](com.eakurnikov.autoque.autofill.api.dependencies.data.entity/index.md) |  |
+| [com.eakurnikov.autoque.autofill.api.dependencies.packagename](com.eakurnikov.autoque.autofill.api.dependencies.packagename/index.md) |  |
 
 ### Index
 

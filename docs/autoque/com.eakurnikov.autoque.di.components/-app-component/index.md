@@ -2,7 +2,7 @@
 
 # AppComponent
 
-`@AppScope @Component([AppModule, AutofillFeatureApiModule, ActivityBuilderModule]) interface AppComponent : AndroidInjector<`[`AutoQueApp`](../../com.eakurnikov.autoque.domain.app/-auto-que-app/index.md)`>`
+`@AppScope @Component([AppModule, DatabaseModule, NetworkModule, RepositoryModule, ViewModelModule, ActivityBuilderModule, AutofillFeatureApiModule]) interface AppComponent : AndroidInjector<`[`AutoQueApp`](../../com.eakurnikov.autoque.domain.app/-auto-que-app/index.md)`>`
 
 Created by eakurnikov on 2019-09-15
 
