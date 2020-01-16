@@ -1,13 +1,17 @@
 package com.eakurnikov.autoque.autofill.impl.di.modules
 
-import com.eakurnikov.autoque.autofill.api.api.auth.AutofillAuthListener
-import com.eakurnikov.autoque.autofill.api.api.registrar.AutofillServiceRegistrar
-import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector
-import com.eakurnikov.autoque.autofill.impl.api.auth.AutofillAuthListenerImpl
-import com.eakurnikov.autoque.autofill.impl.api.registrar.AutofillServiceRegistrarImpl
-import com.eakurnikov.autoque.autofill.impl.api.selector.AutofillServiceSelectorImpl
-import com.eakurnikov.autoque.autofill.impl.data.repositories.AutofillRepository
-import com.eakurnikov.autoque.autofill.impl.data.repositories.AutofillRepositoryImpl
+import com.eakurnikov.autoque.autofill.api.api.domain.enable.AutofillServiceEnabler
+import com.eakurnikov.autoque.autofill.api.api.domain.select.AutofillServiceSelector
+import com.eakurnikov.autoque.autofill.api.api.presentation.auth.AutofillAuthPresenter
+import com.eakurnikov.autoque.autofill.api.api.presentation.disclaimer.AutofillDisclaimerPresenter
+import com.eakurnikov.autoque.autofill.api.api.presentation.update.AutofillUpdatePromptPresenter
+import com.eakurnikov.autoque.autofill.impl.api.domain.enable.AutofillServiceEnablerImpl
+import com.eakurnikov.autoque.autofill.impl.api.domain.select.AutofillServiceSelectorImpl
+import com.eakurnikov.autoque.autofill.impl.api.presentation.auth.AutofillAuthPresenterImpl
+import com.eakurnikov.autoque.autofill.impl.api.presentation.disclaimer.AutofillDisclaimerPresenterImpl
+import com.eakurnikov.autoque.autofill.impl.api.presentation.update.AutofillUpdatePromptPresenterImpl
+import com.eakurnikov.autoque.autofill.impl.internal.data.repositories.AutofillRepository
+import com.eakurnikov.autoque.autofill.impl.internal.data.repositories.AutofillRepositoryImpl
 import dagger.Binds
 import dagger.Module
 
@@ -24,12 +28,22 @@ class AutofillFeatureModule {
         fun bindAutofillRepository(impl: AutofillRepositoryImpl): AutofillRepository
 
         @Binds
-        fun bindAutofillServiceRegistrar(impl: AutofillServiceRegistrarImpl): AutofillServiceRegistrar
+        fun bindAutofillServiceEnabler(impl: AutofillServiceEnablerImpl): AutofillServiceEnabler
 
         @Binds
         fun bindAutofillServiceSelector(impl: AutofillServiceSelectorImpl): AutofillServiceSelector
 
         @Binds
-        fun bindAutofillAuthListener(impl: AutofillAuthListenerImpl): AutofillAuthListener
+        fun bindAutofillAuthPresenter(impl: AutofillAuthPresenterImpl): AutofillAuthPresenter
+
+        @Binds
+        fun bindAutofillDisclaimerPresenter(
+            impl: AutofillDisclaimerPresenterImpl
+        ): AutofillDisclaimerPresenter
+
+        @Binds
+        fun bindAutofillUpdatePromptPresenter(
+            impl: AutofillUpdatePromptPresenterImpl
+        ): AutofillUpdatePromptPresenter
     }
 }

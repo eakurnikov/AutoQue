@@ -1,6 +1,6 @@
 package com.eakurnikov.autoque.autofill.impl.di.components
 
-import com.eakurnikov.autoque.autofill.impl.domain.AutoQueAutofillService
+import com.eakurnikov.autoque.autofill.impl.internal.domain.AutoQueAutofillService
 import com.eakurnikov.common.di.annotations.AutofillSessionScope
 import com.eakurnikov.common.di.initializer.ComponentInitializer
 import dagger.Subcomponent

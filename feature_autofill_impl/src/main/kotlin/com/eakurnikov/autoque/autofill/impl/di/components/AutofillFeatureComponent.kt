@@ -17,7 +17,8 @@ import dagger.Component
 )
 abstract class AutofillFeatureComponent : AutofillFeatureApi {
 
-    companion object : ComponentInitializer<AutofillFeatureDependencies, AutofillFeatureComponent>() {
+    companion object :
+        ComponentInitializer<AutofillFeatureDependencies, AutofillFeatureComponent>() {
         override fun buildComponent(param: AutofillFeatureDependencies): AutofillFeatureComponent {
             return DaggerAutofillFeatureComponent
                 .builder()
