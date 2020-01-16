@@ -1,4 +1,4 @@
-[autoque](../../index.md) / [com.eakurnikov.autoque.dependencies.auth](../index.md) / [AutofillAuthProviderImpl](index.md) / [getAuthIntentSenderForSave](./get-auth-intent-sender-for-save.md)
+[autoque](../../index.md) / [com.eakurnikov.autoque.domain.autofill.auth](../index.md) / [AutofillAuthProviderImpl](index.md) / [getAuthIntentSenderForSave](./get-auth-intent-sender-for-save.md)
 
 # getAuthIntentSenderForSave
 

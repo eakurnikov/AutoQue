@@ -1,4 +1,4 @@
-[autoque](../../index.md) / [com.eakurnikov.autoque.dependencies.auth](../index.md) / [AutofillAuthProviderImpl](index.md) / [&lt;init&gt;](./-init-.md)
+[autoque](../../index.md) / [com.eakurnikov.autoque.domain.autofill.auth](../index.md) / [AutofillAuthProviderImpl](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 

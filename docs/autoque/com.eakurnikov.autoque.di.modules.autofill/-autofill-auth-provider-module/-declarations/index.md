@@ -8,4 +8,4 @@
 
 | Name | Summary |
 |---|---|
-| [bindAutofillAuthProvider](bind-autofill-auth-provider.md) | `abstract fun bindAutofillAuthProvider(impl: `[`AutofillAuthProviderImpl`](../../../com.eakurnikov.autoque.dependencies.auth/-autofill-auth-provider-impl/index.md)`): AutofillAuthProvider<*>` |
+| [bindAutofillAuthProvider](bind-autofill-auth-provider.md) | `abstract fun bindAutofillAuthProvider(impl: `[`AutofillAuthProviderImpl`](../../../com.eakurnikov.autoque.domain.autofill.auth/-autofill-auth-provider-impl/index.md)`): AutofillAuthProvider<*>` |

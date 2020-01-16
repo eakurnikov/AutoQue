@@ -1,4 +1,4 @@
-[autoque](../../index.md) / [com.eakurnikov.autoque.data.dao](../index.md) / [AutofillDaoAdapter](index.md) / [getAccounts](./get-accounts.md)
+[autoque](../../index.md) / [com.eakurnikov.autoque.data.db.dao](../index.md) / [AutofillDaoAdapter](index.md) / [getAccounts](./get-accounts.md)
 
 # getAccounts
 

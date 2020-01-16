@@ -2,4 +2,4 @@
 
 # bindDigitalAssetLinksVerifier
 
-`@Binds @AppScope abstract fun bindDigitalAssetLinksVerifier(impl: `[`DigitalAssetLinksVerifierImpl`](../../../com.eakurnikov.autoque.dependencies.dal/-digital-asset-links-verifier-impl/index.md)`): DigitalAssetLinksVerifier`
+`@Binds @AppScope abstract fun bindDigitalAssetLinksVerifier(impl: `[`DigitalAssetLinksVerifierImpl`](../../../com.eakurnikov.autoque.domain.autofill.dal/-digital-asset-links-verifier-impl/index.md)`): DigitalAssetLinksVerifier`

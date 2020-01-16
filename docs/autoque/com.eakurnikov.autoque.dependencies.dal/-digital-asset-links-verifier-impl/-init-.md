@@ -1,4 +1,4 @@
-[autoque](../../index.md) / [com.eakurnikov.autoque.dependencies.dal](../index.md) / [DigitalAssetLinksVerifierImpl](index.md) / [&lt;init&gt;](./-init-.md)
+[autoque](../../index.md) / [com.eakurnikov.autoque.domain.autofill.dal](../index.md) / [DigitalAssetLinksVerifierImpl](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 

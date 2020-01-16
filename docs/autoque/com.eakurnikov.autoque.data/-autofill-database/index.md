@@ -16,4 +16,4 @@ Created by eakurnikov on 2019-09-15
 
 | Name | Summary |
 |---|---|
-| [autofillDao](autofill-dao.md) | `abstract fun autofillDao(): `[`AutofillRoomDao`](../../com.eakurnikov.autoque.data.dao/-autofill-room-dao/index.md) |
+| [autofillDao](autofill-dao.md) | `abstract fun autofillDao(): `[`AutofillRoomDao`](../../com.eakurnikov.autoque.data.db.dao/-autofill-room-dao/index.md) |

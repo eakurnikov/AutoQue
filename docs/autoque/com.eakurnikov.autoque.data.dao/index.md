@@ -1,6 +1,6 @@
-[autoque](../index.md) / [com.eakurnikov.autoque.data.dao](./index.md)
+[autoque](../index.md) / [com.eakurnikov.autoque.data.db.dao](./index.md)
 
-## Package com.eakurnikov.autoque.data.dao
+## Package com.eakurnikov.autoque.data.db.dao
 
 ### Types
 

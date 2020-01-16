@@ -1,6 +1,6 @@
-[autoque](../index.md) / [com.eakurnikov.autoque.dependencies.dal](./index.md)
+[autoque](../index.md) / [com.eakurnikov.autoque.domain.autofill.dal](./index.md)
 
-## Package com.eakurnikov.autoque.dependencies.dal
+## Package com.eakurnikov.autoque.domain.autofill.dal
 
 ### Types
 

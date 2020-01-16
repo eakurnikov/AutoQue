@@ -1,4 +1,4 @@
-[autoque](../../index.md) / [com.eakurnikov.autoque.dependencies.packagename](../index.md) / [PackageVerifierImpl](index.md) / [verifyPackage](./verify-package.md)
+[autoque](../../index.md) / [com.eakurnikov.autoque.domain.autofill.packagename](../index.md) / [PackageVerifierImpl](index.md) / [verifyPackage](./verify-package.md)
 
 # verifyPackage
 

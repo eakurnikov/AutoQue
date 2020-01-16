@@ -2,4 +2,4 @@
 
 # bindAutofillAuthProvider
 
-`@Binds @AppScope abstract fun bindAutofillAuthProvider(impl: `[`AutofillAuthProviderImpl`](../../../com.eakurnikov.autoque.dependencies.auth/-autofill-auth-provider-impl/index.md)`): AutofillAuthProvider<*>`
+`@Binds @AppScope abstract fun bindAutofillAuthProvider(impl: `[`AutofillAuthProviderImpl`](../../../com.eakurnikov.autoque.domain.autofill.auth/-autofill-auth-provider-impl/index.md)`): AutofillAuthProvider<*>`

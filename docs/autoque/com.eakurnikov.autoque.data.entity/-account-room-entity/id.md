@@ -1,4 +1,4 @@
-[autoque](../../index.md) / [com.eakurnikov.autoque.data.entity](../index.md) / [AccountRoomEntity](index.md) / [id](./id.md)
+[autoque](../../index.md) / [com.eakurnikov.autoque.data.db.entity](../index.md) / [AccountRoomEntity](index.md) / [id](./id.md)
 
 # id
 

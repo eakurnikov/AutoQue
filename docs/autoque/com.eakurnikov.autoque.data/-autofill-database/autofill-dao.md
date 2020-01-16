@@ -2,4 +2,4 @@
 
 # autofillDao
 
-`abstract fun autofillDao(): `[`AutofillRoomDao`](../../com.eakurnikov.autoque.data.dao/-autofill-room-dao/index.md)
+`abstract fun autofillDao(): `[`AutofillRoomDao`](../../com.eakurnikov.autoque.data.db.dao/-autofill-room-dao/index.md)

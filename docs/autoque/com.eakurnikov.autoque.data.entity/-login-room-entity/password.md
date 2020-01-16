@@ -1,4 +1,4 @@
-[autoque](../../index.md) / [com.eakurnikov.autoque.data.entity](../index.md) / [LoginRoomEntity](index.md) / [password](./password.md)
+[autoque](../../index.md) / [com.eakurnikov.autoque.data.db.entity](../index.md) / [LoginRoomEntity](index.md) / [password](./password.md)
 
 # password
 

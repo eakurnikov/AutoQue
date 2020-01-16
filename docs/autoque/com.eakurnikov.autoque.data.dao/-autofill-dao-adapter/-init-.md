@@ -1,4 +1,4 @@
-[autoque](../../index.md) / [com.eakurnikov.autoque.data.dao](../index.md) / [AutofillDaoAdapter](index.md) / [&lt;init&gt;](./-init-.md)
+[autoque](../../index.md) / [com.eakurnikov.autoque.data.db.dao](../index.md) / [AutofillDaoAdapter](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 

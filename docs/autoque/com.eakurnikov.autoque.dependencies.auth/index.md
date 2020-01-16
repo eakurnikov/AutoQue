@@ -1,6 +1,6 @@
-[autoque](../index.md) / [com.eakurnikov.autoque.dependencies.auth](./index.md)
+[autoque](../index.md) / [com.eakurnikov.autoque.domain.autofill.auth](./index.md)
 
-## Package com.eakurnikov.autoque.dependencies.auth
+## Package com.eakurnikov.autoque.domain.autofill.auth
 
 ### Types
 

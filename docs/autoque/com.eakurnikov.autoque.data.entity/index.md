@@ -1,6 +1,6 @@
-[autoque](../index.md) / [com.eakurnikov.autoque.data.entity](./index.md)
+[autoque](../index.md) / [com.eakurnikov.autoque.data.db.entity](./index.md)
 
-## Package com.eakurnikov.autoque.data.entity
+## Package com.eakurnikov.autoque.data.db.entity
 
 ### Types
 

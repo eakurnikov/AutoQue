@@ -8,4 +8,4 @@
 
 | Name | Summary |
 |---|---|
-| [bindPackageVerifier](bind-package-verifier.md) | `abstract fun bindPackageVerifier(impl: `[`PackageVerifierImpl`](../../../com.eakurnikov.autoque.dependencies.packagename/-package-verifier-impl/index.md)`): PackageVerifier` |
+| [bindPackageVerifier](bind-package-verifier.md) | `abstract fun bindPackageVerifier(impl: `[`PackageVerifierImpl`](../../../com.eakurnikov.autoque.domain.autofill.packagename/-package-verifier-impl/index.md)`): PackageVerifier` |

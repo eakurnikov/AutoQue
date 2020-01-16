@@ -2,4 +2,4 @@
 
 # bindPackageVerifier
 
-`@Binds @AppScope abstract fun bindPackageVerifier(impl: `[`PackageVerifierImpl`](../../../com.eakurnikov.autoque.dependencies.packagename/-package-verifier-impl/index.md)`): PackageVerifier`
+`@Binds @AppScope abstract fun bindPackageVerifier(impl: `[`PackageVerifierImpl`](../../../com.eakurnikov.autoque.domain.autofill.packagename/-package-verifier-impl/index.md)`): PackageVerifier`

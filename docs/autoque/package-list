@@ -1,14 +1,14 @@
 $dokka.format:gfm
 $dokka.linkExtension:md
-$dokka.location:com.eakurnikov.autoque.autofill.api.dependencies.auth$getAutofillAuthPayload(android.content.Intent)com.eakurnikov.autoque.autofill.api.dependencies.auth/android.content.-intent/get-autofill-auth-payload.md
-$dokka.location:com.eakurnikov.autoque.autofill.api.dependencies.auth$setAutofillAuthPayload(android.content.Intent, com.eakurnikov.autoque.autofill.api.dependencies.auth.AutofillAuthType, android.os.Bundle)com.eakurnikov.autoque.autofill.api.dependencies.auth/android.content.-intent/set-autofill-auth-payload.md
+$dokka.location:com.eakurnikov.autoque.autofill.api.dependencies.domain.auth$getAutofillAuthPayload(android.content.Intent)com.eakurnikov.autoque.autofill.api.dependencies.domain.auth/android.content.-intent/get-autofill-auth-payload.md
+$dokka.location:com.eakurnikov.autoque.autofill.api.dependencies.domain.auth$setAutofillAuthPayload(android.content.Intent, com.eakurnikov.autoque.autofill.api.dependencies.domain.auth.AutofillAuthType, android.os.Bundle)com.eakurnikov.autoque.autofill.api.dependencies.domain.auth/android.content.-intent/set-autofill-auth-payload.md
 com.eakurnikov.autoque.autofill.api.api
 com.eakurnikov.autoque.autofill.api.api.auth
 com.eakurnikov.autoque.autofill.api.api.registrar
 com.eakurnikov.autoque.autofill.api.api.selector
 com.eakurnikov.autoque.autofill.api.dependencies
-com.eakurnikov.autoque.autofill.api.dependencies.auth
-com.eakurnikov.autoque.autofill.api.dependencies.dal
+com.eakurnikov.autoque.autofill.api.dependencies.domain.auth
+com.eakurnikov.autoque.autofill.api.dependencies.domain.dal
 com.eakurnikov.autoque.autofill.api.dependencies.data.dao
 com.eakurnikov.autoque.autofill.api.dependencies.data.entity
-com.eakurnikov.autoque.autofill.api.dependencies.packagename
+com.eakurnikov.autoque.autofill.api.dependencies.domain.packagename
