@@ -13,8 +13,7 @@ import javax.inject.Provider
  * Created by eakurnikov on 2019-10-07
  */
 @AppScope
-class ViewModelFactory
-@Inject constructor(
+class ViewModelFactory @Inject constructor(
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
 

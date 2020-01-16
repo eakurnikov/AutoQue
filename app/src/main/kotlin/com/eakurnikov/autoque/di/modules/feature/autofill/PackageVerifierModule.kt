@@ -1,7 +1,7 @@
 package com.eakurnikov.autoque.di.modules.feature.autofill
 
-import com.eakurnikov.autoque.autofill.api.dependencies.packagename.PackageVerifier
-import com.eakurnikov.autoque.dependencies.packagename.PackageVerifierImpl
+import com.eakurnikov.autoque.autofill.api.dependencies.domain.packagename.PackageVerifier
+import com.eakurnikov.autoque.domain.autofill.packagename.PackageVerifierImpl
 import com.eakurnikov.common.di.annotations.AppScope
 import dagger.Binds
 import dagger.Module

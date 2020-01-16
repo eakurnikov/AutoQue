@@ -1,5 +1,6 @@
 package com.eakurnikov.autoque.view
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -15,9 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
-import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector
-import com.eakurnikov.autoque.autofill.impl.data.Resource
-import com.eakurnikov.autoque.data.entity.LoginRoomEntity
+import com.eakurnikov.common.data.Resource
+import com.eakurnikov.autoque.data.db.entity.LoginEntity
 import com.eakurnikov.autoque.view.base.BaseActivity
 import com.eakurnikov.autoque.viewmodel.MainViewModel
 import dagger.android.AndroidInjection
@@ -37,27 +37,26 @@ class MainActivity : BaseActivity<MainViewModel>() {
     private val adapter: AccountsAdapter = AccountsAdapter()
 
     private var viewModelDisposable: Disposable? = null
-    private var autofillServiceSelectorDisposable: Disposable? = null
 
     private val promptAutofillServiceSelection: () -> Unit = {
         if (::autofillApi.isInitialized) {
             with(autofillApi) {
-                if (!autofillServiceRegistrar.isRegistered) {
-                    autofillServiceRegistrar.isRegistered = true
+                if (!autofillServiceEnabler.isEnabled) {
+                    autofillServiceEnabler.isEnabled = true
                 }
 
                 if (!autofillServiceSelector.isSelected) {
-                    autofillServiceSelector.promptSelection(this@MainActivity)
+                    autofillServiceSelector.promptSelection(this@MainActivity, 0)
                 }
             }
         }
     }
 
-    private val onAccounts = object : DisposableObserver<Resource<List<LoginRoomEntity>>>() {
+    private val onAccounts = object : DisposableObserver<Resource<List<LoginEntity>>>() {
         override fun onComplete() {
         }
 
-        override fun onNext(resource: Resource<List<LoginRoomEntity>>) {
+        override fun onNext(resource: Resource<List<LoginEntity>>) {
             when (resource) {
                 is Resource.Success -> {
                     label_loading.visibility = View.GONE
@@ -106,23 +105,6 @@ class MainActivity : BaseActivity<MainViewModel>() {
         }
     }
 
-    private val onAutofillServiceSelection = object : DisposableObserver<AutofillServiceSelector.SelectionStatus>() {
-        override fun onComplete() {
-        }
-
-        override fun onNext(status: AutofillServiceSelector.SelectionStatus) {
-            Toast.makeText(
-                this@MainActivity,
-                "AutoQue Autofill Service ${if (status.isSelected) "selected" else "selection canceled"}",
-                Toast.LENGTH_LONG
-            ).show()
-            disposeAutofillServiceSelector()
-        }
-
-        override fun onError(error: Throwable) {
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -136,7 +118,10 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
         initViews()
 
-        Handler(mainLooper).postDelayed(promptAutofillServiceSelection, TimeUnit.SECONDS.toMillis(2))
+        Handler(mainLooper).postDelayed(
+            promptAutofillServiceSelection,
+            TimeUnit.SECONDS.toMillis(2)
+        )
     }
 
     override fun onStart() {
@@ -151,11 +136,19 @@ class MainActivity : BaseActivity<MainViewModel>() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        autofillServiceSelectorDisposable = autofillApi
-            .autofillServiceSelector
-            .onSelection(requestCode, resultCode, data)
-            ?.subscribeWith(onAutofillServiceSelection)
+        if (requestCode == 0) {
+            val isSelected: Boolean = resultCode == Activity.RESULT_OK
+            autofillApi.autofillServiceSelector.onSelection(isSelected)
 
+            //todo
+//            AutofillPopup.Companion.cancelIfNecessary()
+
+            Toast.makeText(
+                this@MainActivity,
+                "AutoQue Autofill Service ${if (isSelected) "selected" else "selection canceled"}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -167,18 +160,12 @@ class MainActivity : BaseActivity<MainViewModel>() {
         }
     }
 
-    private fun disposeAutofillServiceSelector() {
-        autofillServiceSelectorDisposable?.dispose()
-        autofillServiceSelectorDisposable = null
-    }
-
-    private class AccountViewHolder
-    constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private class AccountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var item: LinearLayout = itemView.findViewById(R.id.item)
         var login: TextView = itemView.findViewById(R.id.login)
         var password: TextView = itemView.findViewById(R.id.password)
 
-        fun bind(position: Int, loginEntity: LoginRoomEntity) {
+        fun bind(position: Int, loginEntity: LoginEntity) {
             item.setBackgroundColor(if (position % 2 == 0) Color.WHITE else Color.GRAY)
             login.text = loginEntity.login
             password.text = loginEntity.password
@@ -186,7 +173,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
     }
 
     private class AccountsAdapter : RecyclerView.Adapter<AccountViewHolder>() {
-        var data: List<LoginRoomEntity> = listOf()
+        var data: List<LoginEntity> = listOf()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountViewHolder =
             AccountViewHolder(

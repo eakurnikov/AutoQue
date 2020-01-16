@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.data
+package com.eakurnikov.autoque.data.db
 
 /**
  * Created by eakurnikov on 2019-09-15

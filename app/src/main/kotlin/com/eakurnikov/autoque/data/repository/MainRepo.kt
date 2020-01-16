@@ -1,7 +1,7 @@
 package com.eakurnikov.autoque.data.repository
 
-import com.eakurnikov.autoque.autofill.impl.data.Resource
-import com.eakurnikov.autoque.data.entity.LoginRoomEntity
+import com.eakurnikov.common.data.Resource
+import com.eakurnikov.autoque.data.db.entity.LoginEntity
 import io.reactivex.subjects.BehaviorSubject
 
 /**
@@ -9,5 +9,5 @@ import io.reactivex.subjects.BehaviorSubject
  */
 interface MainRepo {
 
-    fun getAccounts(): BehaviorSubject<Resource<List<LoginRoomEntity>>>
+    fun getAccounts(): BehaviorSubject<Resource<List<LoginEntity>>>
 }

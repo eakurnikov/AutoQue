@@ -1,8 +1,8 @@
 package com.eakurnikov.autoque.domain.repository
 
-import com.eakurnikov.autoque.autofill.impl.data.Resource
-import com.eakurnikov.autoque.data.dao.main.MainDao
-import com.eakurnikov.autoque.data.entity.LoginRoomEntity
+import com.eakurnikov.common.data.Resource
+import com.eakurnikov.autoque.data.db.dao.main.MainDao
+import com.eakurnikov.autoque.data.db.entity.LoginEntity
 import com.eakurnikov.autoque.data.repository.MainRepo
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,16 +14,16 @@ import javax.inject.Inject
 /**
  * Created by eakurnikov on 2019-10-05
  */
-class MainRepoImpl
-@Inject constructor(
+class MainRepoImpl @Inject constructor(
     private val dao: MainDao
 ) : MainRepo {
 
-    private val accountsSubject: BehaviorSubject<Resource<List<LoginRoomEntity>>> = BehaviorSubject.create()
+    private val accountsSubject: BehaviorSubject<Resource<List<LoginEntity>>> =
+        BehaviorSubject.create()
 
     private var disposable: Disposable? = null
 
-    override fun getAccounts(): BehaviorSubject<Resource<List<LoginRoomEntity>>> {
+    override fun getAccounts(): BehaviorSubject<Resource<List<LoginEntity>>> {
         dispose()
 
         disposable = dao
@@ -35,7 +35,7 @@ class MainRepoImpl
             .flatMapIterable { it }
             .toList()
             .subscribe(
-                { loginEntities: List<LoginRoomEntity> ->
+                { loginEntities: List<LoginEntity> ->
                     accountsSubject.onNext(
                         Resource.Success(loginEntities)
                     )

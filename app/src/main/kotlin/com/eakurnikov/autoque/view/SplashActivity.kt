@@ -1,19 +1,17 @@
 package com.eakurnikov.autoque.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
-import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector
 import dagger.android.AndroidInjection
 import dagger.android.DaggerActivity
-import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
+import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * Created by eakurnikov on 2019-09-15
@@ -23,45 +21,20 @@ class SplashActivity : DaggerActivity() {
     @Inject
     lateinit var autofillApi: AutofillFeatureApi
 
-    private var autofillServiceSelectorDisposable: Disposable? = null
-
+    //todo mode to view model
     private val promptAutofillServiceSelection: () -> Unit = {
         if (::autofillApi.isInitialized) {
             with(autofillApi) {
-                if (!autofillServiceRegistrar.isRegistered) {
-                    autofillServiceRegistrar.isRegistered = true
+                if (!autofillServiceEnabler.isEnabled) {
+                    autofillServiceEnabler.isEnabled = true
                 }
 
                 if (!autofillServiceSelector.isSelected) {
-                    autofillServiceSelector.promptSelection(this@SplashActivity)
+                    autofillServiceSelector.promptSelection(this@SplashActivity, 0)
                 } else {
                     finish()
                 }
             }
-        }
-    }
-
-    private val onAutofillServiceSelection = object : DisposableObserver<AutofillServiceSelector.SelectionStatus>() {
-        override fun onComplete() {
-        }
-
-        override fun onNext(status: AutofillServiceSelector.SelectionStatus) {
-            if (status.isSelected) {
-                autofill_registration_status.text = getString(R.string.autofill_service_selected)
-                Handler(mainLooper).postDelayed({ finish() }, TimeUnit.SECONDS.toMillis(2))
-            } else {
-                Toast.makeText(
-                    this@SplashActivity,
-                    R.string.autofill_service_selection_canceled,
-                    Toast.LENGTH_LONG
-                ).show()
-
-                finish()
-            }
-            disposeAutofillServiceSelector()
-        }
-
-        override fun onError(error: Throwable) {
         }
     }
 
@@ -80,20 +53,33 @@ class SplashActivity : DaggerActivity() {
                 R.string.autofill_service_not_selected
         )
 
-        Handler(mainLooper).postDelayed(promptAutofillServiceSelection, TimeUnit.SECONDS.toMillis(2))
+        Handler(mainLooper).postDelayed(
+            promptAutofillServiceSelection,
+            TimeUnit.SECONDS.toMillis(2)
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        autofillServiceSelectorDisposable = autofillApi
-            .autofillServiceSelector
-            .onSelection(requestCode, resultCode, data)
-            ?.subscribeWith(onAutofillServiceSelection)
+        if (requestCode == 0) {
+            val isSelected: Boolean = resultCode == Activity.RESULT_OK
+            autofillApi.autofillServiceSelector.onSelection(isSelected)
 
+            //todo
+//            AutofillPopup.Companion.cancelIfNecessary()
+
+            if (isSelected) {
+                autofill_registration_status.text = getString(R.string.autofill_service_selected)
+                Handler(mainLooper).postDelayed({ finish() }, TimeUnit.SECONDS.toMillis(2))
+            } else {
+                Toast.makeText(
+                    this@SplashActivity,
+                    R.string.autofill_service_selection_canceled,
+                    Toast.LENGTH_LONG
+                ).show()
+
+                finish()
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    private fun disposeAutofillServiceSelector() {
-        autofillServiceSelectorDisposable?.dispose()
-        autofillServiceSelectorDisposable = null
     }
 }

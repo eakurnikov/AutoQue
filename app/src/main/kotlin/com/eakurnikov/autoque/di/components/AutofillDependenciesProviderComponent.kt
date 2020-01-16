@@ -4,9 +4,7 @@ import android.content.Context
 import com.eakurnikov.autoque.autofill.api.dependencies.AutofillDependenciesProvider
 import com.eakurnikov.autoque.di.modules.common.ContextModule
 import com.eakurnikov.autoque.di.modules.common.DaoModule
-import com.eakurnikov.autoque.di.modules.feature.autofill.AuthProviderModule
-import com.eakurnikov.autoque.di.modules.feature.autofill.DigitalAssetLinksVerifierModule
-import com.eakurnikov.autoque.di.modules.feature.autofill.PackageVerifierModule
+import com.eakurnikov.autoque.di.modules.feature.autofill.*
 import com.eakurnikov.common.annotations.AppContext
 import com.eakurnikov.common.di.annotations.AppScope
 import com.eakurnikov.common.di.initializer.ComponentInitializer
@@ -22,7 +20,9 @@ import dagger.Component
         DaoModule::class,
         PackageVerifierModule::class,
         DigitalAssetLinksVerifierModule::class,
-        AuthProviderModule::class
+        AutofillAuthProviderModule::class,
+        AutofillDisclaimerProviderModule::class,
+        AutofillUpdatePromptProviderModule::class
     ]
 )
 abstract class AutofillDependenciesProviderComponent : AutofillDependenciesProvider {
@@ -35,7 +35,9 @@ abstract class AutofillDependenciesProviderComponent : AutofillDependenciesProvi
                 .daoModule(DaoModule())
                 .packageVerifierModule(PackageVerifierModule())
                 .digitalAssetLinksVerifierModule(DigitalAssetLinksVerifierModule())
-                .authProviderModule(AuthProviderModule())
+                .autofillAuthProviderModule(AutofillAuthProviderModule())
+                .autofillDisclaimerProviderModule(AutofillDisclaimerProviderModule())
+                .autofillUpdatePromptProviderModule(AutofillUpdatePromptProviderModule())
                 .build()
         }
     }

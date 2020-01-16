@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.domain
+package com.eakurnikov.autoque.domain.autofill.auth
 
 import android.content.Context
 import android.os.Handler

@@ -1,7 +1,7 @@
 package com.eakurnikov.autoque.di.modules.feature.autofill
 
-import com.eakurnikov.autoque.autofill.api.dependencies.dal.DigitalAssetLinksVerifier
-import com.eakurnikov.autoque.dependencies.dal.DigitalAssetLinksVerifierImpl
+import com.eakurnikov.autoque.autofill.api.dependencies.domain.dal.DigitalAssetLinksVerifier
+import com.eakurnikov.autoque.domain.autofill.dal.DigitalAssetLinksVerifierImpl
 import com.eakurnikov.common.di.annotations.AppScope
 import dagger.Binds
 import dagger.Module
@@ -17,6 +17,8 @@ class DigitalAssetLinksVerifierModule {
 
         @Binds
         @AppScope
-        fun bindDigitalAssetLinksVerifier(impl: DigitalAssetLinksVerifierImpl): DigitalAssetLinksVerifier
+        fun bindDigitalAssetLinksVerifier(
+            impl: DigitalAssetLinksVerifierImpl
+        ): DigitalAssetLinksVerifier
     }
 }

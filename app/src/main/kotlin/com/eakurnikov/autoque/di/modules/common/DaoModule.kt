@@ -1,9 +1,9 @@
 package com.eakurnikov.autoque.di.modules.common
 
 import com.eakurnikov.autoque.autofill.api.dependencies.data.dao.AutofillDao
-import com.eakurnikov.autoque.data.AutoQueDatabase
-import com.eakurnikov.autoque.data.dao.autofill.AutofillDaoAdapter
-import com.eakurnikov.autoque.data.dao.main.MainDao
+import com.eakurnikov.autoque.data.db.AutoQueDatabase
+import com.eakurnikov.autoque.data.db.dao.autofill.AutofillDaoAdapter
+import com.eakurnikov.autoque.data.db.dao.main.MainDao
 import com.eakurnikov.common.di.annotations.AppScope
 import dagger.Module
 import dagger.Provides
