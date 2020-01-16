@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.autofill.api.dependencies.packagename
+package com.eakurnikov.autoque.autofill.api.dependencies.domain.packagename
 
 /**
  * Created by eakurnikov on 2019-09-14

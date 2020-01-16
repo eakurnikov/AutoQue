@@ -1,7 +1,7 @@
 package com.eakurnikov.autoque.autofill.api.dependencies.data.dao
 
-import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.AccountEntity
-import com.eakurnikov.autoque.autofill.api.dependencies.data.entity.LoginEntity
+import com.eakurnikov.autoque.autofill.api.dependencies.data.model.Account
+import com.eakurnikov.autoque.autofill.api.dependencies.data.model.Login
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -10,9 +10,17 @@ import io.reactivex.Single
  */
 interface AutofillDao {
 
-    fun getAccounts(): Single<List<AccountEntity>>
+    fun getAccounts(): Single<List<Account>>
 
-    fun getLoginsForAccount(accountId: Long): Single<List<LoginEntity>>
+    fun getAccountById(accountId: Long): Single<Account>
 
-    fun addAccountWithLogin(accountEntity: AccountEntity, loginEntity: LoginEntity): Completable
+    fun getLoginsForAccount(accountId: Long): Single<List<Login>>
+
+    fun getLoginById(loginId: Long): Single<Login>
+
+    fun addAccountWithLogin(account: Account, login: Login): Completable
+
+    fun addLoginToAccount(account: Account, login: Login): Completable
+
+    fun updateLoginInAccount(account: Account, login: Login): Completable
 }

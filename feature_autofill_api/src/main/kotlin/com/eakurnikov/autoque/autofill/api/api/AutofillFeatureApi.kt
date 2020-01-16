@@ -1,14 +1,23 @@
 package com.eakurnikov.autoque.autofill.api.api
 
-import com.eakurnikov.autoque.autofill.api.api.auth.AutofillAuthListener
-import com.eakurnikov.autoque.autofill.api.api.registrar.AutofillServiceRegistrar
-import com.eakurnikov.autoque.autofill.api.api.selector.AutofillServiceSelector
+import com.eakurnikov.autoque.autofill.api.api.domain.enable.AutofillServiceEnabler
+import com.eakurnikov.autoque.autofill.api.api.domain.select.AutofillServiceSelector
+import com.eakurnikov.autoque.autofill.api.api.presentation.auth.AutofillAuthPresenter
+import com.eakurnikov.autoque.autofill.api.api.presentation.disclaimer.AutofillDisclaimerPresenter
+import com.eakurnikov.autoque.autofill.api.api.presentation.update.AutofillUpdatePromptPresenter
 
 /**
  * Created by eakurnikov on 2019-09-14
  */
 interface AutofillFeatureApi {
-    val autofillServiceRegistrar: AutofillServiceRegistrar
+
+    val autofillServiceEnabler: AutofillServiceEnabler
+
     val autofillServiceSelector: AutofillServiceSelector
-    val autofillAuthListener: AutofillAuthListener
+
+    val autofillAuthPresenter: AutofillAuthPresenter
+
+    val autofillDisclaimerPresenter: AutofillDisclaimerPresenter
+
+    val autofillUpdatePromptPresenter: AutofillUpdatePromptPresenter
 }
