@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.autofill.impl.data
+package com.eakurnikov.common.data
 
 /**
  * Created by eakurnikov on 2019-09-15
