@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorPrimaryTransparent"
-              android:gravity="center"
-              android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/faf_transparent_primary"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <ImageView android:layout_width="300dp"
-               android:layout_height="300dp"
-               android:src="@drawable/ic_main"/>
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_main" />
 
-    <TextView android:id="@+id/autofill_inject_status"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textColor="@color/textColorDarkest"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              tools:text="@string/autofill_service_injected"/>
+    <TextView
+        android:id="@+id/autofill_inject_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/faf_text_darkest"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="@string/autofill_service_injected" />
 
-    <TextView android:id="@+id/autofill_registration_status"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="18dp"
-              android:textColor="@color/textColorDarkest"
-              android:textSize="16sp"
-              android:textStyle="bold"
-              tools:text="@string/autofill_service_selected"/>
+    <TextView
+        android:id="@+id/autofill_registration_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/faf_text_darkest"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="@string/autofill_service_selected" />
 
 </LinearLayout>

@@ -3,7 +3,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:background="@color/faf_colorPrimary"
+              android:background="@color/faf_primary"
               android:orientation="vertical">
 
     <TextView android:id="@+id/faf_no_datasets_text"
@@ -17,7 +17,7 @@
               android:paddingEnd="24dp"
               android:paddingRight="24dp"
               android:textAppearance="?android:attr/textAppearanceListItemSmall"
-              android:textColor="@color/faf_textColorLight"
+              android:textColor="@color/faf_text_light"
               android:textSize="15sp"
               android:textStyle="bold"
               tools:text="Credentials not found. Login in this app and the next time we will do it for you."/>

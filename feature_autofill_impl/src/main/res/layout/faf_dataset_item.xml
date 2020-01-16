@@ -50,7 +50,7 @@
                   android:paddingEnd="16dp"
                   android:paddingRight="16dp"
                   android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                  android:textColor="@color/faf_textColorDark"
+                  android:textColor="@color/faf_text_dark"
                   android:textSize="12sp"
                   android:textStyle="bold"
                   tools:text="MyAwesomeApp"/>

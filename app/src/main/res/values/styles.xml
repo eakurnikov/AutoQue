@@ -1,14 +1,14 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/faf_primary</item>
+        <item name="colorPrimaryDark">@color/faf_primary</item>
+        <item name="colorAccent">@color/faf_accent</item>
     </style>
 
     <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/faf_primary</item>
+        <item name="colorPrimaryDark">@color/faf_primary</item>
         <item name="android:windowBackground">@drawable/layer_splash</item>
     </style>
 
@@ -16,12 +16,6 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
-    </style>
-
-    <style name="textStyle" parent="@android:style/Widget.TextView">
-        <item name="android:textColor">#ff4c4c4c</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

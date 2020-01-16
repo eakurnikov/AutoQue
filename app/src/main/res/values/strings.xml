@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [<!ENTITY app_name "AutoQue">]>
 <resources>
 
-    <string name="app_name">AutoQue</string>
-    <string name="authentication">Autofill Authentication</string>
+    <string name="app_name">&app_name;</string>
+    <string name="authentication">Autofill authentication</string>
 
     <string name="authenticate">Authenticate?</string>
     <string name="authenticate_yes">Yes</string>

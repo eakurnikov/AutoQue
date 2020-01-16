@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="faf_login_synonyms">
+        <item>логин</item>
+        <item>имя пользователя</item>
+        <item>псевдоним</item>
+        <item>login</item>
+        <item>user name</item>
+        <item>username</item>
+        <item>account</item>
+        <item>id</item>
+        <item>user identifier</item>
+        <item>nickname</item>
+    </string-array>
+
+    <string-array name="faf_password_synonyms">
+        <item>пароль</item>
+        <item>password</item>
+    </string-array>
+
+    <string-array name="faf_email_synonyms">
+        <item>email</item>
+        <item>e-mail</item>
+        <item>электронная почта</item>
+        <item>электронный адрес</item>
+    </string-array>
+
+    <string-array name="faf_phone_synonyms">
+        <item>телефон</item>
+        <item>phone</item>
+    </string-array>
+
+    <string-array name="faf_autofill_ignore_list">
+        <item>поиск</item>
+        <item>сообщение</item>
+        <item>запрос</item>
+        <item>комментарий</item>
+        <item>search</item>
+        <item>message</item>
+        <item>request</item>
+        <item>comment</item>
+    </string-array>
+
+</resources>
