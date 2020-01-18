@@ -38,7 +38,7 @@ class AutofillViewBuilder @Inject constructor(
         }
 
     fun buildAutoQueToast(text: String): RemoteViews =
-        RemoteViews(context.packageName, R.layout.faf_no_datasets_toast).apply {
+        RemoteViews(context.packageName, R.layout.autoque_toast).apply {
             setTextViewText(R.id.faf_toast_text, text)
         }
 }

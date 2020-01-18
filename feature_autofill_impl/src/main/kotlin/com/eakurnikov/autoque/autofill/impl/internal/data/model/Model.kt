@@ -2,10 +2,12 @@ package com.eakurnikov.autoque.autofill.impl.internal.data.model
 
 import android.content.IntentSender
 import android.os.Parcelable
+import android.service.autofill.Dataset
 import android.service.autofill.FillResponse
 import android.view.autofill.AutofillId
 import com.eakurnikov.autoque.autofill.impl.internal.data.enums.FillResponseType
 import com.eakurnikov.autoque.autofill.impl.internal.data.enums.IntentSenderType
+import com.eakurnikov.autoque.autofill.impl.internal.data.enums.UnsafeDatasetType
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -40,13 +42,20 @@ data class RequestInfo(
 ) : Parcelable
 
 @Parcelize
+data class IntentSenderResource(
+    val intentSender: IntentSender,
+    val type: IntentSenderType
+) : Parcelable
+
+@Parcelize
 data class FillResponseResource(
     val fillResponse: FillResponse,
     val type: FillResponseType
 ) : Parcelable
 
 @Parcelize
-data class IntentSenderResource(
-    val intentSender: IntentSender,
-    val type: IntentSenderType
+data class UnsafeDatasetResource(
+    val dataset: Dataset?,
+    val intentSender: IntentSender?,
+    val type: UnsafeDatasetType
 ) : Parcelable

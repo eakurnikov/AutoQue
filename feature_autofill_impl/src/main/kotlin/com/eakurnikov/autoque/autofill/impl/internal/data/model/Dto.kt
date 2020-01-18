@@ -20,7 +20,7 @@ data class FillDataId(
 )
 
 data class AccountDto(
-    override val id: Long?,
+    override var id: Long?,
     override val name: String,
     override val comment: String?,
     override val packageName: String
@@ -37,7 +37,7 @@ data class AccountDto(
 }
 
 data class LoginDto(
-    override val id: Long?,
+    override var id: Long?,
     override val login: String,
     override val password: String,
     override val comment: String?

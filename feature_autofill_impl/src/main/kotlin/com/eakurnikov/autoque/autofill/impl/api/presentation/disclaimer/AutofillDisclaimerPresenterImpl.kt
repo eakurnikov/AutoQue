@@ -2,21 +2,24 @@ package com.eakurnikov.autoque.autofill.impl.api.presentation.disclaimer
 
 import android.annotation.TargetApi
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.service.autofill.Dataset
 import android.view.autofill.AutofillManager
 import com.eakurnikov.autoque.autofill.api.api.presentation.disclaimer.AutofillDisclaimerPresenter
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.AutofillPayload
 import com.eakurnikov.autoque.autofill.api.dependencies.ui.disclaimer.AutofillDisclaimerUi
 import com.eakurnikov.autoque.autofill.impl.R
+import com.eakurnikov.autoque.autofill.impl.internal.data.enums.UnsafeDatasetType
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataId
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.RequestInfo
+import com.eakurnikov.autoque.autofill.impl.internal.data.model.UnsafeDatasetResource
 import com.eakurnikov.autoque.autofill.impl.internal.domain.usecase.fill.ProduceUnsafeDatasetUseCase
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.getFillDataId
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.getRequestInfo
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.log
 import com.eakurnikov.autoque.autofill.impl.internal.ui.AutofillUi
+import com.eakurnikov.common.annotations.AppContext
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -28,6 +31,7 @@ import javax.inject.Inject
 @Suppress("CheckResult")
 @TargetApi(Build.VERSION_CODES.O)
 class AutofillDisclaimerPresenterImpl @Inject constructor(
+    @AppContext private val context: Context,
     private val produceUnsafeDatasetUseCase: ProduceUnsafeDatasetUseCase,
     private val autofillUi: AutofillUi
 ) : AutofillDisclaimerPresenter {
@@ -40,7 +44,7 @@ class AutofillDisclaimerPresenterImpl @Inject constructor(
         allowAutofill: Boolean
     ) {
         if (!allowAutofill) {
-            log("$tag: Fill denied by user via disclaimer")
+            log("$tag: Unsafe fill denied by user via disclaimer")
             disclaimerUi.activityContext.setResult(Activity.RESULT_CANCELED)
             disclaimerUi.finish()
             autofillUi.showAsToast(R.string.faf_fill_canceled)
@@ -73,7 +77,7 @@ class AutofillDisclaimerPresenterImpl @Inject constructor(
         }
 
         produceUnsafeDatasetUseCase
-            .invoke(fillDataId, fillRequestInfo)
+            .invoke(fillDataId, fillRequestInfo, disclaimerPayload.clientState)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(OnUnsafeDatasetProducedObserver(disclaimerUi))
@@ -81,13 +85,26 @@ class AutofillDisclaimerPresenterImpl @Inject constructor(
 
     private inner class OnUnsafeDatasetProducedObserver(
         private val disclaimerUi: AutofillDisclaimerUi
-    ) : DisposableSingleObserver<Dataset>() {
+    ) : DisposableSingleObserver<UnsafeDatasetResource>() {
 
-        override fun onSuccess(unsafeDataset: Dataset) {
-            val disclaimerResultIntent: Intent = Intent().apply {
-                putExtra(AutofillManager.EXTRA_AUTHENTICATION_RESULT, unsafeDataset)
+        override fun onSuccess(resource: UnsafeDatasetResource) {
+            when (resource.type) {
+                UnsafeDatasetType.LOCKED -> {
+                    resource.intentSender
+                        ?.sendIntent(context, 0, null, null, null)
+                        ?: log("$tag: Auth intent for unsafe dataset is null somehow")
+                }
+                UnsafeDatasetType.UNLOCKED -> {
+                    if (resource.dataset == null) {
+                        log("$tag: Unsafe dataset is null somehow")
+                    } else {
+                        val resultIntent: Intent = Intent().apply {
+                            putExtra(AutofillManager.EXTRA_AUTHENTICATION_RESULT, resource.dataset)
+                        }
+                        disclaimerUi.activityContext.setResult(Activity.RESULT_OK, resultIntent)
+                    }
+                }
             }
-            disclaimerUi.activityContext.setResult(Activity.RESULT_OK, disclaimerResultIntent)
             disclaimerUi.finish()
             dispose()
         }

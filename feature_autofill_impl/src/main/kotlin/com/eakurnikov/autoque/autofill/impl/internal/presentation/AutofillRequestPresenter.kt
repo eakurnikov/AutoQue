@@ -165,7 +165,7 @@ class AutofillRequestPresenter @Inject constructor(
         }
 
         override fun onComplete() {
-            autofillUi.showAsToast(R.string.faf_save_success)
+            autofillUi.showAsAutoQueToast(R.string.faf_save_success)
             saveCallback.onSuccess()
             dispose()
         }
