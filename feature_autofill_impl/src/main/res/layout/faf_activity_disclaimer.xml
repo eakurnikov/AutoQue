@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/faf_transparent_black"
+    android:background="@color/transparent_black"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:gravity="center"
@@ -15,7 +15,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/faf_lightest_gray"
+        android:background="@color/lightest_gray"
         android:orientation="vertical">
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:text="@string/faf_disclaimer_title"
-            android:textColor="@color/faf_text_dark"
+            android:textColor="@color/text_dark"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
             android:text="@string/faf_disclaimer_description"
-            android:textColor="@color/faf_text_gray"
+            android:textColor="@color/text_gray"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -62,18 +62,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:layout_marginEnd="16dp"
-                android:background="@color/faf_primary"
+                android:background="@color/primary"
                 android:text="@string/faf_disclaimer_btn_no"
-                android:textColor="@color/faf_text_light"
+                android:textColor="@color/text_light"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/faf_disclaimer_btn_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:background="@color/faf_primary"
+                android:background="@color/primary"
                 android:text="@string/faf_disclaimer_btn_yes"
-                android:textColor="@color/faf_text_light"
+                android:textColor="@color/text_light"
                 android:textStyle="bold" />
 
         </LinearLayout>

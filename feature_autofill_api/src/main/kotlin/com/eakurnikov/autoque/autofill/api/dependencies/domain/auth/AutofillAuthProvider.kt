@@ -15,5 +15,9 @@ interface AutofillAuthProvider<T : AutofillAuthUi> {
 
     fun getFillAuthIntentSender(clientState: Bundle): IntentSender
 
+    fun getUnsafeFillAuthIntentSender(clientState: Bundle): IntentSender
+
     fun getSaveAuthIntentSender(clientState: Bundle): IntentSender
+
+    fun getUpdateAuthIntentSender(clientState: Bundle): IntentSender
 }

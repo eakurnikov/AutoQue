@@ -14,7 +14,9 @@ data class AutofillPayload internal constructor(
         private val description: String
     ) {
         FILL("FILL"),
-        SAVE("SAVE");
+        UNSAFE_FILL("UNSAFE_FILL"),
+        SAVE("SAVE"),
+        UPDATE("UPDATE");
 
         override fun toString(): String = description
     }
