@@ -28,11 +28,13 @@ class PackageVerifierImpl @Inject constructor(
         "com.xiaomi.market",
         "com.xiaomi.mipicks",
 
-        "com.huawei.appmarket"
+        "com.huawei.appmarket",
+
+        "com.yandex.store"
     )
 
     override fun verifyPackage(clientPackageName: String): Boolean {
-        return true // isInstallerKnown(clientPackageName) || isSystemApp(clientPackageName)
+        return false // isInstallerKnown(clientPackageName) || isSystemApp(clientPackageName)
     }
 
     private fun isInstallerKnown(clientPackageName: String): Boolean {

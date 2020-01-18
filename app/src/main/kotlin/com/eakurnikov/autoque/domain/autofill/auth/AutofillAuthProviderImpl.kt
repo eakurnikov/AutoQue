@@ -26,11 +26,18 @@ class AutofillAuthProviderImpl @Inject constructor(
 
     override val autofillAuthUiClass: Class<AuthActivity> = AuthActivity::class.java
 
-    override val isAuthRequired: Boolean = isSessionExpired
+    override val isAuthRequired: Boolean
+        get() = isSessionExpired
 
     override fun getFillAuthIntentSender(clientState: Bundle): IntentSender {
         return Intent(context, autofillAuthUiClass)
             .setAutofillPayload(AutofillPayload.Type.FILL, clientState)
+            .wrapWithSender(context)
+    }
+
+    override fun getUnsafeFillAuthIntentSender(clientState: Bundle): IntentSender {
+        return Intent(context, autofillAuthUiClass)
+            .setAutofillPayload(AutofillPayload.Type.UNSAFE_FILL, clientState)
             .wrapWithSender(context)
     }
 
@@ -42,6 +49,17 @@ class AutofillAuthProviderImpl @Inject constructor(
                         Intent.FLAG_ACTIVITY_MULTIPLE_TASK
             )
             .setAutofillPayload(AutofillPayload.Type.SAVE, clientState)
+            .wrapWithSender(context)
+    }
+
+    override fun getUpdateAuthIntentSender(clientState: Bundle): IntentSender {
+        return Intent(context, autofillAuthUiClass)
+            .addFlags(
+                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            )
+            .setAutofillPayload(AutofillPayload.Type.UPDATE, clientState)
             .wrapWithSender(context)
     }
 

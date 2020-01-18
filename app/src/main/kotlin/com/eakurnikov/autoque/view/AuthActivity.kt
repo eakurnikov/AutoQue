@@ -26,7 +26,8 @@ class AuthActivity : DaggerAppCompatActivity(), AutofillAuthUi {
 
     override val activityContext: Activity = this@AuthActivity
 
-    override val autofillAuthPresenter: AutofillAuthPresenter = autofillApi.autofillAuthPresenter
+    override val autofillAuthPresenter: AutofillAuthPresenter
+        get() = autofillApi.autofillAuthPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

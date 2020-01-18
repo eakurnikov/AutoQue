@@ -3,6 +3,7 @@ package com.eakurnikov.autoque.view
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
 import com.eakurnikov.autoque.autofill.api.api.presentation.update.AutofillUpdatePromptPresenter
@@ -10,7 +11,6 @@ import com.eakurnikov.autoque.autofill.api.dependencies.data.model.getAutofillPa
 import com.eakurnikov.autoque.autofill.api.dependencies.ui.update.AutofillUpdatePromptUi
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.faf_activity_update_prompt.*
 import javax.inject.Inject
 
 /**
@@ -32,8 +32,8 @@ class AutofillUpdatePromptActivity : DaggerAppCompatActivity(), AutofillUpdatePr
 
         AndroidInjection.inject(this)
 
-        faf_update_prompt_btn_yes.setOnClickListener(::onUpdateAllowed)
-        faf_update_prompt_btn_no.setOnClickListener(::onUpdateRejected)
+        findViewById<Button>(R.id.faf_update_prompt_btn_yes).setOnClickListener(::onUpdateAllowed)
+        findViewById<Button>(R.id.faf_update_prompt_btn_no).setOnClickListener(::onUpdateRejected)
     }
 
     private fun onUpdateAllowed(view: View) {

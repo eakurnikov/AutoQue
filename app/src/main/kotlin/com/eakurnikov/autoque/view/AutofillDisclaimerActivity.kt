@@ -3,6 +3,7 @@ package com.eakurnikov.autoque.view
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
 import com.eakurnikov.autoque.autofill.api.api.presentation.disclaimer.AutofillDisclaimerPresenter
@@ -10,7 +11,6 @@ import com.eakurnikov.autoque.autofill.api.dependencies.data.model.getAutofillPa
 import com.eakurnikov.autoque.autofill.api.dependencies.ui.disclaimer.AutofillDisclaimerUi
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.faf_activity_disclaimer.*
 import javax.inject.Inject
 
 /**
@@ -33,8 +33,11 @@ class AutofillDisclaimerActivity : DaggerAppCompatActivity(), AutofillDisclaimer
 
         AndroidInjection.inject(this)
 
-        faf_disclaimer_btn_yes.setOnClickListener(::onUnsafeAutofillAllowed)
-        faf_disclaimer_btn_no.setOnClickListener(::onUnsafeAutofillRejected)
+        findViewById<Button>(R.id.faf_disclaimer_btn_yes)
+            .setOnClickListener(::onUnsafeAutofillAllowed)
+
+        findViewById<Button>(R.id.faf_disclaimer_btn_no)
+            .setOnClickListener(::onUnsafeAutofillRejected)
     }
 
     private fun onUnsafeAutofillAllowed(view: View) {
