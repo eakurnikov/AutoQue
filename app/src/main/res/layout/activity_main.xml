@@ -12,7 +12,7 @@
         android:layout_marginBottom="8dp"
         android:padding="10dp"
         android:text="@string/loading"
-        android:textColor="@color/faf_primary"
+        android:textColor="@color/primary"
         android:textSize="22sp"
         android:textStyle="bold"
         android:visibility="gone" />
@@ -25,7 +25,7 @@
         android:layout_marginBottom="8dp"
         android:padding="10dp"
         android:text="@string/logical_error"
-        android:textColor="@color/faf_primary"
+        android:textColor="@color/primary"
         android:textSize="22sp"
         android:textStyle="bold"
         android:visibility="gone" />
@@ -38,7 +38,7 @@
         android:layout_marginBottom="8dp"
         android:padding="10dp"
         android:text="@string/no_entries"
-        android:textColor="@color/faf_primary"
+        android:textColor="@color/primary"
         android:textSize="22sp"
         android:textStyle="bold"
         android:visibility="gone" />

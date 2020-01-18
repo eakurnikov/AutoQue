@@ -55,8 +55,9 @@ class ToastProxy(context: Context) : BaseSmartToast(context) {
     }
 
     private fun setOutsideTouchParamFlag() {
-        toast.getPrivateField<Toast, Any?>("mTN")?.apply {
-            getPrivateField<Any, WindowManager.LayoutParams?>("mParams")?.apply {
+        toast.getPrivateField("mTN")?.apply {
+            getPrivateField("mParams")?.apply {
+                this as WindowManager.LayoutParams
                 flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                         WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH or
                         WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or

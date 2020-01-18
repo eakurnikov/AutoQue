@@ -4,7 +4,7 @@
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/faf_lightest_gray"
+    android:background="@color/lightest_gray"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">
@@ -22,7 +22,7 @@
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
-        android:textColor="@color/faf_primary"
+        android:textColor="@color/primary"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:text="username@gmail.com" />
@@ -48,6 +48,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/faf_dataset_header_background" />
+        android:src="@drawable/divider" />
 
 </LinearLayout>

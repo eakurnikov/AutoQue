@@ -3,20 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/faf_transparent_primary"
+    android:background="@color/transparent_primary"
     android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_main" />
+        android:src="@drawable/ic_autoque" />
 
     <TextView
         android:id="@+id/autofill_inject_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/faf_text_darkest"
+        android:textColor="@color/text_darkest"
         android:textSize="24sp"
         android:textStyle="bold"
         tools:text="@string/autofill_service_injected" />
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:textColor="@color/faf_text_darkest"
+        android:textColor="@color/text_darkest"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:text="@string/autofill_service_selected" />
