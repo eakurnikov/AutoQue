@@ -24,7 +24,7 @@ import com.eakurnikov.autoque.data.db.AutofillDatabaseNames.LOGINS_TABLE_NAME
 )
 data class LoginEntity(
     @PrimaryKey(autoGenerate = true)
-    override val id: Long?,
+    override var id: Long?,
     val accountId: Long,
     override val login: String,
     override val password: String,

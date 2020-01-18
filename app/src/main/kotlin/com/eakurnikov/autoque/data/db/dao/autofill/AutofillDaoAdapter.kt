@@ -15,6 +15,8 @@ class AutofillDaoAdapter(
     private val dao: AutofillRoomDao
 ) : AutofillDao {
 
+    private val tag: String = "AutofillDao"
+
     override fun getAccounts(): Single<List<Account>> {
         return dao
             .getAccounts()
@@ -50,7 +52,7 @@ class AutofillDaoAdapter(
         return if (accountRowId > 0 && loginRowId > 0) {
             Completable.complete()
         } else {
-            Completable.error(RuntimeException("Error while saving credentials"))
+            Completable.error(RuntimeException("$tag: error while saving credentials"))
         }
     }
 
@@ -60,18 +62,44 @@ class AutofillDaoAdapter(
         return if (loginRowId > 0) {
             Completable.complete()
         } else {
-            Completable.error(RuntimeException("Error while adding login to account"))
+            Completable.error(RuntimeException("$tag: error while adding login to account"))
         }
     }
 
     override fun updateLoginInAccount(account: Account, login: Login): Completable {
-        val updatedLoginEntitiesCount: Int = updateLogin(account.id!!, login)
 
-        return if (updatedLoginEntitiesCount > 0) {
-            Completable.complete()
-        } else {
-            Completable.error(RuntimeException("Error while adding login to account"))
-        }
+        return dao.getAccounts()
+            .map { accountEntities: List<AccountEntity> ->
+                accountEntities.find { it.packageName == account.packageName }?.id ?: 0L
+            }.flatMap { targetAccountId: Long ->
+                if (targetAccountId == 0L) {
+                    Single.error(
+                        RuntimeException("$tag: no account found to update the login")
+                    )
+                } else {
+                    account.id = targetAccountId
+                    dao.getLoginsForAccount(targetAccountId)
+                }
+            }.map { loginEntities: List<LoginEntity> ->
+                loginEntities.find { it.login == login.login }?.id ?: 0
+            }.flatMapCompletable { targetLoginId: Long ->
+                if (targetLoginId == 0L) {
+                    Completable.error(
+                        RuntimeException("$tag: no login found to update")
+                    )
+                } else {
+                    login.id = targetLoginId
+                    val updatedLoginEntitiesCount: Int = updateLogin(account.id!!, login)
+
+                    if (updatedLoginEntitiesCount > 0) {
+                        Completable.complete()
+                    } else {
+                        Completable.error(
+                            RuntimeException("$tag: error while adding login to account")
+                        )
+                    }
+                }
+            }
     }
 
     private fun addAccount(account: Account): Long {

@@ -15,7 +15,7 @@ import com.eakurnikov.autoque.data.db.AutofillDatabaseNames.ACCOUNTS_TABLE_NAME
 )
 data class AccountEntity(
     @PrimaryKey(autoGenerate = true)
-    override val id: Long?,
+    override var id: Long?,
     override val name: String,
     override val comment: String?,
     override val packageName: String
