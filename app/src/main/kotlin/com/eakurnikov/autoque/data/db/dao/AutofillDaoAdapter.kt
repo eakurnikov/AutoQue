@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.data.db.dao.autofill
+package com.eakurnikov.autoque.data.db.dao
 
 import com.eakurnikov.autoque.autofill.api.dependencies.data.dao.AutofillDao
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.Account
@@ -12,7 +12,7 @@ import io.reactivex.Single
  * Created by eakurnikov on 2019-09-15
  */
 class AutofillDaoAdapter(
-    private val dao: AutofillRoomDao
+    private val dao: CredentialsDao
 ) : AutofillDao {
 
     private val tag: String = "AutofillDao"
@@ -67,7 +67,6 @@ class AutofillDaoAdapter(
     }
 
     override fun updateLoginInAccount(account: Account, login: Login): Completable {
-
         return dao.getAccounts()
             .map { accountEntities: List<AccountEntity> ->
                 accountEntities.find { it.packageName == account.packageName }?.id ?: 0L

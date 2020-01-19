@@ -19,8 +19,6 @@ import dagger.android.AndroidInjector
 @Component(
     modules = [
         AppModule::class,
-        DatabaseModule::class,
-        NetworkModule::class,
         RepositoryModule::class,
         ViewModelModule::class,
         ActivityBuilderModule::class,

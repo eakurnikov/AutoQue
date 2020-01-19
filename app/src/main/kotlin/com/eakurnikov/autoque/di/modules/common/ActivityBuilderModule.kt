@@ -1,7 +1,10 @@
 package com.eakurnikov.autoque.di.modules.common
 
-import com.eakurnikov.autoque.di.modules.feature.main.MainModule
-import com.eakurnikov.autoque.view.*
+import com.eakurnikov.autoque.view.auth.AuthActivity
+import com.eakurnikov.autoque.view.autofill.AutofillDisclaimerActivity
+import com.eakurnikov.autoque.view.autofill.AutofillUpdatePromptActivity
+import com.eakurnikov.autoque.view.credentials.CredentialsActivity
+import com.eakurnikov.autoque.view.splash.SplashActivity
 import com.eakurnikov.common.di.annotations.ActivityScope
 import dagger.Module
 import dagger.android.AndroidInjectionModule
@@ -22,8 +25,8 @@ interface ActivityBuilderModule {
     fun bindAuthActivity(): AuthActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [MainModule::class])
-    fun bindMainActivity(): MainActivity
+    @ContributesAndroidInjector
+    fun bindCredentialsActivity(): CredentialsActivity
 
     @ActivityScope
     @ContributesAndroidInjector

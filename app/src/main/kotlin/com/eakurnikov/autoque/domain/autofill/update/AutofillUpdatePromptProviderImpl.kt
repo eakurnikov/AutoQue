@@ -8,7 +8,7 @@ import android.os.Bundle
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.AutofillPayload
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.setAutofillPayload
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.update.AutofillUpdatePromptProvider
-import com.eakurnikov.autoque.view.AutofillUpdatePromptActivity
+import com.eakurnikov.autoque.view.autofill.AutofillUpdatePromptActivity
 import com.eakurnikov.common.annotations.AppContext
 import com.eakurnikov.common.di.annotations.AppScope
 import javax.inject.Inject
@@ -29,7 +29,7 @@ class AutofillUpdatePromptProviderImpl @Inject constructor(
     override fun getPromptIntentSender(clientState: Bundle): IntentSender {
         return Intent(context, autofillUpdatePromptUiClass)
             .addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or Intent.FLAG_ACTIVITY_NEW_TASK)
-            .setAutofillPayload(AutofillPayload.Type.SAVE, clientState)
+            .setAutofillPayload(AutofillPayload.Type.UPDATE, clientState)
             .wrapWithSender(context)
     }
 

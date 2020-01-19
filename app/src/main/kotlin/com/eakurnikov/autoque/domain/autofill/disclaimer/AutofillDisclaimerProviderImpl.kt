@@ -8,7 +8,7 @@ import android.os.Bundle
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.AutofillPayload
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.setAutofillPayload
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.disclaimer.AutofillDisclaimerProvider
-import com.eakurnikov.autoque.view.AutofillDisclaimerActivity
+import com.eakurnikov.autoque.view.autofill.AutofillDisclaimerActivity
 import com.eakurnikov.common.annotations.AppContext
 import com.eakurnikov.common.di.annotations.AppScope
 import javax.inject.Inject
@@ -28,7 +28,7 @@ class AutofillDisclaimerProviderImpl @Inject constructor(
 
     override fun getDisclaimerIntentSender(clientState: Bundle): IntentSender {
         return Intent(context, autofillDisclaimerUiClass)
-            .setAutofillPayload(AutofillPayload.Type.FILL, clientState)
+            .setAutofillPayload(AutofillPayload.Type.UNSAFE_FILL, clientState)
             .wrapWithSender(context)
     }
 

@@ -3,7 +3,7 @@ package com.eakurnikov.autoque.di.modules.common
 import android.content.Context
 import androidx.room.Room
 import com.eakurnikov.autoque.data.db.AutoQueDatabase
-import com.eakurnikov.autoque.data.db.AutofillDatabaseNames.DATABASE_NAME
+import com.eakurnikov.autoque.data.db.AutoQueDatabaseNames.DATABASE_NAME
 import com.eakurnikov.common.annotations.AppContext
 import com.eakurnikov.common.di.annotations.AppScope
 import dagger.Module

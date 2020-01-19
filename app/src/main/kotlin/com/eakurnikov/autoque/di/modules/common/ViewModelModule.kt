@@ -2,7 +2,7 @@ package com.eakurnikov.autoque.di.modules.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.eakurnikov.autoque.viewmodel.MainViewModel
+import com.eakurnikov.autoque.viewmodel.credentials.CredentialsViewModel
 import com.eakurnikov.autoque.viewmodel.base.ViewModelFactory
 import com.eakurnikov.common.annotations.ViewModelKey
 import dagger.Binds
@@ -17,8 +17,8 @@ interface ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+    @ViewModelKey(CredentialsViewModel::class)
+    fun bindCredentialsViewModel(credentialsViewModel: CredentialsViewModel): ViewModel
 
     @Binds
     fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory

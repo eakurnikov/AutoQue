@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.view
+package com.eakurnikov.autoque.view.splash
 
 import android.app.Activity
 import android.content.Intent
