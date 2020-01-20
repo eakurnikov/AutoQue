@@ -2,6 +2,7 @@ package com.eakurnikov.autoque.di.modules.common
 
 import android.util.Log
 import com.eakurnikov.autoque.data.network.NetworkConstants
+import com.eakurnikov.autoque.data.network.interceptors.AuthInterceptor
 import com.eakurnikov.common.di.annotations.AppScope
 import dagger.Module
 import dagger.Provides
@@ -29,11 +30,19 @@ class NetworkModule {
 
     @Provides
     @AppScope
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideAuthInterceptor(): AuthInterceptor = AuthInterceptor()
+
+    @Provides
+    @AppScope
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(NetworkConstants.READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .connectTimeout(NetworkConstants.CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(authInterceptor)
             .build()
     }
 

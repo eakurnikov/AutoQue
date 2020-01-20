@@ -1,6 +1,5 @@
 package com.eakurnikov.autoque.view.credentials
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +29,7 @@ class CredentialsViewHolder(
     var password: TextView = itemView.findViewById(R.id.password)
 
     fun bind(position: Int, credentials: Credentials) {
-        item.setBackgroundColor(if (position % 2 == 0) Color.WHITE else Color.GRAY)
+        item.setBackgroundColor(itemView.context.getColor(R.color.lightest_gray))
         login.text = credentials.login
         password.text = credentials.password
     }

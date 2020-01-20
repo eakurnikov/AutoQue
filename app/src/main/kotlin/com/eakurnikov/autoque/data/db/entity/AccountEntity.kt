@@ -5,7 +5,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.Account
 import com.eakurnikov.autoque.data.db.AutoQueDatabaseNames.ACCOUNTS_TABLE_NAME
-import com.eakurnikov.autoque.data.network.dto.AccountDto
+import com.eakurnikov.autoque.data.network.dto.CredentialsDto
 
 /**
  * Created by eakurnikov on 2019-09-15
@@ -22,11 +22,11 @@ data class AccountEntity(
     override val packageName: String
 ) : Account {
     constructor(
-        accountDto: AccountDto
+        credentialsDto: CredentialsDto
     ) : this(
-        accountDto.id,
-        accountDto.name,
-        "",
-        accountDto.packageName
+        null,
+        credentialsDto.name,
+        credentialsDto.comment,
+        credentialsDto.packageName
     )
 }

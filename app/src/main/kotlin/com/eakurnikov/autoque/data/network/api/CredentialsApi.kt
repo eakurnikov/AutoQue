@@ -1,9 +1,12 @@
 package com.eakurnikov.autoque.data.network.api
 
-import com.eakurnikov.autoque.data.network.dto.AccountDto
-import com.eakurnikov.autoque.data.network.dto.LoginDto
+import com.eakurnikov.autoque.data.network.dto.CredentialsDto
+import com.eakurnikov.autoque.data.network.dto.ResponseByIdDto
+import com.eakurnikov.autoque.data.network.dto.ResponseDto
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -11,12 +14,19 @@ import retrofit2.http.Query
  */
 interface CredentialsApi {
 
-    @GET("/posts")
-    fun getAccounts(): Single<List<AccountDto>>
+    @GET("/public-api/users")
+    fun getCredentials(): Single<ResponseDto>
 
-    @GET("/comments")
-    fun getLogins(): Single<List<LoginDto>>
+    @GET("/public-api/users/{id}")
+    fun getCredentialsById(
+        @Path("id") credentialsId: Long
+    ): Single<ResponseByIdDto>
 
-    @GET("/comments")
-    fun getLoginsForAccount(@Query("postId") accountId: Long): Single<List<LoginDto>>?
+    @GET("/public-api/users")
+    fun getCredentialsByPackageName(
+        @Query("first_name") packageName: String
+    ): Single<ResponseDto>
+
+    @POST("/public-api/users")
+    fun saveCredentials(credentialsDto: CredentialsDto)
 }

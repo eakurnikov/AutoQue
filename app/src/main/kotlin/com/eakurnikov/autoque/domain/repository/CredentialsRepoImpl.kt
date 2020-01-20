@@ -7,8 +7,8 @@ import com.eakurnikov.common.data.Resource
 import com.eakurnikov.autoque.data.db.entity.LoginEntity
 import com.eakurnikov.autoque.data.model.Credentials
 import com.eakurnikov.autoque.data.network.api.CredentialsApi
-import com.eakurnikov.autoque.data.network.dto.AccountDto
-import com.eakurnikov.autoque.data.network.dto.LoginDto
+import com.eakurnikov.autoque.data.network.dto.CredentialsDto
+import com.eakurnikov.autoque.data.network.dto.ResponseDto
 import com.eakurnikov.autoque.data.repository.CredentialsRepo
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -79,20 +79,29 @@ class CredentialsRepoImpl @Inject constructor(
     override fun loadCredentials() {
         credentialsSubject.onNext(Resource.Loading())
         disposeApi()
-        apiDisposable = api.getAccounts()
-            .flatMapPublisher { accountDtos: List<AccountDto> ->
-                dao.createAccountsList(accountDtos.map { AccountEntity(it) })
-                Flowable.fromIterable(accountDtos)
+        apiDisposable = api.getCredentials()
+            .flatMapPublisher { responseDto: ResponseDto ->
+                Flowable.fromIterable(responseDto.result)
             }
-            .flatMapSingle { accountDto: AccountDto ->
-                Single.zip(
-                    Single.just(accountDto),
-                    api.getLoginsForAccount(accountDto.id),
-                    BiFunction { acc: AccountDto, loginDtos: List<LoginDto> ->
-                        dao.addLoginsToAccount(loginDtos.map { LoginEntity(it) })
-                        loginDtos.map { Credentials(acc, it) }
-                    }
-                )
+            .flatMap(
+                { credentialsDto: CredentialsDto ->
+                    AccountEntity(credentialsDto)
+                        .also { it.id = dao.createAccount(it) }
+                        .let { Flowable.just(it) }
+                },
+                { credentialsDto: CredentialsDto, accountEntity: AccountEntity ->
+                    LoginEntity(accountEntity.id!!, credentialsDto)
+                        .also { it.id = dao.addLoginToAccount(it) }
+                        .let { Credentials(accountEntity, it) }
+                }
+            )
+            .toList()
+            .doOnError { e: Throwable ->
+                Log.i(tag, "Error while loading credentials: $e. Emit empty list")
+                e.printStackTrace()
+            }
+            .onErrorReturn {
+                emptyList()
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
