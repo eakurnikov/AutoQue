@@ -21,7 +21,7 @@
         android:paddingBottom="8dp"
         android:text="@string/faf_dataset_title_no_exact_datasets"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/text_light"
+        android:textColor="@color/text_lightest_gray"
         android:textSize="15sp"
         android:textStyle="bold" />
 

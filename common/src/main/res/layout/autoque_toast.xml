@@ -37,7 +37,7 @@
             android:layout_marginEnd="12dp"
             android:layout_marginRight="12dp"
             android:layout_marginBottom="12dp"
-            android:textColor="@color/text_light"
+            android:textColor="@color/text_lightest_gray"
             android:textSize="14sp"
             tools:text="Dolor ipsum sit amet" />
 

@@ -18,7 +18,7 @@
         android:padding="16dp"
         android:text="@string/faf_save_description"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/text_dark"
+        android:textColor="@color/text_primary"
         android:textSize="16sp"
         android:textStyle="bold" />
 

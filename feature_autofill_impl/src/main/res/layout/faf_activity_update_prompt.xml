@@ -28,7 +28,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:text="@string/faf_update_prompt_title"
-            android:textColor="@color/text_dark"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
             android:text="@string/faf_update_prompt_description"
-            android:textColor="@color/text_gray"
+            android:textColor="@color/text_darkest_gray"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -64,7 +64,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@color/primary"
                 android:text="@string/faf_update_prompt_btn_no"
-                android:textColor="@color/text_light"
+                android:textColor="@color/text_lightest_gray"
                 android:textStyle="bold" />
 
             <Button
@@ -73,7 +73,7 @@
                 android:layout_height="36dp"
                 android:background="@color/primary"
                 android:text="@string/faf_update_prompt_btn_yes"
-                android:textColor="@color/text_light"
+                android:textColor="@color/text_lightest_gray"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -22,7 +22,7 @@
     <TextView android:id="@+id/faf_dataset_auth_text"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textColor="@color/text_light"
+              android:textColor="@color/text_lightest_gray"
               android:textSize="15sp"
               android:textStyle="bold"
               android:text="@string/faf_dataset_title_auth"/>
