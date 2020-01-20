@@ -1,0 +1,11 @@
+[autoque](../../../index.md) / [com.eakurnikov.autoque.di.modules.feature.autofill](../../index.md) / [AutofillAuthProviderModule](../index.md) / [Declarations](./index.md)
+
+# Declarations
+
+`interface Declarations`
+
+### Functions
+
+| Name | Summary |
+|---|---|
+| [bindAutofillAuthProvider](bind-autofill-auth-provider.md) | `abstract fun bindAutofillAuthProvider(impl: `[`AutofillAuthProviderImpl`](../../../com.eakurnikov.autoque.domain.autofill.auth/-autofill-auth-provider-impl/index.md)`): AutofillAuthProvider<*>` |
