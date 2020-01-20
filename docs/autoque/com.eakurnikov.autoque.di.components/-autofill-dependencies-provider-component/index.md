@@ -2,7 +2,7 @@
 
 # AutofillDependenciesProviderComponent
 
-`@AppScope @Component([ContextModule, DaoModule, PackageVerifierModule, DigitalAssetLinksVerifierModule, AuthProviderModule]) abstract class AutofillDependenciesProviderComponent : AutofillDependenciesProvider`
+`@AppScope @Component([ContextModule, DaoModule, PackageVerifierModule, DigitalAssetLinksVerifierModule, AutofillAuthProviderModule, AutofillDisclaimerProviderModule, AutofillUpdatePromptProviderModule]) abstract class AutofillDependenciesProviderComponent : AutofillDependenciesProvider`
 
 Created by eakurnikov on 2019-09-15
 
