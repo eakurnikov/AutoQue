@@ -34,6 +34,7 @@ class ViewIdHeuristics @Inject constructor() {
             contains("btn") -> true
             contains("button") -> true
             contains("container") -> true
+            contains("content") -> true
             contains("wrapper") -> true
             contains("layout") -> true
             contains("search") -> true
@@ -54,7 +55,7 @@ class ViewIdHeuristics @Inject constructor() {
         }
     }
 
-    private fun String.isPassword(): Boolean = contains("password")
+    private fun String.isPassword(): Boolean = contains("pass")
     private fun String.isEmail(): Boolean = contains("email")
     private fun String.isPhone(): Boolean = contains("phone")
 }

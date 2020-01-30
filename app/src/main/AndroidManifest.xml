@@ -25,16 +25,19 @@
         <activity
             android:name=".view.auth.AuthActivity"
             android:label="@string/authentication"
+            android:launchMode="singleTask"
             android:taskAffinity=".AuthActivity"
             android:theme="@style/Transparent" />
 
         <activity
             android:name=".view.autofill.AutofillDisclaimerActivity"
+            android:launchMode="singleTask"
             android:taskAffinity=".AutofillDisclaimerActivity"
             android:theme="@style/Transparent" />
 
         <activity
             android:name=".view.autofill.AutofillUpdatePromptActivity"
+            android:launchMode="singleTask"
             android:taskAffinity=".AutofillUpdatePromptActivity"
             android:theme="@style/Transparent" />
 
@@ -43,6 +46,7 @@
             android:theme="@style/AppTheme.Launcher">
 
             <intent-filter>
+                <data android:mimeType="text/csv" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

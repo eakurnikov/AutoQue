@@ -5,6 +5,7 @@ import android.app.assist.AssistStructure
 import android.os.Build
 import android.service.autofill.SaveInfo
 import android.view.View
+import android.view.ViewStructure
 import javax.inject.Inject
 
 /**
@@ -41,6 +42,28 @@ class ViewNodeHeuristics @Inject constructor(
 
             if (text != null && className != null && className.contains("EditText")) {
                 textHeuristics.inferAutofillHint(text.toString())?.let { return it }
+            }
+
+            htmlInfo?.let { htmlInfo: ViewStructure.HtmlInfo ->
+                if (htmlInfo.tag != "input") {
+                    return@let
+                }
+                htmlInfo.attributes?.let { attributes: List<android.util.Pair<String?, String?>> ->
+                    attributes.forEach { attribute: android.util.Pair<String?, String?> ->
+                        val attrName: String? = attribute.first
+                        val attrValue: String? = attribute.second
+
+                        when (attrName) {
+                            "id", "name", "type", "ua-autofill-hints" -> {
+                                viewIdHeuristics.inferAutofillHint(attrValue)?.let { return it }
+                            }
+                            "label" -> {
+                                textHeuristics.inferAutofillHint(attrValue)?.let { return it }
+                            }
+                            else -> Unit
+                        }
+                    }
+                }
             }
         }
 
