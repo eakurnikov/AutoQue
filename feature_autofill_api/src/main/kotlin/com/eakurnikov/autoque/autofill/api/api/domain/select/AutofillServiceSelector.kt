@@ -11,11 +11,11 @@ interface AutofillServiceSelector {
 
     val isSelected: Boolean
 
-    val selectionStatusSubject: BehaviorSubject<Boolean>
+    val selectionSubject: BehaviorSubject<Boolean>
 
     fun unselect()
 
-    fun promptSelection(activity: Activity, requestCode: Int)
+    fun promptSelection(activity: Activity, requestCode: Int): Boolean
 
     fun onSelection(isSelected: Boolean)
 }

@@ -37,5 +37,7 @@ class CredentialsViewModel @Inject constructor(
         )
     }
 
-    fun onRefresh(): Unit = repo.loadCredentials()
+    fun onRefresh() {
+        repo.loadCredentials()
+    }
 }

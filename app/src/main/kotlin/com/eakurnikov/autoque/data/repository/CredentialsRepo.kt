@@ -11,7 +11,7 @@ interface CredentialsRepo {
 
     val credentialsSubject: BehaviorSubject<Resource<List<Credentials>>>
 
-    fun getCredentials()
+    fun getCredentials(limit: Int? = null)
 
     fun loadCredentials()
 }

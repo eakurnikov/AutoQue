@@ -16,6 +16,9 @@ interface CredentialsDao {
     @Query("SELECT * FROM $ACCOUNTS_TABLE_NAME")
     fun getAccounts(): Single<List<AccountEntity>>
 
+    @Query("SELECT * FROM $ACCOUNTS_TABLE_NAME LIMIT :limit")
+    fun getAccountsWithLimit(limit: Int): Single<List<AccountEntity>>
+
     @Query("SELECT * FROM $ACCOUNTS_TABLE_NAME WHERE id = :accountId")
     fun getAccountById(accountId: Long): Single<AccountEntity>
 

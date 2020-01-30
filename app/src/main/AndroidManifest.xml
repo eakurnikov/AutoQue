@@ -46,7 +46,6 @@
             android:theme="@style/AppTheme.Launcher">
 
             <intent-filter>
-                <data android:mimeType="text/csv" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

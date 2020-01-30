@@ -129,7 +129,7 @@ class AutofillAuthPresenterImpl @Inject constructor(
         val fillDataId: FillDataId? = authPayload.clientState.getFillDataId()
 
         if (fillDataId == null) {
-            log("$tag: Fill data entity id is null")
+            log("$tag: Fill data id is null")
             authUi.finish()
             autofillUi.showAsToast(R.string.faf_fill_failure)
             return

@@ -35,45 +35,49 @@ class CredentialsRepoImpl @Inject constructor(
     override val credentialsSubject: BehaviorSubject<Resource<List<Credentials>>> =
         BehaviorSubject.create()
 
-    override fun getCredentials() {
+    override fun getCredentials(limit: Int?) {
         credentialsSubject.onNext(Resource.Loading())
         disposeDao()
-        daoDisposable = dao.getAccounts()
-            .flatMapPublisher { accountEntities: List<AccountEntity> ->
-                Flowable.fromIterable(accountEntities)
-            }
-            .flatMapSingle { accountEntity: AccountEntity ->
-                Single.zip(
-                    Single.just(accountEntity),
-                    dao.getLoginsForAccount(accountEntity.id!!),
-                    BiFunction { acc: AccountEntity, loginEntities: List<LoginEntity> ->
-                        loginEntities.map { Credentials(acc, it) }
+        daoDisposable =
+            (if (limit == null) {
+                dao.getAccounts()
+            } else {
+                dao.getAccountsWithLimit(limit)
+            })
+                .flatMapPublisher { accountEntities: List<AccountEntity> ->
+                    Flowable.fromIterable(accountEntities)
+                }
+                .flatMapSingle { accountEntity: AccountEntity ->
+                    Single.zip(
+                        Single.just(accountEntity),
+                        dao.getLoginsForAccount(accountEntity.id!!),
+                        BiFunction { acc: AccountEntity, loginEntities: List<LoginEntity> ->
+                            loginEntities.map { Credentials(acc, it) }
+                        }
+                    )
+                }
+                .doOnError { e: Throwable ->
+                    Log.i(tag, "Error while getting credentials: $e. Emit empty list")
+                    e.printStackTrace()
+                }
+                .onErrorReturn {
+                    emptyList()
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { credentialsList: List<Credentials> ->
+                        credentialsSubject.onNext(
+                            Resource.Success(credentialsList)
+                        )
+                    },
+                    { error: Throwable ->
+                        credentialsSubject.onNext(
+                            Resource.Error(error.message ?: "Logical error in db")
+                        )
+                        disposeDao()
                     }
                 )
-            }
-            .doOnError { e: Throwable ->
-                Log.i(tag, "Error while getting credentials: $e. Emit empty list")
-                e.printStackTrace()
-            }
-            .onErrorReturn {
-                emptyList()
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { credentialsList: List<Credentials> ->
-                    credentialsSubject.onNext(
-                        Resource.Success(credentialsList.takeLast(2))
-                    )
-                    loadCredentials()
-                },
-                { error: Throwable ->
-                    credentialsSubject.onNext(
-                        Resource.Error(error.message ?: "Logical error in db")
-                    )
-                    disposeDao()
-                }
-            )
     }
 
     override fun loadCredentials() {

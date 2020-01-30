@@ -7,8 +7,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.view.autofill.AutofillManager
 import com.eakurnikov.autoque.autofill.api.api.domain.select.AutofillServiceSelector
+import com.eakurnikov.autoque.autofill.impl.internal.extensions.isAutofillServiceSelected
+import com.eakurnikov.autoque.autofill.impl.internal.extensions.unselectAutofillService
 import com.eakurnikov.common.annotations.AppContext
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
@@ -21,31 +22,31 @@ class AutofillServiceSelectorImpl @Inject constructor(
     @AppContext private val context: Context
 ) : AutofillServiceSelector {
 
-    private val autofillManager: AutofillManager?
-        get() = context.getSystemService(AutofillManager::class.java)
+    override val isSelected: Boolean
+        get() = context.isAutofillServiceSelected()
 
-    override val isSelected: Boolean = autofillManager?.hasEnabledAutofillServices() ?: false
-
-    override val selectionStatusSubject: BehaviorSubject<Boolean> =
+    override val selectionSubject: BehaviorSubject<Boolean> =
         BehaviorSubject.createDefault(isSelected)
 
-    override fun unselect() {
-        autofillManager?.let { autofillManager: AutofillManager ->
-            autofillManager.disableAutofillServices()
-            selectionStatusSubject.onNext(false)
-        }
-    }
+    override fun unselect(): Unit =
+        if (context.unselectAutofillService()) selectionSubject.onNext(false) else Unit
 
-    override fun promptSelection(activity: Activity, requestCode: Int) {
-        activity.startActivityForResult(
-            Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE).apply {
-                data = Uri.parse("package:${context.packageName}")
-            },
-            requestCode
-        )
+    override fun promptSelection(activity: Activity, requestCode: Int): Boolean {
+        val selectionIntent = Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE).apply {
+            data = Uri.parse("package:${context.packageName}")
+        }
+
+        val activityExists: Boolean =
+            selectionIntent.resolveActivityInfo(context.packageManager, 0) != null
+
+        if (activityExists) {
+            activity.startActivityForResult(selectionIntent, requestCode)
+        }
+
+        return activityExists
     }
 
     override fun onSelection(isSelected: Boolean) {
-        selectionStatusSubject.onNext(isSelected)
+        selectionSubject.onNext(isSelected)
     }
 }

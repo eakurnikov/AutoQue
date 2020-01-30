@@ -21,7 +21,7 @@ class SplashActivity : DaggerActivity() {
     @Inject
     lateinit var autofillApi: AutofillFeatureApi
 
-    //todo mode to view model
+    //todo move to view model
     private val promptAutofillServiceSelection: () -> Unit = {
         if (::autofillApi.isInitialized) {
             with(autofillApi) {
