@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.view.credentials
+package com.eakurnikov.autoque.ui.credentials
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

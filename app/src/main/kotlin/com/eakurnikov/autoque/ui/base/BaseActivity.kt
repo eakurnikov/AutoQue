@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.view.base
+package com.eakurnikov.autoque.ui.base
 
 import androidx.lifecycle.ViewModelProvider
 import com.eakurnikov.autoque.viewmodel.base.BaseViewModel

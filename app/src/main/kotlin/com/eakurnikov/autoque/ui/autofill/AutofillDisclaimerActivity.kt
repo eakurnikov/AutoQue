@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.view.autofill
+package com.eakurnikov.autoque.ui.autofill
 
 import android.app.Activity
 import android.os.Bundle

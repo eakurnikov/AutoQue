@@ -8,7 +8,7 @@ import android.os.Bundle
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.AutofillPayload
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.setAutofillPayload
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.disclaimer.AutofillDisclaimerProvider
-import com.eakurnikov.autoque.view.autofill.AutofillDisclaimerActivity
+import com.eakurnikov.autoque.ui.autofill.AutofillDisclaimerActivity
 import com.eakurnikov.common.annotations.AppContext
 import com.eakurnikov.common.di.annotations.AppScope
 import javax.inject.Inject

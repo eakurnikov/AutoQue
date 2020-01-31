@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.view.credentials
+package com.eakurnikov.autoque.ui.credentials
 
 import android.app.Activity
 import android.content.Context
@@ -13,7 +13,8 @@ import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
 import com.eakurnikov.autoque.data.model.Credentials
 import com.eakurnikov.common.data.Resource
-import com.eakurnikov.autoque.view.base.BaseActivity
+import com.eakurnikov.autoque.ui.base.BaseActivity
+import com.eakurnikov.autoque.ui.view.popup.PopupFactory
 import com.eakurnikov.autoque.viewmodel.credentials.CredentialsViewModel
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,6 +38,9 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
     @Inject
     lateinit var autofillApi: AutofillFeatureApi
 
+    @Inject
+    lateinit var popupFactory: PopupFactory
+
     override lateinit var viewModel: CredentialsViewModel
 
     private val adapter: CredentialsAdapter = CredentialsAdapter()
@@ -52,6 +56,7 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
 
                 if (!autofillServiceSelector.isSelected) {
                     autofillServiceSelector.promptSelection(this@CredentialsActivity, 0)
+                    popupFactory.createAutofillPopup().show()
                 }
             }
         }

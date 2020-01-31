@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.view.auth
+package com.eakurnikov.autoque.ui.auth
 
 import android.app.Activity
 import android.os.Bundle

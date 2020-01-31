@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.view.credentials
+package com.eakurnikov.autoque.ui.credentials
 
 import android.view.LayoutInflater
 import android.view.View

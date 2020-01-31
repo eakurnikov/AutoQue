@@ -22,4 +22,8 @@
 
     <string name="no_entries">No entries yet :( Swipe to refresh</string>
 
+    <string name="regular_notification_channel_name">Notifications</string>
+    <string name="popup_notification_channel_name">Popups</string>
+    <string name="popup_notification_channel_description">Allow showing hints</string>
+
 </resources>

@@ -9,7 +9,7 @@ import com.eakurnikov.autoque.autofill.api.dependencies.data.model.AutofillPaylo
 import com.eakurnikov.autoque.autofill.api.dependencies.data.model.setAutofillPayload
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.auth.AutofillAuthProvider
 import com.eakurnikov.autoque.domain.autofill.auth.AutoQueAuthentication.isSessionExpired
-import com.eakurnikov.autoque.view.auth.AuthActivity
+import com.eakurnikov.autoque.ui.auth.AuthActivity
 import com.eakurnikov.common.annotations.AppContext
 import com.eakurnikov.common.di.annotations.AppScope
 import javax.inject.Inject

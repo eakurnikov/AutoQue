@@ -19,30 +19,30 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity
-            android:name=".view.splash.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:theme="@style/Transparent" />
 
         <activity
-            android:name=".view.auth.AuthActivity"
+            android:name=".ui.auth.AuthActivity"
             android:label="@string/authentication"
             android:launchMode="singleTask"
             android:taskAffinity=".AuthActivity"
             android:theme="@style/Transparent" />
 
         <activity
-            android:name=".view.autofill.AutofillDisclaimerActivity"
+            android:name=".ui.autofill.AutofillDisclaimerActivity"
             android:launchMode="singleTask"
             android:taskAffinity=".AutofillDisclaimerActivity"
             android:theme="@style/Transparent" />
 
         <activity
-            android:name=".view.autofill.AutofillUpdatePromptActivity"
+            android:name=".ui.autofill.AutofillUpdatePromptActivity"
             android:launchMode="singleTask"
             android:taskAffinity=".AutofillUpdatePromptActivity"
             android:theme="@style/Transparent" />
 
         <activity
-            android:name=".view.credentials.CredentialsActivity"
+            android:name=".ui.credentials.CredentialsActivity"
             android:theme="@style/AppTheme.Launcher">
 
             <intent-filter>
