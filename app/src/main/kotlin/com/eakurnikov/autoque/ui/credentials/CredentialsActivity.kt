@@ -14,6 +14,7 @@ import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
 import com.eakurnikov.autoque.data.model.Credentials
 import com.eakurnikov.common.data.Resource
 import com.eakurnikov.autoque.ui.base.BaseActivity
+import com.eakurnikov.autoque.ui.view.popup.Popup
 import com.eakurnikov.autoque.ui.view.popup.PopupFactory
 import com.eakurnikov.autoque.viewmodel.credentials.CredentialsViewModel
 import dagger.android.AndroidInjection
@@ -45,6 +46,8 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
 
     private val adapter: CredentialsAdapter = CredentialsAdapter()
 
+    private var autofillPopup: Popup? = null
+
     private var viewModelDisposable: Disposable? = null
 
     private val promptAutofillServiceSelection: () -> Unit = {
@@ -56,7 +59,7 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
 
                 if (!autofillServiceSelector.isSelected) {
                     autofillServiceSelector.promptSelection(this@CredentialsActivity, 0)
-                    popupFactory.createAutofillPopup().show()
+                    showAutofillPopup()
                 }
             }
         }
@@ -121,9 +124,7 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
         if (requestCode == 0) {
             val isSelected: Boolean = resultCode == Activity.RESULT_OK
             autofillApi.autofillServiceSelector.onSelection(isSelected)
-
-//            todo
-//            AutofillPopup.Companion.cancelIfNecessary()
+            hideAutofillPopup()
 
             Toast.makeText(
                 this@CredentialsActivity,
@@ -184,5 +185,19 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
         list_credentials.visibility = View.GONE
         tv_credentials_error.visibility = View.VISIBLE
         tv_credentials_error.text = message
+    }
+
+    private fun showAutofillPopup() {
+        if (autofillPopup != null) {
+            hideAutofillPopup()
+        }
+        autofillPopup = popupFactory.createAutofillPopup().apply { show() }
+    }
+
+    private fun hideAutofillPopup() {
+        if (autofillPopup != null) {
+            autofillPopup?.cancelIfNecessary()
+            autofillPopup = null
+        }
     }
 }
