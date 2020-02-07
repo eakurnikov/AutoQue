@@ -7,6 +7,7 @@ import android.os.Handler
 import android.widget.Toast
 import com.eakurnikov.autoque.R
 import com.eakurnikov.autoque.autofill.api.api.AutofillFeatureApi
+import com.eakurnikov.autoque.ui.popup.AutofillPopupUi
 import dagger.android.AndroidInjection
 import dagger.android.DaggerActivity
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -21,6 +22,9 @@ class SplashActivity : DaggerActivity() {
     @Inject
     lateinit var autofillApi: AutofillFeatureApi
 
+    @Inject
+    lateinit var autfillPopupUi: AutofillPopupUi
+
     //todo move to view model
     private val promptAutofillServiceSelection: () -> Unit = {
         if (::autofillApi.isInitialized) {
@@ -31,6 +35,7 @@ class SplashActivity : DaggerActivity() {
 
                 if (!autofillServiceSelector.isSelected) {
                     autofillServiceSelector.promptSelection(this@SplashActivity, 0)
+                    autfillPopupUi.show()
                 } else {
                     finish()
                 }
@@ -63,9 +68,7 @@ class SplashActivity : DaggerActivity() {
         if (requestCode == 0) {
             val isSelected: Boolean = resultCode == Activity.RESULT_OK
             autofillApi.autofillServiceSelector.onSelection(isSelected)
-
-            //todo
-//            AutofillPopup.Companion.cancelIfNecessary()
+            autfillPopupUi.hide()
 
             if (isSelected) {
                 autofill_registration_status.text = getString(R.string.autofill_service_selected)
