@@ -1,11 +1,6 @@
 package com.eakurnikov.autoque.di.components
 
-import com.eakurnikov.autoque.di.modules.common.ActivityBuilderModule
-import com.eakurnikov.autoque.di.modules.common.AppModule
-import com.eakurnikov.autoque.di.modules.common.DatabaseModule
-import com.eakurnikov.autoque.di.modules.common.NetworkModule
-import com.eakurnikov.autoque.di.modules.common.RepositoryModule
-import com.eakurnikov.autoque.di.modules.common.ViewModelModule
+import com.eakurnikov.autoque.di.modules.common.*
 import com.eakurnikov.autoque.di.modules.feature.autofill.AutofillFeatureApiModule
 import com.eakurnikov.autoque.domain.app.AutoQueApp
 import com.eakurnikov.common.di.annotations.AppScope
@@ -22,7 +17,8 @@ import dagger.android.AndroidInjector
         RepositoryModule::class,
         ViewModelModule::class,
         ActivityBuilderModule::class,
-        AutofillFeatureApiModule::class
+        AutofillFeatureApiModule::class,
+        UtilModule::class
     ]
 )
 interface AppComponent : AndroidInjector<AutoQueApp> {

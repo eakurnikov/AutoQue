@@ -114,6 +114,16 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
             .subscribeWith(onCredentials)
     }
 
+    override fun onResume() {
+        super.onResume()
+        intent
+            ?.clipData
+            ?.getItemAt(0)
+            ?.uri
+            ?.let { viewModel.onPasswordsImport(it) }
+            ?: viewModel.onCredentialsCanBeLoaded()
+    }
+
     override fun onStop() {
         super.onStop()
         viewModelDisposable?.dispose()

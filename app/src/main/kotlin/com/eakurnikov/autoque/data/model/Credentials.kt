@@ -1,5 +1,7 @@
 package com.eakurnikov.autoque.data.model
 
+import com.eakurnikov.autoque.autofill.impl.internal.data.model.AccountDto
+import com.eakurnikov.autoque.autofill.impl.internal.data.model.LoginDto
 import com.eakurnikov.autoque.data.db.entity.AccountEntity
 import com.eakurnikov.autoque.data.db.entity.LoginEntity
 
@@ -24,5 +26,28 @@ data class Credentials(
         loginEntity.login,
         loginEntity.password,
         accountEntity.packageName
+    )
+
+    constructor(
+        accountDto: AccountDto,
+        loginDto: LoginDto
+    ) : this(
+        0,
+        0,
+        accountDto.name,
+        loginDto.login,
+        loginDto.password,
+        accountDto.packageName
+    )
+
+    constructor(
+        name: String,
+        url: String,
+        login: String,
+        password: String
+    ): this(
+        AccountDto(name, url),
+        LoginDto(login, password)
+
     )
 }
