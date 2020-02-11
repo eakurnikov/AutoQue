@@ -71,7 +71,7 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
                 is Resource.Success -> {
                     when (resource.data.size) {
                         0 -> showEmptyList()
-                        else -> showPosts(resource.data)
+                        else -> showCredentials(resource.data)
                     }
                 }
                 is Resource.Loading -> showLoading(false)
@@ -166,14 +166,14 @@ class CredentialsActivity : BaseActivity<CredentialsViewModel>() {
         }
     }
 
-    private fun showPosts(posts: List<Credentials>) {
+    private fun showCredentials(credentialsList: List<Credentials>) {
         layout_refresh_credentials.isRefreshing = false
         progress_bar_credentials.visibility = View.GONE
         list_credentials.visibility = View.VISIBLE
         tv_credentials_error.visibility = View.GONE
 
         adapter.apply {
-            data = posts
+            data = credentialsList
             notifyDataSetChanged()
         }
     }

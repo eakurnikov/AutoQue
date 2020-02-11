@@ -10,7 +10,7 @@ import android.service.autofill.FillResponse
 import android.service.autofill.SaveInfo
 import android.view.autofill.AutofillId
 import android.widget.RemoteViews
-import com.eakurnikov.autoque.autofill.api.dependencies.domain.packagename.PackageVerifier
+import com.eakurnikov.autoque.autofill.api.dependencies.domain.verification.AutofillClientVerifier
 import com.eakurnikov.autoque.autofill.impl.R
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataDto
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.RequestInfo
@@ -29,7 +29,7 @@ import javax.inject.Inject
 @TargetApi(Build.VERSION_CODES.O)
 class FillResponseBuilder @Inject constructor(
     @AppContext private val context: Context,
-    private val packageVerifier: PackageVerifier,
+    private val autofillClientVerifier: AutofillClientVerifier,
     private val autofillViewBuilder: AutofillViewBuilder,
     private val datasetBuilder: DatasetBuilder
 ) {
@@ -117,7 +117,7 @@ class FillResponseBuilder @Inject constructor(
     ): FillResponse.Builder {
 
         val isClientPackageNameVerified: Boolean =
-            packageVerifier.verifyPackage(fillRequestInfo.clientPackageName)
+            autofillClientVerifier.isInstallerSafe(fillRequestInfo.clientPackageName)
 
         if (isClientPackageNameVerified) {
             fillDataDtos.forEach { fillDataDto: FillDataDto ->

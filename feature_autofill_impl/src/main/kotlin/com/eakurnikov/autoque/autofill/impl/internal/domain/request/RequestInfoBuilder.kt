@@ -7,6 +7,7 @@ import android.service.autofill.FillContext
 import android.service.autofill.FillRequest
 import android.service.autofill.SaveRequest
 import android.view.autofill.AutofillId
+import com.eakurnikov.autoque.autofill.api.dependencies.domain.verification.AutofillClientVerifier
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.ScreenInfo
 import com.eakurnikov.autoque.autofill.impl.internal.domain.screen.ScreenInfoBuilder
@@ -24,18 +25,26 @@ import javax.inject.Inject
  */
 @TargetApi(Build.VERSION_CODES.O)
 class RequestInfoBuilder @Inject constructor(
+    private val autofillClientVerifier: AutofillClientVerifier,
     private val screenInfoBuilder: ScreenInfoBuilder
 ) {
+    private val tag: String = "RequestInfoBuilder"
+
     fun build(fillRequest: FillRequest): RequestInfo? {
         val fillContexts: List<FillContext> =
             fillRequest.fillContexts.filter { it.requestId == fillRequest.id }
 
         val clientPackageName: String = fillContexts.last().structure.activityComponent.packageName
 
+        if (autofillClientVerifier.isForbidden(clientPackageName)) {
+            log("$tag: client app is forbidden for autofill")
+            return null
+        }
+
         val assistStructures: List<AssistStructure> = fillContexts.map { it.structure }
 
         val screenInfo: ScreenInfo = screenInfoBuilder.build(assistStructures) ?: run {
-            log("Both login and password fields were not found while fill request")
+            log("$tag: Both login and password fields were not found while fill request")
             return null
         }
 
@@ -48,6 +57,11 @@ class RequestInfoBuilder @Inject constructor(
 
         val clientPackageName: String = fillContexts.last().structure.activityComponent.packageName
 
+        if (autofillClientVerifier.isForbidden(clientPackageName)) {
+            log("$tag: client app is forbidden for autosave")
+            return null
+        }
+
         val filledAutofillIds: Array<AutofillId> =
             fillRequestInfo.screenInfo.authFormInfo.autofillIdsAsArray
 
@@ -55,7 +69,7 @@ class RequestInfoBuilder @Inject constructor(
             fillContexts.flatMap { it.findViewNodes(filledAutofillIds).filterNotNull() }
 
         val screenInfo: ScreenInfo = screenInfoBuilder.build(viewNodes) ?: run {
-            log("Both login and password fields were not found while save request")
+            log("$tag: Both login and password fields were not found while save request")
             return null
         }
 

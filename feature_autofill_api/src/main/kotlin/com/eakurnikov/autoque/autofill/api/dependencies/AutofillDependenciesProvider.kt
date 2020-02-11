@@ -5,8 +5,8 @@ import com.eakurnikov.autoque.autofill.api.dependencies.domain.dal.DigitalAssetL
 import com.eakurnikov.autoque.autofill.api.dependencies.data.dao.AutofillDao
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.auth.AutofillAuthProvider
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.disclaimer.AutofillDisclaimerProvider
-import com.eakurnikov.autoque.autofill.api.dependencies.domain.packagename.PackageVerifier
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.update.AutofillUpdatePromptProvider
+import com.eakurnikov.autoque.autofill.api.dependencies.domain.verification.AutofillClientVerifier
 import com.eakurnikov.common.annotations.AppContext
 
 /**
@@ -19,7 +19,7 @@ interface AutofillDependenciesProvider {
 
     fun provideAutofillDao(): AutofillDao
 
-    fun providePackageVerifier(): PackageVerifier
+    fun provideAutofillClientVerifier(): AutofillClientVerifier
 
     fun provideDigitalAssetLinksVerifier(): DigitalAssetLinksVerifier
 

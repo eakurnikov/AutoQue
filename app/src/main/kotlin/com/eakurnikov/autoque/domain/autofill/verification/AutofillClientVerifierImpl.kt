@@ -1,50 +1,64 @@
-package com.eakurnikov.autoque.domain.autofill.packagename
+package com.eakurnikov.autoque.domain.autofill.verification
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import com.eakurnikov.autoque.autofill.api.dependencies.domain.packagename.PackageVerifier
+import com.eakurnikov.autoque.autofill.api.dependencies.domain.verification.AutofillClientVerifier
 import com.eakurnikov.common.annotations.AppContext
+import java.util.ArrayList
 import javax.inject.Inject
 
 /**
  * Created by eakurnikov on 2019-09-15
  */
-class PackageVerifierImpl @Inject constructor(
+class AutofillClientVerifierImpl @Inject constructor(
     @AppContext private val context: Context
-) : PackageVerifier {
+) : AutofillClientVerifier {
 
-    private val allowedInstallerPackageNames = listOf(
-        "com.android.vending",
-        "com.google.android.feedback",
+    private val knownInstallerPackageNames: MutableList<String> = ArrayList(12)
 
-        "com.sec.android.app.samsungapps",
-        "com.sec.knox.containeragent",
-        "com.sec.android.easyMover",
-        "com.samsung.android.app.watchmanager",
-        "com.sec.android.preloadinstaller",
+    init {
+        // Google
+        knownInstallerPackageNames.add("com.android.vending")
+        knownInstallerPackageNames.add("com.google.android.feedback")
 
-        "com.xiaomi.market",
-        "com.xiaomi.mipicks",
+        // Samsung
+        knownInstallerPackageNames.add("com.sec.android.app.samsungapps")
+        knownInstallerPackageNames.add("com.sec.knox.containeragent")
+        knownInstallerPackageNames.add("com.sec.android.easyMover")
+        knownInstallerPackageNames.add("com.samsung.android.app.watchmanager")
+        knownInstallerPackageNames.add("com.sec.android.preloadinstaller")
 
-        "com.huawei.appmarket",
+        // Xiaomi
+        knownInstallerPackageNames.add("com.xiaomi.market")
+        knownInstallerPackageNames.add("com.xiaomi.mipicks")
 
-        "com.yandex.store"
-    )
+        // Meizu
+        knownInstallerPackageNames.add("com.xrom.intl.appcenter")
 
-    override fun verifyPackage(clientPackageName: String): Boolean {
-        return false // isInstallerKnown(clientPackageName) || isSystemApp(clientPackageName)
+        // Huawei
+        knownInstallerPackageNames.add("com.huawei.appmarket")
+
+        // Yandex
+        knownInstallerPackageNames.add("com.yandex.store")
+    }
+
+    override fun isInstallerSafe(clientPackageName: String): Boolean {
+        return isInstallerKnown(clientPackageName) || isSystemApp(clientPackageName)
+    }
+
+    override fun isForbidden(clientPackageName: String): Boolean {
+        return clientPackageName == context.packageName
     }
 
     private fun isInstallerKnown(clientPackageName: String): Boolean {
-        val installerPackageName: String =
-            getInstallerPackageName(clientPackageName) ?: return false
-        return allowedInstallerPackageNames.contains(installerPackageName)
+        val installerPackageName = getInstallerPackageName(clientPackageName) ?: return false
+        return knownInstallerPackageNames.contains(installerPackageName)
     }
 
     private fun isSystemApp(clientPackageName: String): Boolean {
-        val clientAppInfo: ApplicationInfo = getAppInfo(clientPackageName) ?: return false
+        val clientAppInfo = getAppInfo(clientPackageName) ?: return false
         return hasSystemAppFlag(clientAppInfo) &&
                 (hasSystemSignature(clientAppInfo) || !hasLaunchIntent(clientPackageName))
     }
@@ -68,7 +82,7 @@ class PackageVerifierImpl @Inject constructor(
     private fun hasLaunchIntent(clientPackageName: String): Boolean {
         return try {
             context.packageManager.getLaunchIntentForPackage(clientPackageName) != null
-        } catch (error: Throwable) {
+        } catch (e: Throwable) {
             false
         }
     }

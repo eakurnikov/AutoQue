@@ -51,7 +51,7 @@ class SplashActivity : DaggerActivity() {
 
         autofill_inject_status.text = getString(R.string.autofill_service_injected)
 
-        autofill_registration_status.text = getString(
+        autofill_selection_status.text = getString(
             if (autofillApi.autofillServiceSelector.isSelected)
                 R.string.autofill_service_selected
             else
@@ -71,7 +71,7 @@ class SplashActivity : DaggerActivity() {
             autfillPopupUi.hide()
 
             if (isSelected) {
-                autofill_registration_status.text = getString(R.string.autofill_service_selected)
+                autofill_selection_status.text = getString(R.string.autofill_service_selected)
                 Handler(mainLooper).postDelayed({ finish() }, TimeUnit.SECONDS.toMillis(2))
             } else {
                 Toast.makeText(

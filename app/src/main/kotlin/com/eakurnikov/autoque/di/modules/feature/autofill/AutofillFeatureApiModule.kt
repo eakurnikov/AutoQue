@@ -22,7 +22,9 @@ class AutofillFeatureApiModule {
         return AutofillFeatureComponent.initAndGet(
             DaggerAutofillFeatureDependenciesComponent
                 .builder()
-                .autofillDependenciesProvider(AutofillDependenciesProviderComponent.initAndGet(context))
+                .autofillDependenciesProvider(
+                    AutofillDependenciesProviderComponent.initAndGet(context)
+                )
                 .build()
         )
     }
