@@ -3,13 +3,13 @@ package com.eakurnikov.autoque.autofill.impl.internal.domain.usecase.save
 import android.content.IntentSender
 import android.os.Bundle
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.auth.AutofillAuthProvider
-import com.eakurnikov.autoque.autofill.api.dependencies.domain.update.AutofillUpdatePromptProvider
 import com.eakurnikov.autoque.autofill.impl.internal.data.enums.IntentSenderType
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataDto
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.IntentSenderResource
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.internal.data.repositories.AutofillRepository
 import com.eakurnikov.autoque.autofill.impl.internal.domain.filldata.FillDataBuilder
+import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.update.UpdatePromptProvider
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.log
 import io.reactivex.Maybe
 import javax.inject.Inject
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class SaveFillDataUseCase @Inject constructor(
     private val autofillRepo: AutofillRepository,
     private val authProvider: AutofillAuthProvider<*>,
-    private val updatePromptProvider: AutofillUpdatePromptProvider<*>,
+    private val updatePromptProvider: UpdatePromptProvider,
     private val fillDataBuilder: FillDataBuilder
 ) {
     private val tag: String = "SaveFillDataUseCase"

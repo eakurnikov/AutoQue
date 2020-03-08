@@ -7,10 +7,10 @@ import android.service.autofill.FillContext
 import android.service.autofill.FillRequest
 import android.service.autofill.SaveRequest
 import android.view.autofill.AutofillId
-import com.eakurnikov.autoque.autofill.api.dependencies.domain.verification.AutofillClientVerifier
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.ScreenInfo
 import com.eakurnikov.autoque.autofill.impl.internal.domain.screen.ScreenInfoBuilder
+import com.eakurnikov.autoque.autofill.impl.internal.domain.verification.AutofillClientVerifier
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.autofillIdsAsArray
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.findViewNodes
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.log

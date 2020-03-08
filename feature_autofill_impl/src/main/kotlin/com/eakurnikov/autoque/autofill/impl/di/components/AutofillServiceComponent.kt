@@ -1,6 +1,8 @@
 package com.eakurnikov.autoque.autofill.impl.di.components
 
 import com.eakurnikov.autoque.autofill.impl.internal.domain.AutoQueAutofillService
+import com.eakurnikov.autoque.autofill.impl.internal.ui.disclaimer.DisclaimerActivity
+import com.eakurnikov.autoque.autofill.impl.internal.ui.update.UpdatePromptActivity
 import com.eakurnikov.common.di.annotations.AutofillSessionScope
 import com.eakurnikov.common.di.initializer.ComponentInitializer
 import dagger.Subcomponent
@@ -19,4 +21,8 @@ abstract class AutofillServiceComponent {
     }
 
     abstract fun inject(autoQueAutofillService: AutoQueAutofillService)
+
+    abstract fun inject(updatePromptActivity: UpdatePromptActivity)
+
+    abstract fun inject(discalimerActivity: DisclaimerActivity)
 }

@@ -48,6 +48,11 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$versions.lifecycle"
+
     // Tests
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test:runner:$versions.testingSupportLibrary"

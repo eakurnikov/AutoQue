@@ -5,6 +5,18 @@
 
     <application>
 
+        <activity
+            android:name="com.eakurnikov.autoque.autofill.impl.internal.ui.disclaimer.DisclaimerActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=".AutofillDisclaimerActivity"
+            android:theme="@style/Transparent" />
+
+        <activity
+            android:name="com.eakurnikov.autoque.autofill.impl.internal.ui.update.UpdatePromptActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=".AutofillUpdatePromptActivity"
+            android:theme="@style/Transparent" />
+
         <service
             android:name="com.eakurnikov.autoque.autofill.impl.internal.domain.AutoQueAutofillService"
             android:enabled="false"

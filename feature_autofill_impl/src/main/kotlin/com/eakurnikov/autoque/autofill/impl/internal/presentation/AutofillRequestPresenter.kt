@@ -16,7 +16,7 @@ import com.eakurnikov.autoque.autofill.impl.internal.domain.request.RequestInfoB
 import com.eakurnikov.autoque.autofill.impl.internal.domain.usecase.fill.ProduceFillResponseUseCase
 import com.eakurnikov.autoque.autofill.impl.internal.domain.usecase.save.SaveFillDataUseCase
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.*
-import com.eakurnikov.autoque.autofill.impl.internal.ui.AutofillUi
+import com.eakurnikov.autoque.autofill.impl.internal.ui.autofill.AutofillUi
 import com.eakurnikov.common.annotations.AppContext
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

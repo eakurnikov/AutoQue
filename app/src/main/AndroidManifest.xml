@@ -30,18 +30,6 @@
             android:theme="@style/Transparent" />
 
         <activity
-            android:name=".ui.autofill.AutofillDisclaimerActivity"
-            android:launchMode="singleTask"
-            android:taskAffinity=".AutofillDisclaimerActivity"
-            android:theme="@style/Transparent" />
-
-        <activity
-            android:name=".ui.autofill.AutofillUpdatePromptActivity"
-            android:launchMode="singleTask"
-            android:taskAffinity=".AutofillUpdatePromptActivity"
-            android:theme="@style/Transparent" />
-
-        <activity
             android:name=".ui.credentials.CredentialsActivity"
             android:theme="@style/AppTheme.Launcher">
 

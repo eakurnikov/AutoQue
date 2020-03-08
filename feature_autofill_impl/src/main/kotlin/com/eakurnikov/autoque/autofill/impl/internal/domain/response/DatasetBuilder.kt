@@ -8,12 +8,12 @@ import android.os.Bundle
 import android.service.autofill.Dataset
 import android.view.autofill.AutofillValue
 import android.widget.RemoteViews
-import com.eakurnikov.autoque.autofill.api.dependencies.domain.disclaimer.AutofillDisclaimerProvider
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.AuthFormInfo
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataDto
 import com.eakurnikov.autoque.autofill.impl.internal.domain.clientapp.AppInfoProvider
+import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.disclaimer.DisclaimerProvider
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.putFillDataId
-import com.eakurnikov.autoque.autofill.impl.internal.ui.AutofillViewBuilder
+import com.eakurnikov.autoque.autofill.impl.internal.ui.autofill.AutofillViewBuilder
 import javax.inject.Inject
 
 /**
@@ -26,7 +26,7 @@ import javax.inject.Inject
 class DatasetBuilder @Inject constructor(
     private val appInfoProvider: AppInfoProvider,
     private val autofillViewBuilder: AutofillViewBuilder,
-    private val disclaimerProvider: AutofillDisclaimerProvider<*>
+    private val disclaimerProvider: DisclaimerProvider
 ) {
     fun buildUnlocked(authFormInfo: AuthFormInfo, fillDataDto: FillDataDto): Dataset {
         val appIcon: Bitmap? =

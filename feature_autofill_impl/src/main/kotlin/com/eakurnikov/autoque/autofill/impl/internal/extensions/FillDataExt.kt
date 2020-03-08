@@ -16,10 +16,13 @@ fun List<FillDataDto>.sort(targetPackageName: String): List<FillDataDto> {
     }
 
     return sortedBy { it.account.name }
-        .map { Pair(it, it.account.packageName.count { targetPackageName.contains(it) }) }
+        .map { Pair(it, it.rank(targetPackageName)) }
         .sortedByDescending { it.second }
         .map { it.first }
 }
+
+fun FillDataDto.rank(targetPackageName: String): Int =
+    account.packageName.count { targetPackageName.contains(it) }
 
 fun List<FillDataDto>.truncate(limit: Int): List<FillDataDto> =
     if (size > limit) subList(0, limit) else this

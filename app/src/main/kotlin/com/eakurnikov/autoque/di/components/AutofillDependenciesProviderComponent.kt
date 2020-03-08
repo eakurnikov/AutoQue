@@ -18,11 +18,7 @@ import dagger.Component
     modules = [
         ContextModule::class,
         DaoModule::class,
-        AutofillClientVerifierModule::class,
-        DigitalAssetLinksVerifierModule::class,
-        AutofillAuthProviderModule::class,
-        AutofillDisclaimerProviderModule::class,
-        AutofillUpdatePromptProviderModule::class
+        AutofillAuthProviderModule::class
     ]
 )
 abstract class AutofillDependenciesProviderComponent : AutofillDependenciesProvider {
@@ -33,11 +29,7 @@ abstract class AutofillDependenciesProviderComponent : AutofillDependenciesProvi
                 .builder()
                 .contextModule(ContextModule(param))
                 .daoModule(DaoModule())
-                .autofillClientVerifierModule(AutofillClientVerifierModule())
-                .digitalAssetLinksVerifierModule(DigitalAssetLinksVerifierModule())
                 .autofillAuthProviderModule(AutofillAuthProviderModule())
-                .autofillDisclaimerProviderModule(AutofillDisclaimerProviderModule())
-                .autofillUpdatePromptProviderModule(AutofillUpdatePromptProviderModule())
                 .build()
         }
     }
