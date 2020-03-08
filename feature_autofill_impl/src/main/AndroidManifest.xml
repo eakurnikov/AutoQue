@@ -6,15 +6,21 @@
     <application>
 
         <activity
-            android:name="com.eakurnikov.autoque.autofill.impl.internal.ui.disclaimer.DisclaimerActivity"
+            android:name="com.eakurnikov.autoque.autofill.impl.internal.ui.update.UpdatePromptActivity"
             android:launchMode="singleTask"
-            android:taskAffinity=".AutofillDisclaimerActivity"
+            android:taskAffinity=".UpdatePromptActivity"
             android:theme="@style/Transparent" />
 
         <activity
-            android:name="com.eakurnikov.autoque.autofill.impl.internal.ui.update.UpdatePromptActivity"
+            android:name="com.eakurnikov.autoque.autofill.impl.internal.ui.disclaimer.DisclaimerActivity"
             android:launchMode="singleTask"
-            android:taskAffinity=".AutofillUpdatePromptActivity"
+            android:taskAffinity=".DisclaimerActivity"
+            android:theme="@style/Transparent" />
+
+        <activity
+            android:name="com.eakurnikov.autoque.autofill.impl.internal.ui.viewall.ViewAllActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=".ViewAllActivity"
             android:theme="@style/Transparent" />
 
         <service

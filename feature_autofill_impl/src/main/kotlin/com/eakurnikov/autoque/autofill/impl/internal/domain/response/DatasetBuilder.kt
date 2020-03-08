@@ -12,6 +12,7 @@ import com.eakurnikov.autoque.autofill.impl.internal.data.model.AuthFormInfo
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataDto
 import com.eakurnikov.autoque.autofill.impl.internal.domain.clientapp.AppInfoProvider
 import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.disclaimer.DisclaimerProvider
+import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.viewall.ViewAllProvider
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.putFillDataId
 import com.eakurnikov.autoque.autofill.impl.internal.ui.autofill.AutofillViewBuilder
 import javax.inject.Inject
@@ -26,7 +27,8 @@ import javax.inject.Inject
 class DatasetBuilder @Inject constructor(
     private val appInfoProvider: AppInfoProvider,
     private val autofillViewBuilder: AutofillViewBuilder,
-    private val disclaimerProvider: DisclaimerProvider
+    private val disclaimerProvider: DisclaimerProvider,
+    private val viewAllProvider: ViewAllProvider
 ) {
     fun buildUnlocked(authFormInfo: AuthFormInfo, fillDataDto: FillDataDto): Dataset {
         val appIcon: Bitmap? =
@@ -79,6 +81,18 @@ class DatasetBuilder @Inject constructor(
             .Builder(autofillViewBuilder.buildDatasetUnsafeItemView())
             .setLogin(authFormInfo, fillDataDto)
             .setPassword(authFormInfo, fillDataDto)
+            .build()
+    }
+
+    fun buildFooterDataset(authFormInfo: AuthFormInfo, clientState: Bundle): Dataset {
+        val viewAllIntentSender: IntentSender =
+            viewAllProvider.getViewAllIntentSender(clientState)
+
+        return Dataset
+            .Builder(autofillViewBuilder.buildDatasetFooterItemView())
+            .setAuthentication(viewAllIntentSender)
+            .setLogin(authFormInfo, null)
+            .setPassword(authFormInfo, null)
             .build()
     }
 

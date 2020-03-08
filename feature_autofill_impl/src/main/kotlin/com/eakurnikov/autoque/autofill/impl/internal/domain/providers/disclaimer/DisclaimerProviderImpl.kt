@@ -23,6 +23,6 @@ class DisclaimerProviderImpl @Inject constructor(
     override fun getDisclaimerIntentSender(clientState: Bundle): IntentSender {
         return Intent(context, DisclaimerActivity::class.java)
             .setAutofillPayload(AutofillPayload.Type.UNSAFE_FILL, clientState)
-            .wrapWithSender(context, pendingIntentId)
+            .wrapWithSender(context, pendingIntentId++)
     }
 }

@@ -10,9 +10,9 @@ import android.content.IntentSender
  */
 
 fun Intent.wrapWithSender(context: Context, pendingIntentId: Int): IntentSender =
-        PendingIntent.getActivity(
-                context,
-                pendingIntentId,
-                this,
-                PendingIntent.FLAG_CANCEL_CURRENT
-        ).intentSender
+    PendingIntent.getActivity(
+        context,
+        pendingIntentId,
+        this,
+        PendingIntent.FLAG_CANCEL_CURRENT
+    ).intentSender

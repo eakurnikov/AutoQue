@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/primary"
     android:gravity="center"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/faf_dataset_header_text"
         android:layout_width="270dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
@@ -19,19 +18,11 @@
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="8dp"
-        android:text="@string/faf_dataset_title_no_exact_datasets"
+        android:text="@string/faf_view_all_item"
+        android:textAllCaps="true"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/text_lightest_gray"
-        android:textSize="15sp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="2dp"
-        android:paddingLeft="2dp"
-        android:paddingEnd="2dp"
-        android:paddingRight="2dp"
-        android:src="@drawable/divider" />
 
 </LinearLayout>

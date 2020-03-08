@@ -6,7 +6,7 @@ import com.eakurnikov.autoque.autofill.api.dependencies.data.model.Login
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataDto
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataId
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.log
-import com.eakurnikov.autoque.autofill.impl.internal.extensions.sort
+import com.eakurnikov.autoque.autofill.impl.internal.extensions.rankByPackageName
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.truncate
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -43,7 +43,7 @@ class AutofillRepositoryImpl @Inject constructor(
             }
             .toList()
             .map { fillDataDtos: List<FillDataDto> ->
-                fillDataDtos.sort(packageName).truncate(fillDataDtosLimit)
+                fillDataDtos.rankByPackageName(packageName).truncate(fillDataDtosLimit)
             }
             .doOnError { e: Throwable ->
                 log("$tag: Error while getting fill data: $e. Emit empty list", e)

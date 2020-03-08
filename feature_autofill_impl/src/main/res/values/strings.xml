@@ -33,4 +33,10 @@
     <string name="faf_disclaimer_btn_yes">Allow</string>
     <string name="faf_disclaimer_btn_no">Cancel</string>
 
+    <string name="faf_view_all_item">Show all</string>
+    <string name="faf_view_all_title">All entities</string>
+    <string name="faf_view_all_search">Search</string>
+    <string name="faf_view_all_nothing_found_title">Nothing was found :(</string>
+    <string name="faf_view_all_nothing_found_descr">Although you can create the one you need</string>
+
 </resources>

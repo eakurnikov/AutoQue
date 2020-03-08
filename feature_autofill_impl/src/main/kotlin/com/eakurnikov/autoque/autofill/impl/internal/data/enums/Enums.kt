@@ -15,3 +15,7 @@ enum class FillResponseType {
 enum class UnsafeDatasetType {
     LOCKED, UNLOCKED
 }
+
+enum class FillDataType {
+    LOCKED, UNLOCKED
+}

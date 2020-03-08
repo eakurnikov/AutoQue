@@ -70,6 +70,9 @@ class AutofillAuthPresenterImpl @Inject constructor(
             AutofillPayload.Type.UPDATE -> {
                 onUpdateAuthenticate(authUi, authPayload, authResult)
             }
+            AutofillPayload.Type.VIEW_ALL -> {
+                onViewAllAuthenticate(authUi, authResult)
+            }
         }
     }
 
@@ -196,6 +199,14 @@ class AutofillAuthPresenterImpl @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(OnUpdateFillDataObserver(authUi))
+    }
+
+    private fun onViewAllAuthenticate(authUi: AutofillAuthUi, authResult: Boolean) {
+        if (!authResult) {
+            log("$tag: View all auth denied by user")
+            autofillUi.showAsToast(R.string.faf_fill_failure_auth)
+        }
+        authUi.finish()
     }
 
     private inner class OnFillResponseProducedObserver(

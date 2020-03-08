@@ -3,6 +3,7 @@ package com.eakurnikov.autoque.autofill.impl.di.modules
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.eakurnikov.autoque.autofill.impl.internal.viewmodel.disclaimer.DisclaimerViewModel
+import com.eakurnikov.autoque.autofill.impl.internal.viewmodel.viewall.ViewAllViewModel
 import com.eakurnikov.autoque.autofill.impl.internal.viewmodel.update.UpdatePromptViewModel
 import com.eakurnikov.common.annotations.ViewModelKey
 import com.eakurnikov.common.ui.viewmodel.ViewModelFactory
@@ -22,15 +23,15 @@ interface ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(UpdatePromptViewModel::class)
-    fun bindAutofillUpdatePromptViewModel(viewModel: UpdatePromptViewModel): ViewModel
+    fun bindUpdatePromptViewModel(viewModel: UpdatePromptViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(DisclaimerViewModel::class)
-    fun bindAutofillDisclaimerViewModel(viewModel: DisclaimerViewModel): ViewModel
+    fun bindDisclaimerViewModel(viewModel: DisclaimerViewModel): ViewModel
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(ShowAllViewModel::class)
-//    fun bindAutofillShowAllViewModel(viewModel: ShowAllViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(ViewAllViewModel::class)
+    fun bindViewAllViewModel(viewModel: ViewAllViewModel): ViewModel
 }

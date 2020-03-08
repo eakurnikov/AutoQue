@@ -19,8 +19,8 @@ class AutofillViewBuilder @Inject constructor(
     fun buildDatasetAuthItemView(): RemoteViews =
         RemoteViews(context.packageName, R.layout.faf_dataset_auth_item)
 
-    fun buildDatasetHeaderView(): RemoteViews =
-        RemoteViews(context.packageName, R.layout.faf_dataset_header_item)
+    fun buildDatasetFooterItemView(): RemoteViews =
+        RemoteViews(context.packageName, R.layout.faf_dataset_footer_item)
 
     fun buildDatasetUnsafeItemView(): RemoteViews =
         RemoteViews(context.packageName, R.layout.faf_dataset_item)

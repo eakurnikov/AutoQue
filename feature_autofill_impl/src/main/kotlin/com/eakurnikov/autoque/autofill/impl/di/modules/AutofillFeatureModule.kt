@@ -10,6 +10,8 @@ import com.eakurnikov.autoque.autofill.impl.internal.data.repositories.AutofillR
 import com.eakurnikov.autoque.autofill.impl.internal.data.repositories.AutofillRepositoryImpl
 import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.disclaimer.DisclaimerProvider
 import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.disclaimer.DisclaimerProviderImpl
+import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.viewall.ViewAllProvider
+import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.viewall.ViewAllProviderImpl
 import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.update.UpdatePromptProvider
 import com.eakurnikov.autoque.autofill.impl.internal.domain.providers.update.UpdatePromptProviderImpl
 import com.eakurnikov.autoque.autofill.impl.internal.domain.verification.AutofillClientVerifier
@@ -52,5 +54,8 @@ class AutofillFeatureModule {
 
         @Binds
         fun bindDisclaimerProvider(impl: DisclaimerProviderImpl): DisclaimerProvider
+
+        @Binds
+        fun bindViewAllProvider(impl: ViewAllProviderImpl): ViewAllProvider
     }
 }

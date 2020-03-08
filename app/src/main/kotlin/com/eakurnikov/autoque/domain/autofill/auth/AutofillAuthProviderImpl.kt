@@ -63,6 +63,17 @@ class AutofillAuthProviderImpl @Inject constructor(
             .wrapWithSender(context)
     }
 
+    override fun getViewAllAuthIntentSender(clientState: Bundle): IntentSender {
+        return Intent(context, autofillAuthUiClass)
+            .addFlags(
+                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            )
+            .setAutofillPayload(AutofillPayload.Type.VIEW_ALL, clientState)
+            .wrapWithSender(context)
+    }
+
     private fun Intent.wrapWithSender(context: Context): IntentSender {
         val pendingAuthIntent: PendingIntent =
             PendingIntent.getActivity(

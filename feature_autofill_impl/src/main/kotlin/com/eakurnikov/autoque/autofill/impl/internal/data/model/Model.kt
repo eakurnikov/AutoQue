@@ -5,6 +5,7 @@ import android.os.Parcelable
 import android.service.autofill.Dataset
 import android.service.autofill.FillResponse
 import android.view.autofill.AutofillId
+import com.eakurnikov.autoque.autofill.impl.internal.data.enums.FillDataType
 import com.eakurnikov.autoque.autofill.impl.internal.data.enums.FillResponseType
 import com.eakurnikov.autoque.autofill.impl.internal.data.enums.IntentSenderType
 import com.eakurnikov.autoque.autofill.impl.internal.data.enums.UnsafeDatasetType
@@ -59,3 +60,9 @@ data class UnsafeDatasetResource(
     val intentSender: IntentSender?,
     val type: UnsafeDatasetType
 ) : Parcelable
+
+data class FillDataResource(
+    val fillData: List<FillDataDto>?,
+    val intentSender: IntentSender?,
+    val type: FillDataType
+)

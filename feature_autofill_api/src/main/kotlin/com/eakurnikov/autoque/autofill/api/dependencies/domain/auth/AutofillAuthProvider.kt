@@ -20,4 +20,6 @@ interface AutofillAuthProvider<T : AutofillAuthUi> {
     fun getSaveAuthIntentSender(clientState: Bundle): IntentSender
 
     fun getUpdateAuthIntentSender(clientState: Bundle): IntentSender
+
+    fun getViewAllAuthIntentSender(clientState: Bundle): IntentSender
 }

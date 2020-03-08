@@ -33,4 +33,10 @@
     <string name="faf_disclaimer_btn_yes">Allow</string>
     <string name="faf_disclaimer_btn_no">Cancel</string>
 
+    <string name="faf_view_all_item">Показать все</string>
+    <string name="faf_view_all_title">Все записи</string>
+    <string name="faf_view_all_search">Поиск</string>
+    <string name="faf_view_all_nothing_found_title">Ничего не найдено :(</string>
+    <string name="faf_view_all_nothing_found_descr">Войдите в приложение и мы все сохраним</string>
+
 </resources>

@@ -64,7 +64,7 @@ class FillResponseBuilder @Inject constructor(
             .setClientState(clientState)
             .addDatasets(fillRequestInfo, fillDataDtos, clientState)
             .addSaveInfo(autofillIds, fillRequestInfo)
-            .addHeader(fillRequestInfo.clientPackageName, fillDataDtos)
+            .addFooter(fillRequestInfo, clientState)
             .build()
     }
 
@@ -83,7 +83,6 @@ class FillResponseBuilder @Inject constructor(
         autofillIds: Array<AutofillId>,
         authIntentSender: IntentSender
     ): FillResponse.Builder {
-
         return setAuthentication(
             autofillIds,
             authIntentSender,
@@ -95,7 +94,6 @@ class FillResponseBuilder @Inject constructor(
         autofillIds: Array<AutofillId>,
         fillRequestInfo: RequestInfo
     ): FillResponse.Builder {
-
         if (isAuthFormFound(autofillIds)) {
             val compositeSaveType: Int = fillRequestInfo.screenInfo.authFormInfo.compositeSaveType
             val saveInfo: SaveInfo = SaveInfo
@@ -106,7 +104,6 @@ class FillResponseBuilder @Inject constructor(
 
             setSaveInfo(saveInfo)
         }
-
         return this
     }
 
@@ -115,7 +112,6 @@ class FillResponseBuilder @Inject constructor(
         fillDataDtos: List<FillDataDto>,
         clientState: Bundle
     ): FillResponse.Builder {
-
         val isClientPackageNameVerified: Boolean =
             autofillClientVerifier.isInstallerSafe(fillRequestInfo.clientPackageName)
 
@@ -143,17 +139,16 @@ class FillResponseBuilder @Inject constructor(
         return this
     }
 
-    private fun FillResponse.Builder.addHeader(
-        clientPackageName: String,
-        fillDataDtos: List<FillDataDto>
+    private fun FillResponse.Builder.addFooter(
+        fillRequestInfo: RequestInfo,
+        clientState: Bundle
     ): FillResponse.Builder {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P &&
-            !fillDataDtos.containsEntityWithPackageName(clientPackageName)
-        ) {
-            setHeader(autofillViewBuilder.buildDatasetHeaderView())
-        }
-
+        addDataset(
+            datasetBuilder.buildFooterDataset(
+                fillRequestInfo.screenInfo.authFormInfo,
+                clientState
+            )
+        )
         return this
     }
 

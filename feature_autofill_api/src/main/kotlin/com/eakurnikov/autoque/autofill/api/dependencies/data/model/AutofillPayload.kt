@@ -16,7 +16,8 @@ data class AutofillPayload internal constructor(
         FILL("FILL"),
         UNSAFE_FILL("UNSAFE_FILL"),
         SAVE("SAVE"),
-        UPDATE("UPDATE");
+        UPDATE("UPDATE"),
+        VIEW_ALL("VIEW_ALL");
 
         override fun toString(): String = description
     }
