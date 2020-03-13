@@ -1,3 +1,1 @@
-# AutoQue
 
-Simple AutofillService implementation.
