@@ -7,6 +7,7 @@ import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataDto
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataId
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.log
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.rankByPackageName
+import com.eakurnikov.autoque.autofill.impl.internal.extensions.sortByPackageName
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.truncate
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -24,32 +25,17 @@ class AutofillRepositoryImpl @Inject constructor(
     private val tag: String = "AutofillRepository"
     private val fillDataDtosLimit: Int = 20
 
+    override fun getAllFillData(packageName: String): Single<List<FillDataDto>> {
+        return getRawFillData()
+            .map { fillDataDtos: List<FillDataDto> ->
+                fillDataDtos.sortByPackageName(packageName)
+            }
+    }
+
     override fun getFillData(packageName: String): Single<List<FillDataDto>> {
-        return getAccounts()
-            .flatMapPublisher { accounts: List<Account> ->
-                Flowable.fromIterable(accounts)
-            }
-            .flatMapSingle { account: Account ->
-                Single.zip(
-                    Single.just(account),
-                    autofillDao.getLoginsForAccount(account.id!!),
-                    BiFunction { acc: Account, logins: List<Login> ->
-                        logins.map { FillDataDto(acc, it) }
-                    }
-                )
-            }
-            .flatMapIterable { fillDataDtos: List<FillDataDto> ->
-                fillDataDtos
-            }
-            .toList()
+        return getRawFillData()
             .map { fillDataDtos: List<FillDataDto> ->
                 fillDataDtos.rankByPackageName(packageName).truncate(fillDataDtosLimit)
-            }
-            .doOnError { e: Throwable ->
-                log("$tag: Error while getting fill data: $e. Emit empty list", e)
-            }
-            .onErrorReturn {
-                emptyList()
             }
     }
 
@@ -74,7 +60,6 @@ class AutofillRepositoryImpl @Inject constructor(
                     accounts.filter { account: Account ->
                         account.packageName == fillDataDto.account.packageName
                     }
-
                 if (withSamePackageName.isEmpty()) {
                     autofillDao.addAccountWithLogin(fillDataDto.account, fillDataDto.login)
                 } else {
@@ -94,6 +79,32 @@ class AutofillRepositoryImpl @Inject constructor(
             .updateLoginInAccount(fillDataDto.account, fillDataDto.login)
             .doOnError { e: Throwable ->
                 log("$tag: Error while updating fill data: $e", e)
+            }
+    }
+
+    private fun getRawFillData(): Single<List<FillDataDto>> {
+        return getAccounts()
+            .flatMapPublisher { accounts: List<Account> ->
+                Flowable.fromIterable(accounts)
+            }
+            .flatMapSingle { account: Account ->
+                Single.zip(
+                    Single.just(account),
+                    autofillDao.getLoginsForAccount(account.id!!),
+                    BiFunction { acc: Account, logins: List<Login> ->
+                        logins.map { FillDataDto(acc, it) }
+                    }
+                )
+            }
+            .flatMapIterable { fillDataDtos: List<FillDataDto> ->
+                fillDataDtos
+            }
+            .toList()
+            .doOnError { e: Throwable ->
+                log("$tag: Error while getting fill data: $e. Emit empty list", e)
+            }
+            .onErrorReturn {
+                emptyList()
             }
     }
 

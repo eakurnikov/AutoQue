@@ -36,7 +36,7 @@ class SaveFillDataUseCase @Inject constructor(
             Maybe.just(resource)
         } else {
             autofillRepo
-                .getFillData(saveRequestInfo.clientPackageName)
+                .getAllFillData(saveRequestInfo.clientPackageName)
                 .flatMapMaybe { existingDtos: List<FillDataDto> ->
                     val newDto: FillDataDto = fillDataBuilder.build(saveRequestInfo)
 

@@ -16,7 +16,6 @@ import com.eakurnikov.autoque.autofill.impl.internal.data.model.RequestInfo
 import com.eakurnikov.autoque.autofill.impl.internal.domain.verification.AutofillClientVerifier
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.autofillIdsAsArray
 import com.eakurnikov.autoque.autofill.impl.internal.extensions.compositeSaveType
-import com.eakurnikov.autoque.autofill.impl.internal.extensions.containsEntityWithPackageName
 import com.eakurnikov.autoque.autofill.impl.internal.ui.autofill.AutofillViewBuilder
 import com.eakurnikov.common.annotations.AppContext
 import javax.inject.Inject

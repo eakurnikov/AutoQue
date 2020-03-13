@@ -66,3 +66,15 @@ data class FillDataResource(
     val intentSender: IntentSender?,
     val type: FillDataType
 )
+
+sealed class ViewAllItem {
+
+    enum class Type(val id: Int) {
+        SECTION(0),
+        FILL_DATA_HOLDER(1)
+    }
+
+    data class Section(val title: String) : ViewAllItem()
+
+    data class FillDataHolder(val fillDataDto: FillDataDto) : ViewAllItem()
+}

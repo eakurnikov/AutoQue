@@ -8,7 +8,8 @@ import com.eakurnikov.autoque.autofill.api.dependencies.data.model.Login
  */
 data class FillDataDto(
     val account: Account,
-    val login: Login
+    val login: Login,
+    var isRelevant: Boolean = false
 ) {
     val id: FillDataId
         get() = FillDataId(account.id, login.id)

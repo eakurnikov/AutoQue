@@ -1,4 +1,4 @@
-package com.eakurnikov.autoque.autofill.impl.internal.domain.usecase.showall
+package com.eakurnikov.autoque.autofill.impl.internal.domain.usecase.viewall
 
 import android.os.Bundle
 import com.eakurnikov.autoque.autofill.api.dependencies.domain.auth.AutofillAuthProvider
@@ -35,7 +35,7 @@ class ProduceFillDataEntitiesUseCase @Inject constructor(
             )
         } else {
             autofillRepo
-                .getFillData(viewAllRequestInfo.clientPackageName)
+                .getAllFillData(viewAllRequestInfo.clientPackageName)
                 .map { dtos: List<FillDataDto> ->
                     FillDataResource(dtos, null, FillDataType.UNLOCKED)
                 }

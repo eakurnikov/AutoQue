@@ -9,7 +9,7 @@
               android:paddingTop="12dp"
               android:paddingEnd="16dp"
               android:paddingRight="16dp"
-              android:background="@color/primary"
+              android:background="@drawable/faf_primary_ripple"
               android:paddingBottom="12dp">
 
     <ImageView android:id="@+id/faf_dataset_auth_icon"

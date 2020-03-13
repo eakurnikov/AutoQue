@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/faf_ripple"
-    android:gravity="center"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/faf_dataset_header_text"
-        android:layout_width="270dp"
-        android:layout_height="48dp"
+        android:id="@+id/faf_view_all_section_title"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
         android:layout_gravity="center_vertical"
+        android:ellipsize="end"
         android:gravity="center_vertical"
+        android:maxEms="15"
+        android:maxLines="1"
+        android:minWidth="128dp"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:paddingStart="16dp"
         android:paddingLeft="16dp"
-        android:paddingTop="8dp"
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
-        android:paddingBottom="8dp"
-        android:text="@string/faf_view_all_item"
-        android:textAllCaps="true"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/text_primary"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="@string/faf_view_all_other" />
 
 </LinearLayout>

@@ -10,6 +10,8 @@ import io.reactivex.Single
  */
 interface AutofillRepository {
 
+    fun getAllFillData(packageName: String): Single<List<FillDataDto>>
+
     fun getFillData(packageName: String): Single<List<FillDataDto>>
 
     fun getFillDataById(fillDataId: FillDataId): Single<FillDataDto>

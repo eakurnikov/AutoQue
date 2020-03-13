@@ -13,11 +13,10 @@ import com.eakurnikov.autoque.autofill.impl.internal.data.enums.FillDataType
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataDto
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.FillDataResource
 import com.eakurnikov.autoque.autofill.impl.internal.data.model.RequestInfo
+import com.eakurnikov.autoque.autofill.impl.internal.data.model.ViewAllItem
 import com.eakurnikov.autoque.autofill.impl.internal.domain.response.DatasetBuilder
-import com.eakurnikov.autoque.autofill.impl.internal.domain.usecase.showall.ProduceFillDataEntitiesUseCase
-import com.eakurnikov.autoque.autofill.impl.internal.extensions.getRequestInfo
-import com.eakurnikov.autoque.autofill.impl.internal.extensions.log
-import com.eakurnikov.autoque.autofill.impl.internal.extensions.rankByPlainText
+import com.eakurnikov.autoque.autofill.impl.internal.domain.usecase.viewall.ProduceFillDataEntitiesUseCase
+import com.eakurnikov.autoque.autofill.impl.internal.extensions.*
 import com.eakurnikov.autoque.autofill.impl.internal.ui.autofill.AutofillUi
 import com.eakurnikov.autoque.autofill.impl.internal.ui.viewall.ViewAllUi
 import com.eakurnikov.common.annotations.AppContext
@@ -43,18 +42,22 @@ class ViewAllViewModel @Inject constructor(
 
     private var viewAllRequestInfo: RequestInfo? = null
 
-    private var cachedFillDataDtos: List<FillDataDto> = emptyList()
+    private var fillDataDtos: List<FillDataDto> = emptyList()
 
-    private val fillDataSubject: BehaviorSubject<Resource<List<FillDataDto>>> =
-        BehaviorSubject.createDefault(Resource.Loading<List<FillDataDto>>(null))
+    private val viewAllItemsSubject: BehaviorSubject<Resource<List<ViewAllItem>>> =
+        BehaviorSubject.createDefault(Resource.Loading<List<ViewAllItem>>(null))
 
-    fun getFillDataSubject(): BehaviorSubject<Resource<List<FillDataDto>>> = fillDataSubject
+    private val relevantSectionTitle: String =
+        context.resources.getString(R.string.faf_view_all_relevant)
 
-    fun onAbleToShow(
-        viewAllUi: ViewAllUi,
-        viewAllPayload: AutofillPayload?
-    ) {
-        fillDataSubject.onNext(Resource.Loading<List<FillDataDto>>(null))
+    private val otherSectionTitle: String =
+        context.resources.getString(R.string.faf_view_all_other)
+
+    fun getViewAllItemSubject(): BehaviorSubject<Resource<List<ViewAllItem>>> =
+        viewAllItemsSubject
+
+    fun onAbleToShow(viewAllUi: ViewAllUi, viewAllPayload: AutofillPayload?) {
+        viewAllItemsSubject.onNext(Resource.Loading(null))
 
         if (viewAllPayload == null) {
             log("$tag: Show all payload is null")
@@ -82,35 +85,42 @@ class ViewAllViewModel @Inject constructor(
     }
 
     fun onSearch(text: String) {
-        if (text.isEmpty()) {
-            return fillDataSubject.onNext(Resource.Success(cachedFillDataDtos))
-        }
-        val ranked: List<FillDataDto> =
-            cachedFillDataDtos
-                .filter { fillDataDto: FillDataDto ->
-                    with(fillDataDto) {
-                        account.name.contains(text) ||
-                                account.packageName.contains(text) ||
-                                login.login.contains(text)
+        val viewAllItems: List<ViewAllItem> = when {
+            text.isEmpty() -> {
+                fillDataDtos.toViewAllItems(relevantSectionTitle, otherSectionTitle)
+            }
+            else -> {
+                fillDataDtos
+                    .filter { fillDataDto: FillDataDto ->
+                        with(fillDataDto) {
+                            account.name.contains(text) ||
+                                    account.packageName.contains(text) ||
+                                    login.login.contains(text)
+                        }
                     }
-                }
-                .rankByPlainText(text)
-        fillDataSubject.onNext(Resource.Success(ranked))
+                    .rankByPlainText(text)
+                    .wrapWithHolders()
+            }
+        }
+        viewAllItemsSubject.onNext(Resource.Success(viewAllItems))
     }
 
     fun onSelected(viewAllUi: ViewAllUi, id: Int) {
-        viewAllRequestInfo ?: return
-        val resource: Resource<List<FillDataDto>> = fillDataSubject.value ?: return
+        val resource: Resource<List<ViewAllItem>> = viewAllItemsSubject.value ?: return
         when (resource) {
             is Resource.Success -> {
-                val dataset = datasetBuilder.buildUnlocked(
-                    viewAllRequestInfo!!.screenInfo.authFormInfo,
-                    resource.data[id]
-                )
-                val resultIntent: Intent = Intent().apply {
-                    putExtra(AutofillManager.EXTRA_AUTHENTICATION_RESULT, dataset)
+                viewAllRequestInfo?.let { requestInfo: RequestInfo ->
+                    resource.data.getFillDataHolderById(id)?.let { fillDataHolder ->
+                        val dataset = datasetBuilder.buildUnlocked(
+                            requestInfo.screenInfo.authFormInfo,
+                            fillDataHolder.fillDataDto
+                        )
+                        val resultIntent: Intent = Intent().apply {
+                            putExtra(AutofillManager.EXTRA_AUTHENTICATION_RESULT, dataset)
+                        }
+                        viewAllUi.activityContext.setResult(Activity.RESULT_OK, resultIntent)
+                    }
                 }
-                viewAllUi.activityContext.setResult(Activity.RESULT_OK, resultIntent)
             }
         }
         viewAllUi.finish()
@@ -129,8 +139,21 @@ class ViewAllViewModel @Inject constructor(
                     if (resource.fillData == null) {
                         log("$tag: Fill data is null somehow")
                     } else {
-                        cachedFillDataDtos = resource.fillData
-                        fillDataSubject.onNext(Resource.Success(resource.fillData))
+                        /**temporay stub**/
+                        val fillData: List<FillDataDto> =
+                            resource.fillData.mapIndexed { index: Int, dto: FillDataDto ->
+                                if (index < 3) {
+                                    dto.isRelevant = true
+                                }
+                                dto
+                            }
+                        val viewAllItems: List<ViewAllItem> =
+                            fillData.toViewAllItems(
+                                relevantSectionTitle,
+                                otherSectionTitle
+                            )
+                        fillDataDtos = fillData
+                        viewAllItemsSubject.onNext(Resource.Success(viewAllItems))
                     }
                 }
             }
@@ -139,7 +162,7 @@ class ViewAllViewModel @Inject constructor(
 
         override fun onError(error: Throwable) {
             log("$tag: Error while producing fill data entities: $error", error)
-            fillDataSubject.onNext(Resource.Error(error.message ?: "Error", null))
+            viewAllItemsSubject.onNext(Resource.Error(error.message ?: "Error", null))
             dispose()
         }
     }
